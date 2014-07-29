@@ -86,6 +86,8 @@
         warn "write failed\n"         unless ($count_out);
         warn "write incomplete\n"     if ( $count_out != length($data) );  
 
+        pause(0.1);
+
         return;
     }
 #------------------------------------------------------
@@ -160,6 +162,8 @@
               die;
            }
         }
+
+        pause(0.1);
 
         return $data;
     }
