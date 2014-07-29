@@ -77,4 +77,24 @@
         return;
     }
 #------------------------------------------------------
+# readData
+#------------------------------------------------------
+    sub readData {
+
+        my $data="";
+
+
+        my $InBytes=1;
+        my ($count_in, $string_in);
+        while (1)
+        {
+           ($count_in, $string_in) = $comPort->read($InBytes);
+           next unless $string_in;
+           print unpack("W",$string_in),"\n";
+        }
+
+
+        return $data;
+    }
+#------------------------------------------------------
 1;

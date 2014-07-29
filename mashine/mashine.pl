@@ -21,8 +21,12 @@ sub null {
 #------------------------------------------------------
 sub main {
 
+   tranfer::openPort();
    tranfer::sendData("\x01\x10\x01");
+
+   tranfer::readData();
                                        
+   tranfer::closePort();
 
 }
 #------------------------------------------------------
