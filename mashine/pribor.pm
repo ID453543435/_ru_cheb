@@ -5,6 +5,7 @@
 
 =cut
 #------------------------------------------------------
+    use Time::Local;
     use strict;
     use tranfer;
 #------------------------------------------------------
@@ -59,7 +60,7 @@
     sub syncTime {
 
         pribor::sendData("\x02"); #Синхронизация
-        $pr_baseTime=time();
+        $pr_baseTime=gmtime();
 
         return;
     }
