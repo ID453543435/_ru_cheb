@@ -55,7 +55,7 @@
         my ($data,$packet,$adress);
         while(1)
         {
-           $data=readPacket();
+           $data=tranfer::readData();
 
            ($packet,$adress)=unpack("cc",$data);
 
