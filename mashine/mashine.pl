@@ -28,12 +28,12 @@ sub main {
 
    pribor::sendData("\x01"); #Эхо-запрос
 
-   my $data=tranfer::pribor();
+   my $data=pribor::readData();
 
    pribor::sendData("\x02"); #Синхронизация
 
    pribor::sendData("\x05"); #Чтение буфера событий
-   my $data=tranfer::pribor();
+   my $data=pribor::readData();
 
    tranfer::closePort();
 
