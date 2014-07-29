@@ -71,7 +71,7 @@
 
         $pr_packet++;
 
-        $data=pack("cc",$pr_packet,$pr_adress).$data;
+        $data=pack("CC",$pr_packet,$pr_adress).$data;
 
         tranfer::sendData($data);
 
@@ -88,7 +88,7 @@
         {
            $data=tranfer::readData();
 
-           ($packet,$adress)=unpack("cc",$data);
+           ($packet,$adress)=unpack("CC",$data);
 
            last if $packet == $pr_packet;
         }

@@ -151,7 +151,7 @@
            }
            elsif ($mode==2)
            {
-              $data .= pack("c",unpack("c",$string_in) | 0x20);
+              $data .= pack("C",unpack("C",$string_in) | 0x20);
 
               $mode=1;
            }
