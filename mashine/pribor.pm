@@ -60,7 +60,7 @@
     sub syncTime {
 
         pribor::sendData("\x02"); #Синхронизация
-        $pr_baseTime=0+gmtime();
+        $pr_baseTime=time();
 
         return;
     }
