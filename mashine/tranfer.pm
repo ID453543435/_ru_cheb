@@ -75,8 +75,8 @@
         my $crc16=rtu::crc($data);
         $data=$data.pack("n",$crc16);
 
-        $data =~ s{\x7D}{\x7D\x5D}g; 
-        $data =~ s{\x7E}{\x7D\x5E}g; 
+        $data =~ s{\x7D}{\x7D\x5D}sg; 
+        $data =~ s{\x7E}{\x7D\x5E}sg; 
 
         $data = "\x7E".$data."\x7E";
 
