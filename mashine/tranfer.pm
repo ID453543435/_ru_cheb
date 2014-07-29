@@ -86,7 +86,7 @@
         warn "write failed\n"         unless ($count_out);
         warn "write incomplete\n"     if ( $count_out != length($data) );  
 
-        sleep(0.1);
+#        sleep(0.1);
 
         return;
     }
@@ -121,6 +121,7 @@
 
         my $data="";
 
+        my $fallCount=5;
         my $mode=0;
         while (1)
         {
@@ -128,6 +129,7 @@
            if ($count_in != 1)
            {
                print "\nread fall:count_in=$count_in,string_in=$string_in\n";
+               last unless --$fallCount;
                sleep(1); next;
            }
            if ($mode==0)
@@ -163,7 +165,7 @@
            }
         }
 
-        sleep(0.1);
+#        sleep(0.1);
 
         return $data;
     }

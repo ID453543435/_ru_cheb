@@ -34,6 +34,7 @@
         while(1)
         {
            last if substr($data,0,2) eq "\xff";
+           last if length($data) < 9;
 
            my $car=substr($data,0,9);
 
@@ -49,7 +50,6 @@
            print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
            $data=substr($data,9);
-           last unless $data;
         }
         if ( $num != -1)
         {
