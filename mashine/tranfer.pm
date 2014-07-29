@@ -155,6 +155,7 @@
            }
            elsif ($mode==2)
            {
+              print "*";
               $data .= pack("C",unpack("C",$string_in) | 0x20);
 
               $mode=1;
