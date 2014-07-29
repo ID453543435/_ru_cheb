@@ -72,6 +72,9 @@
 
         $pr_packet++;
 
+        $pr_packet = $pr_packet & 0xFF;
+
+
         $data=pack("CC",$pr_packet,$pr_adress).$data;
 
         tranfer::sendData($data);
