@@ -42,7 +42,7 @@
 
            $chenel=$chenel & 0x0f;
 
-           my $timeL=fileLib::toSql($time+$pribor::pr_baseTime);
+           my $timeL=fileLib::toSql($time/1000+$pribor::pr_baseTime);
 
            print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
