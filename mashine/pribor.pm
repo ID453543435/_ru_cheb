@@ -89,6 +89,8 @@
         {
            $data=tranfer::readData();
 
+           last unless $data;
+
            ($packet,$adress)=unpack("CC",$data);
 
            last if $packet == $pr_packet;
