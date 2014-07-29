@@ -29,6 +29,8 @@ sub main {
 
    pribor::readyUp();
 
+   pribor::syncTime();
+
    read_pass::readCars();
 
    tranfer::closePort();

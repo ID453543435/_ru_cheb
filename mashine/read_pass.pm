@@ -32,7 +32,7 @@
 
         while(1)
         {
-           last if substr($data,0,1) eq "\xff";
+           last if substr($data,0,2) eq "\xff";
 
            my $car=substr($data,0,9);
 
