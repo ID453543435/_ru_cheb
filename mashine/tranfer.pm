@@ -87,7 +87,7 @@
         while (1)
         {
            my ($count_in, $string_in) = $comPort->read(1);
-           if ($string_in != 1)
+           if ($count_in != 1)
            {
                print "\nread fall:count_in=$count_in,string_in=$string_in\n";
                sleep(1); next;
