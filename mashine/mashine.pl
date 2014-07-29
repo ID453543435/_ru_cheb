@@ -24,8 +24,10 @@ sub main {
    tranfer::openPort();
    tranfer::sendData("\x01\x10\x01");
 
-   tranfer::readData();
-                                       
+   my $data=tranfer::readData();
+
+   $data =~ s/(.)/sprintf("|%02x",ord($1))/eg; print "$data\n";
+                                      
    tranfer::closePort();
 
 }

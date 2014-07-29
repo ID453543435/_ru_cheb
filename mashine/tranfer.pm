@@ -83,16 +83,47 @@
 
         my $data="";
 
-
-        my $InBytes=1;
-        my ($count_in, $string_in);
+        my $mode=0;
         while (1)
         {
-           ($count_in, $string_in) = $comPort->read($InBytes);
-           next unless $string_in;
-           print unpack("W",$string_in),"\n";
-        }
+           my ($count_in, $string_in) = $comPort->read(1);
+           if ($string_in != 1)
+           {
+               print "\nread fall:count_in=$count_in,string_in=$string_in\n"
+               sleep(1); next;
+           }
+           if ($mode==0)
+           {
+              if ($string_in eq "\x7E")
+              {
+                 $mode=1;
+              }
 
+           }
+           elsif ($mode==1)
+           {
+              if ($string_in eq "\x7E")
+              {
+                 last;
+              }
+              elsif ($string_in eq "\x7D")
+              {
+                 $mode=2;
+                 next
+              }
+              $data .= $string_in;
+           }
+           elsif ($mode==2)
+           {
+              $data .= pack("c",unpack("c",$string_in) | 0x20);
+
+              $mode=1;
+           }
+           else
+           {
+              die;
+           }
+        }
 
         return $data;
     }
