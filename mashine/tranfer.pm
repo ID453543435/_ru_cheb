@@ -29,7 +29,7 @@
         my $PortName="COM3";
         my $quiet=0;
 
-        my $comPort = new Win32::SerialPort ($PortName, $quiet)
+        $comPort = new Win32::SerialPort ($PortName, $quiet)
              || die "Can't open $PortName: $^E\n";    # $quiet is optional
 
         $comPort->user_msg("ON");
