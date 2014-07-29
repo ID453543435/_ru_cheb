@@ -30,13 +30,15 @@
         pribor::sendData("\x05"); #Чтение буфера событий
         my $data=pribor::readData();
 
+        my $num=-1;
         while(1)
         {
            last if substr($data,0,2) eq "\xff";
 
            my $car=substr($data,0,9);
 
-           my ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$car);
+           my ($chenel,$time,$lenght,$speed);
+           ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$car);
 
            my $dirct=$chenel & 0xf0;
 
@@ -48,6 +50,11 @@
 
            $data=substr($data,9);
            last unless $data;
+        }
+        if ( $num != -1)
+        {
+           pribor::sendData("\x06".pack("C",$num));
+           my $data=pribor::readData();
         }
 
 
