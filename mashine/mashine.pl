@@ -22,9 +22,17 @@ sub null {
 sub main {
 
    tranfer::openPort();
-   tranfer::sendData("\x01\x10\x01");
+#   tranfer::sendData("\x01\x10\x01");
+   pribor::init(0x10);
 
-   my $data=tranfer::readData();
+   pribor::sendData("\x01"); #Эхо-запрос
+
+   my $data=tranfer::pribor();
+
+   pribor::sendData("\x02"); #Синхронизация
+
+   pribor::sendData("\x05"); #Чтение буфера событий
+   my $data=tranfer::pribor();
 
    tranfer::closePort();
 
