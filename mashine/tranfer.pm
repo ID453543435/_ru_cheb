@@ -89,7 +89,7 @@
            my ($count_in, $string_in) = $comPort->read(1);
            if ($string_in != 1)
            {
-               print "\nread fall:count_in=$count_in,string_in=$string_in\n"
+               print "\nread fall:count_in=$count_in,string_in=$string_in\n";
                sleep(1); next;
            }
            if ($mode==0)
@@ -109,7 +109,7 @@
               elsif ($string_in eq "\x7D")
               {
                  $mode=2;
-                 next
+                 next;
               }
               $data .= $string_in;
            }
