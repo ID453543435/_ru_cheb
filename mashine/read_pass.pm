@@ -7,6 +7,7 @@
 #------------------------------------------------------
     use strict;
     use pribor;
+    use fileLib;
 #------------------------------------------------------
     package read_pass;
 
@@ -31,6 +32,7 @@
 
         while(1)
         {
+           last if substr($data,0,1) eq "\xff";
 
            my $car=substr($data,0,9);
 
@@ -40,7 +42,9 @@
 
            $chenel=$chenel & 0x0f;
 
-           print "($num,$chenel,$dirct,$time,$lenght,$speed)\n";
+           my $timeL=fileLib::toSql($time+$pribor::pr_baseTime);
+
+           print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
            $data=substr($data,9);
            last unless $data;
