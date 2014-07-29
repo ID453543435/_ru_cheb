@@ -31,7 +31,10 @@ sub main {
 
    pribor::syncTime();
 
-   read_pass::readCars();
+   while(1)
+   {
+      read_pass::readCars();
+   }
 
    tranfer::closePort();
 
