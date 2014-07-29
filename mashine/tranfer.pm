@@ -81,6 +81,30 @@
 #------------------------------------------------------
     sub readData {
 
+        my $data=readPacket();
+
+        my $crc=unpack("n",substr($data,-2,2));
+
+        $data=substr($data,0,-2);
+
+        my $crc16=rtu::crc($data);
+
+
+        if ($crc !=$crc16)
+        {
+           print "\nCRC error!\n";
+           
+        }
+
+
+        return $data;
+    }
+#------------------------------------------------------
+#------------------------------------------------------
+# readPacket
+#------------------------------------------------------
+    sub readPacket {
+
         my $data="";
 
         my $mode=0;
