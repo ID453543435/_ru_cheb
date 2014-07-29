@@ -22,6 +22,16 @@
         return $par;
     }
 #------------------------------------------------------
+# printData
+#------------------------------------------------------
+    sub printData {
+        my ($data)=@_;
+
+        $data =~ s/(.)/sprintf("|%02x",ord($1))/eg; print "$data\n";
+        
+        return;
+    }
+#------------------------------------------------------
 # openPort
 #------------------------------------------------------
     sub openPort {
@@ -60,6 +70,8 @@
     sub sendData {
         my ($data)=@_;
 
+        print ">";printData($data);
+
         my $crc16=rtu::crc($data);
         $data=$data.pack("n",$crc16);
 
@@ -96,6 +108,7 @@
            
         }
 
+        print "<";printData($data);
 
         return $data;
     }

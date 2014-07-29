@@ -26,8 +26,6 @@ sub main {
 
    my $data=tranfer::readData();
 
-   $data =~ s/(.)/sprintf("|%02x",ord($1))/eg; print "$data\n";
-                                      
    tranfer::closePort();
 
 }
