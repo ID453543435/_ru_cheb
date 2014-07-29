@@ -10,7 +10,7 @@
 #------------------------------------------------------
     package pribor;
 
-    use vars qw($pr_adress $pr_packet);
+    use vars qw($pr_adress $pr_packet $pr_baseTime);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -29,6 +29,37 @@
         $pr_packet=-1;
         $pr_adress=$adress;
 
+
+        return;
+    }
+#------------------------------------------------------
+# readyUp
+#------------------------------------------------------
+    sub readyUp {
+
+        sleep(1);
+
+        while (1)
+        {
+           pribor::sendData("\x01"); #Эхо-запрос
+
+           my $data=pribor::readData();
+
+           last if $data eq "\x00";
+           last if $data eq "\x01";
+
+           sleep(1);
+        }
+
+        return;
+    }
+#------------------------------------------------------
+# syncTime
+#------------------------------------------------------
+    sub syncTime {
+
+        pribor::sendData("\x02"); #Синхронизация
+        $pr_baseTime=time();
 
         return;
     }

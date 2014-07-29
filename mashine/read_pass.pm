@@ -6,34 +6,31 @@
 =cut
 #------------------------------------------------------
     use strict;
-    use tranfer;
     use pribor;
-    use read_pass;
+#------------------------------------------------------
+    package read_pass;
+
+#    use vars qw($comPort);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
-sub null {
-    my ($par)=@_;
+    sub null {
+        my ($par)=@_;
 
 
-    return $par;
-}
+        return $par;
+    }
 #------------------------------------------------------
-# main
+# readCars
 #------------------------------------------------------
-sub main {
+    sub readCars {
 
-   tranfer::openPort();
 
-   pribor::init(0x10);
+        pribor::sendData("\x05"); #Чтение буфера событий
+        my $data=pribor::readData();
 
-   pribor::readyUp();
 
-   read_pass::readCars();
-
-   tranfer::closePort();
-
-}
+        return;
+    }
 #------------------------------------------------------
-$|++;
-main(@ARGV);
+1;
