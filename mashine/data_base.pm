@@ -79,7 +79,7 @@
 
         my $dateHour=substr($timeL,0,13);
 
-        $dateHour =~ tr/- //cd;
+        $dateHour =~ tr/\- //cd;
 
         print "$dateHour-($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
