@@ -59,7 +59,24 @@
         $dbFile="database/${parameters::point_code}_$dateHour.SQLite";
         $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
         or die "cant connect\n";
-        makeDb($db) if -z $dbFile;
+        if (-z $dbFile)
+        {
+            makeDb($db);
+        }else
+        {
+
+            print "REINDEX...\n";
+            my $res=$db->do("REINDEX;");
+
+            unless ($res)
+            {
+                print "REINDEX fall;recreate database;\n";
+                $db->disconnect();
+                $dbDateHour="";
+                unlink($dbFile); 
+                openDataBase($dateHour);
+            }
+        }
 
         $dbDateHour=$dateHour;
 
@@ -106,22 +123,11 @@
             openDataBase($dateHour);
         };
 
-        while(1)
-        {
-
-            my $res=$db->do("INSERT INTO log 
-            (run_number, car_number, date_time, data) 
-            VALUES(?,?,?,?) ",{},
-            ($parameters::run_number,$dbCarNumber,$timeL,$data)
-            );
-
-            last if $res;
-
-            $db->disconnect();
-            unlink($dbFile); 
-            openDataBase($dateHour);
-        };
-        
+        $db->do("INSERT INTO log 
+        (run_number, car_number, date_time, data) 
+        VALUES(?,?,?,?) ",{},
+        ($parameters::run_number,$dbCarNumber,$timeL,$data)
+        );
 
         print "$dateHour-($parameters::run_number,$dbCarNumber)($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
