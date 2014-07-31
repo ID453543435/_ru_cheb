@@ -38,7 +38,7 @@
         do "settings/settings.pl";
 
         my $fileName="settings/run_number";
-        if -f($fileName)
+        if (-f($fileName))
         {
              $run_number=fileLib::fileToStr($fileName);
              $run_number++;
@@ -50,7 +50,7 @@
         fileLib::strToFile($fileName,$run_number);
 
         $fileName="settings/point_code";
-        if -f($fileName)
+        if (-f($fileName))
         {
              $point_code=fileLib::fileToStr($fileName);
         }
