@@ -69,11 +69,17 @@
 
         $chenel=$chenel & 0x0f;
 
-        my $timeL=fileLib::toSql($time/1000+$pribor::pr_baseTime);
+        my $timeSec=$time/1000+$pribor::pr_baseTime;
+
+        $data .= pack("L",$timeSec);
+
+        my $timeL=fileLib::toSql($timeSec);
 
 #           print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
         my $dateHour=substr($timeL,0,13);
+
+        $dateHour =~ s/- //sg;
 
         print "$dateHour-($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
