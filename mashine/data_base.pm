@@ -59,11 +59,11 @@
 # saveData
 #------------------------------------------------------
     sub saveData {
-        my ($data)=@_;
+        my ($date_time,$data)=@_;
 
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
 
-        print "(",join(";",@$data),")\n";
+        print "$date_time-(",join(";",@$data),")\n";
 
 
         return;

@@ -28,10 +28,11 @@
 
 
         my $data=pribor::readCars();
+#       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
     
         for my $str (@$data)
         {
-            data_base::saveData($str);
+            data_base::saveData($$str[3],$str);
         }
 
 
