@@ -106,11 +106,21 @@
             openDataBase($dateHour);
         };
 
-        $db->do("INSERT INTO log 
-        (run_number, car_number, date_time, data) 
-        VALUES(?,?,?,?) ",{},
-        ($parameters::run_number,$dbCarNumber,$timeL,$data)
-        );
+        while(1)
+        {
+
+            my $res=$db->do("INSERT INTO log 
+            (run_number, car_number, date_time, data) 
+            VALUES(?,?,?,?) ",{},
+            ($parameters::run_number,$dbCarNumber,$timeL,$data)
+            );
+
+            last if $res;
+
+            $db->disconnect();
+            unlink($dbFile); 
+            openDataBase($dateHour);
+        };
         
 
         print "$dateHour-($parameters::run_number,$dbCarNumber)($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
