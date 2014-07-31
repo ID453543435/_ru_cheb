@@ -128,8 +128,12 @@
            my ($count_in, $string_in) = $comPort->read(1);
            if ($count_in != 1)
            {
-               print "\nread fall:count_in=$count_in,string_in=$string_in\n";
-               last unless --$fallCount;
+#               print "\nread fall:count_in=$count_in,string_in=$string_in\n";
+               unless (--$fallCount)
+               {
+                  print "\nread fall:timeout\n";
+                  last;
+               };
                sleep(1); next;
            }
            if ($mode==0)

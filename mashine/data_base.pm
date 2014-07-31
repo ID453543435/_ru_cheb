@@ -63,7 +63,7 @@
 
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
 
-        print join(";",@$data),"\n";
+        print "(",join(";",@$data),")\n";
 
 
         return;
