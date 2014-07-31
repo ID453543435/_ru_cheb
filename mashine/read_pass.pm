@@ -27,34 +27,11 @@
     sub readCars {
 
 
-        pribor::sendData("\x05"); #Чтение буфера событий
-        my $data=pribor::readData();
-
-        my $num=-1;
-        while(1)
+        my $data=pribor::readCars();
+    
+        for my $str (@$data)
         {
-           last if substr($data,0,2) eq "\xff";
-           last if length($data) < 9;
-
-           my $car=substr($data,0,9);
-
-           my ($chenel,$time,$lenght,$speed);
-           ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$car);
-
-           my $dirct=$chenel & 0xf0;
-
-           $chenel=$chenel & 0x0f;
-
-           my $timeL=fileLib::toSql($time/1000+$pribor::pr_baseTime);
-
-           print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
-
-           $data=substr($data,9);
-        }
-        if ( $num != -1)
-        {
-           pribor::sendData("\x06".pack("C",$num));
-           my $data=pribor::readData();
+            data_base::saveData($str);
         }
 
 

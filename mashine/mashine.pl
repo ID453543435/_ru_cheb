@@ -6,6 +6,8 @@
 =cut
 #------------------------------------------------------
     use strict;
+    use parameters;
+    use data_base;
     use tranfer;
     use pribor;
     use read_pass;
@@ -22,6 +24,9 @@ sub null {
 # main
 #------------------------------------------------------
 sub main {
+
+   parameters::init();
+   data_base::init();
 
    tranfer::openPort();
 

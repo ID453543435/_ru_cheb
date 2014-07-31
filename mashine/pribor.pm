@@ -104,4 +104,46 @@
         return $data;
     }
 #------------------------------------------------------
+# readCars
+#------------------------------------------------------
+    sub readCars {
+
+
+        sendData("\x05"); #Чтение буфера событий
+        my $data=readData();
+
+        my $num=-1;
+        my @res=();
+        while(1)
+        {
+           last if substr($data,0,2) eq "\xff";
+           last if length($data) < 9;
+
+           my $car=substr($data,0,9);
+
+           my ($chenel,$time,$lenght,$speed);
+           ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$car);
+
+           my $dirct=$chenel & 0xf0;
+
+           $chenel=$chenel & 0x0f;
+
+           my $timeL=fileLib::toSql($time/1000+$pribor::pr_baseTime);
+
+#           print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
+
+           push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
+
+           $data=substr($data,9);
+        }
+        if ( $num != -1)
+        {
+           pribor::sendData("\x06".pack("C",$num));
+           my $data=pribor::readData();
+        }
+
+
+        return \@res;
+    }
+#------------------------------------------------------
 1;
