@@ -12,7 +12,7 @@
     package data_base;
 #------------------------------------------------------
 
-    use vars qw($db $dbFile);
+    use vars qw($db $dbFile $dbDateHour $dbCarNumber);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -44,14 +44,34 @@
         return;
     }
 #------------------------------------------------------
+# openDataBase
+#------------------------------------------------------
+    sub openDataBase {
+        my ($dateHour)=@_;
+
+
+        if ($dbDateHour ne "")
+        {
+            $db->disconnect();
+        }
+
+
+        $dbFile="database/${parameters::point_code}_$dateHour.SQLite";
+        $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
+        or die "cant connect\n";
+        makeDb($db) if -z $dbFile;
+
+        $dbDateHour=$dateHour;
+
+        return;
+    }
+#------------------------------------------------------
 # init
 #------------------------------------------------------
     sub init {
 
-        $dbFile="database/dbfile.SQLite";
-        $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
-        or die "cant connect\n";
-        makeDb($db) if -z $dbFile;
+        $dbDateHour="";
+        $dbCarNumber=0;
 
         return;
     }
@@ -81,7 +101,21 @@
 
         $dateHour =~ tr/\- //d;
 
-        print "$dateHour-($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
+        if ($dateHour ne $dbDateHour)
+        {
+            openDataBase($dateHour);
+        };
+
+        $db->do("INSERT INTO log 
+        (run_number, car_number, date_time, data) 
+        VALUES(?,?,?,?) ",{},
+        ($parameters::run_number,$dbCarNumber,$timeL,$data)
+        );
+        
+
+        print "$dateHour-($parameters::run_number,$dbCarNumber)($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
+
+        $dbCarNumber++;
 
 
         return;
