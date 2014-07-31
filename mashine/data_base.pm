@@ -59,11 +59,23 @@
 # saveData
 #------------------------------------------------------
     sub saveData {
-        my ($date_time,$data)=@_;
+        my ($data)=@_;
 
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
 
-        print "$date_time-(",join(";",@$data),")\n";
+        my ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$data);
+
+        my $dirct=$chenel & 0xf0;
+
+        $chenel=$chenel & 0x0f;
+
+        my $timeL=fileLib::toSql($time/1000+$pribor::pr_baseTime);
+
+#           print "($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
+
+        my $dateHour=substr($timeL,0,13);
+
+        print "$dateHour-($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
 
         return;

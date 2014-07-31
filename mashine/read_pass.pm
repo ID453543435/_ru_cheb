@@ -32,7 +32,7 @@
     
         for my $str (@$data)
         {
-            data_base::saveData($$str[3],$str);
+            data_base::saveData($str);
         }
 
 
