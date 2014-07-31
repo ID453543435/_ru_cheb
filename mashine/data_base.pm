@@ -108,7 +108,7 @@
 
         my $timeSec=$time/1000+$pribor::pr_baseTime;
 
-        $data .= pack("L",$timeSec);
+        $data .= pack("LLL",$timeSec,$parameters::run_number,$dbCarNumber);
 
         my $timeL=fileLib::toSql($timeSec);
 
