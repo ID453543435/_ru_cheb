@@ -39,7 +39,7 @@ sub header {
 sub fin {
 
     print "<!---end---!>\n";
-    $::q->end_html; # end the HTML
+    $cgi->end_html; # end the HTML
 
     return;
 }
@@ -49,7 +49,7 @@ sub fin {
 sub init {
 
     $cgi = CGI->new; # create new CGI object
-    print $::q->header, # create the HTTP header
+    print $cgi->header, # create the HTTP header
 
     header();
 
