@@ -25,8 +25,8 @@
 #------------------------------------------------------
 sub header {
 
-    $cgi->start_html('mserv'), # start the HTML
-    $cgi->h1('mserv'), # level 1 header
+    print $cgi->start_html('mserv'), # start the HTML
+    print $cgi->h1('mserv'), # level 1 header
 
     print "<!---beg---!>\n";
 
@@ -39,7 +39,7 @@ sub header {
 sub fin {
 
     print "<!---end---!>\n";
-    $cgi->end_html; # end the HTML
+    print $cgi->end_html; # end the HTML
 
     return;
 }
