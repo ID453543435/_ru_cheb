@@ -25,8 +25,8 @@
 #------------------------------------------------------
 sub header {
 
-    print $cgi->start_html('mserv'), # start the HTML
-    print $cgi->h1('mserv'), # level 1 header
+    print $cgi->start_html('mserv'); # start the HTML
+    print $cgi->h1('mserv'); # level 1 header
 
     print "<!---beg---!>\n";
 
@@ -49,7 +49,7 @@ sub fin {
 sub init {
 
     $cgi = CGI->new; # create new CGI object
-    print $cgi->header, # create the HTTP header
+    print $cgi->header; # create the HTTP header
 
     header();
 
