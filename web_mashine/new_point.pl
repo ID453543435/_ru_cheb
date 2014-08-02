@@ -31,7 +31,7 @@ sub main {
         "SELECT id
          FROM points
          ORDER BY id DESC LIMIT 1;");
-    $sth->execute( $age ) or die $DBI::errstr;
+    $sth->execute() or die $DBI::errstr;
     print "Number of rows found :" + $sth->rows;
     my $id;
     while (my @row = $sth->fetchrow_array()) {
