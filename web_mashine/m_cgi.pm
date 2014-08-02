@@ -6,11 +6,12 @@
 =cut
 #------------------------------------------------------
     use CGI; # load CGI routines
+    use DBI;
     use strict;
 #------------------------------------------------------
     package m_cgi;
 
-    use vars qw($cgi);
+    use vars qw($cgi $db);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -19,6 +20,23 @@
 
 
         return $par;
+    }
+#------------------------------------------------------
+# connectDB
+#------------------------------------------------------
+    sub connectDB {
+
+        # MySQL database configurations
+        my $dsn = "DBI:mysql:mashine";
+        my $username = "root";
+        my $password = '';
+
+        # connect to MySQL database
+        my %attr = (PrintError=>0, RaiseError=>1);
+
+        $db = DBI->connect($dsn,$username,$password, \%attr);
+
+        return;
     }
 #------------------------------------------------------
 # header
