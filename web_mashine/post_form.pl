@@ -44,10 +44,12 @@ sub main {
     $sth->finish();    
 
 
+    print "point_id=".sprintf("%08i",$point_id)."\n";
     print "run_number=".sprintf("%08i",$run_number)."\n";
     print "car_number=".sprintf("%08i",$car_number)."\n";
     print "date_time=".$date_time."\n";
-    
+
+    print "<!---end--->\n";
     
     print $m_cgi::cgi->start_form(
         -name    => 'main_form',
