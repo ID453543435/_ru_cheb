@@ -32,14 +32,14 @@ sub main {
          FROM points
          ORDER BY id DESC LIMIT 1;");
     $sth->execute() or die $DBI::errstr;
-    print "Number of rows found :" + $sth->rows;
+    print "Number of rows found :" + $sth->rows+"\n";
     my $id;
     while (my @row = $sth->fetchrow_array()) {
        ($id ) = @row;
     }
     $sth->finish();    
 
-    print "num=".sprintf("i08",$id)."\n";
+    print "num=".sprintf("%08i",$id)."\n";
 
     $m_cgi::db->disconnect();
 
