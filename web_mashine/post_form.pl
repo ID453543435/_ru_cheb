@@ -25,9 +25,30 @@ sub main {
     m_cgi::init();
     m_cgi::connectDB();
 
-    my $point_id=$m_cgi::cgi->param('text1');
+    my $point_id=$m_cgi::cgi->param('point_id');
+
+    my $sth = $m_cgi::db->prepare(
+        "SELECT run_number,car_number,date_time
+         FROM data
+         WHERE point_id=?
+         ORDER BY point_id,run_number,car_number DESC LIMIT 1;");
+    
+    $sth->execute($point_id) or die $DBI::errstr;
+
+    print "Number of rows found :" . $sth->rows . "\n";
+
+    my ($run_number,$car_number,$date_time);
+    while (my @row = $sth->fetchrow_array()) {
+       ($run_number,$car_number,$date_time) = @row;
+    }
+    $sth->finish();    
 
 
+    print "run_number=".sprintf("%08i",$run_number)."\n";
+    print "car_number=".sprintf("%08i",$car_number)."\n";
+    print "date_time=".$date_time."\n";
+    
+    
     print $m_cgi::cgi->start_form(
         -name    => 'main_form',
         -method  => 'POST',
