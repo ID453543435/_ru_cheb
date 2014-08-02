@@ -36,7 +36,7 @@ sub main {
 
      $dbh->do("CREATE DATABASE mashine;");
 
-     $dbh->do("USE DATABASE mashine;");
+     $dbh->do("USE mashine;");
 
      $dbh->do("
      CREATE TABLE points (
