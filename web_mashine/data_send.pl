@@ -26,12 +26,13 @@ sub saveFile {
     my ($bytesread, $buffer);
     my $num_bytes = 1024;
     my $totalbytes= 0;
+    my $res=0;
 
     print "Uploading $filename to $file:\n";
 
     if (!$filename) {
-        print "You must enter a filename before you can upload it\n";
-        return;
+#        print "You must enter a filename before you can upload it\n";
+        return 404;
     }
 
 
@@ -46,15 +47,17 @@ sub saveFile {
     close OUTFILE or die "Couldn't close $file: $!";
     if (defined($bytesread))
     {
-        print "<p>Done. File $filename uploaded to $file ($totalbytes bytes)\n";
+#        print "<p>Done. File $filename uploaded to $file ($totalbytes bytes)\n";
+        $res=200;
     }
     else
     {
-        print "Read failure\n";
+#        print "Read failure\n";
         unlink($file);
+        $res=305;
     }
 
-    return;
+    return $res;
 }
 #------------------------------------------------------
 # main
@@ -66,12 +69,12 @@ sub main {
 
     my $point_id=$m_cgi::cgi->param('point_id');
 
-    saveFile($point_id."data.raw",  $m_cgi::cgi->upload('data'));
-    saveFile($point_id."data.7z",   $m_cgi::cgi->upload('data_arx'));
+    my $dataRes=saveFile($point_id."data.raw",  $m_cgi::cgi->upload('data'));
+    my $dataArxRes=saveFile($point_id."data.7z",   $m_cgi::cgi->upload('data_arx'));
 
 
-#    print "point_id=".sprintf("%08i",$point_id)."\n";
-
+    print "dataRes=$dataRes\n";
+    print "dataArxRes=$dataArxRes\n";
 
 
     $m_cgi::db->disconnect();
