@@ -35,7 +35,7 @@ sub main {
     
     $sth->execute() or die $DBI::errstr;
 
-    print "Number of rows found :" + $sth->rows + "\n";
+    print "Number of rows found :" . $sth->rows . "\n";
 
     my $id;
     while (my @row = $sth->fetchrow_array()) {

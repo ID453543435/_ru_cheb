@@ -47,7 +47,7 @@ sub header {
     print $cgi->h1('mserv'); # level 1 header
 
     print "<PRE>\n";
-    print "<!---beg---!>\n";
+    print "<!---beg--->\n";
 
 
     return;
@@ -57,7 +57,7 @@ sub header {
 #------------------------------------------------------
 sub fin {
 
-    print "<!---end---!>\n";
+    print "<!---end--->\n";
     print "</PRE>\n";
     print $cgi->end_html; # end the HTML
 
