@@ -23,7 +23,7 @@ sub null {
 sub main {
 
      # MySQL database configurations
-     my $dsn = "DBI:mysql";
+     my $dsn = "DBI:mysql:test";
      my $username = "root";
      my $password = '';
 
