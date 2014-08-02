@@ -27,14 +27,13 @@ sub saveFile {
         my $num_bytes = 1024;
         my $totalbytes= 0;
 
+        print "Uploading $filename to $file:\n";
+
         if (!$filename) {
             print "You must enter a filename before you can upload it\n";
             return;
         }
 
-        # Untaint $filename
-
-        print "Uploading $filename to $file<BR>";
 
         open (OUTFILE, ">", "$file") or die "Couldn't open $file for writing: $!";
         binmode(OUTFILE);
@@ -43,15 +42,17 @@ sub saveFile {
             $totalbytes += $bytesread;
             print OUTFILE $buffer;
         }
-        die "Read failure" unless defined($bytesread);
-        unless (defined($totalbytes)) {
-            print "<p>Error: Could not read file $filename, ";
-            print "or the file was zero length.";
-        } else {
-            print "<p>Done. File $filename uploaded to $file ($totalbytes bytes)";
-        }
-        close OUTFILE or die "Couldn't close $file: $!";
 
+        close OUTFILE or die "Couldn't close $file: $!";
+        if (defined($bytesread))
+        {
+            print "<p>Done. File $filename uploaded to $file ($totalbytes bytes)\n";
+        }
+        else
+        {
+            print "Read failure\n";
+            unlink($file);
+        }
 
     return;
 }
