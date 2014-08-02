@@ -23,7 +23,7 @@ sub null {
 sub main {
 
      # MySQL database configurations
-     my $dsn = "DBI:mysql:perlmysqldb";
+     my $dsn = "DBI:mysql";
      my $username = "root";
      my $password = '';
 
@@ -31,6 +31,12 @@ sub main {
      my %attr = (PrintError=>0, RaiseError=>1);
 
      my $dbh = DBI->connect($dsn,$username,$password, \%attr);
+
+     $dbh->do("DROP DATABASE mashine;");
+
+     $dbh->do("CREATE DATABASE mashine;");
+
+     $dbh->do("USE DATABASE mashine;");
 
      $dbh->do("
      CREATE TABLE points (
