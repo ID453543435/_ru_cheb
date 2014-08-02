@@ -26,13 +26,17 @@ sub main {
 
     m_cgi::connectDB();
 
-    $m_cgi::db->do("INSERT INTO points;");
+    $m_cgi::db->do("INSERT INTO points () VALUES () ;");
+    
     my $sth = $m_cgi::db->prepare(
         "SELECT id
          FROM points
          ORDER BY id DESC LIMIT 1;");
+    
     $sth->execute() or die $DBI::errstr;
-    print "Number of rows found :" + $sth->rows+"\n";
+
+    print "Number of rows found :" + $sth->rows + "\n";
+
     my $id;
     while (my @row = $sth->fetchrow_array()) {
        ($id ) = @row;
