@@ -41,7 +41,7 @@ sub compress {
 
     chdir($dir);
 
-    system($conf_rar, "a", "-tgzip", "-mx=9", "-ms=on", $arhFile, $file, "-scsDOS");
+    system($conf_rar, "a", "-tgzip", $arhFile, $file);
 
     chdir($cwd);
 

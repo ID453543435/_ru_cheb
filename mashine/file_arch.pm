@@ -74,7 +74,7 @@
 
         move("temp/$arxName","archives/$arxName");
 
-        unlink($tempFile);
+#        unlink($tempFile);
 
         return ($arxName);
     }
