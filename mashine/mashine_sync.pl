@@ -30,7 +30,8 @@ sub archivate {
 
     if ($lastFile2)
     {
-        file_arch::fileArch(substr($lastFile2,0,19));
+        my $arxFile=file_arch::fileArch(substr($lastFile2,0,19));
+        file_db::addFile($arxFile);
     }
 
     for my $file (@$list)

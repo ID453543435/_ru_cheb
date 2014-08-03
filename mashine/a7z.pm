@@ -35,13 +35,13 @@ sub extention {
 # compress
 #------------------------------------------------------
 sub compress {
-    my ($file,$dir)=@_;
+    my ($file,$arhFile,$dir)=@_;
 
     my $cwd=Cwd::getdcwd();
 
     chdir($dir);
 
-    system($conf_rar, "a", "-tgzip", "-mx=9", "-ms=on", $file."gzip", $file, "-scsDOS");
+    system($conf_rar, "a", "-tgzip", "-mx=9", "-ms=on", $arhFile, $file, "-scsDOS");
 
     chdir($cwd);
 

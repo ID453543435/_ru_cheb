@@ -68,9 +68,9 @@
         
         close OUTFILE or return die "cant close";
 
-        a7z::compress($dbFile,"temp");
+        my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number).".gzip";
 
-        my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number)."gzip";
+        a7z::compress($dbFile,$arxName,"temp");
 
         move($tempFile,"archives/$arxName");
 
