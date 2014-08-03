@@ -42,7 +42,7 @@
     sub fileArch {
         my ($dbFile)=@_;
 
-        $db = openDataBase("database/$dbFile");
+        $db = openDataBase("database/$dbFile.SQLite");
         
         my $sth = $db->prepare(
             "SELECT run_number, car_number, date_time, data
@@ -70,7 +70,7 @@
 
         a7z::compress($dbFile,"temp");
 
-        my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number);
+        my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number)."gzip";
 
         move($tempFile,"archives/$arxName");
 

@@ -5,18 +5,21 @@
 
 =cut
 #------------------------------------------------------
-    use file_arch;
-    use file_db;
     use strict;
+
+    package file_db;
+#------------------------------------------------------
+
+    use vars qw(%files);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
-sub null {
-    my ($par)=@_;
+    sub null {
+        my ($par)=@_;
 
 
-    return $par;
-}
+        return $par;
+    }
 #------------------------------------------------------
 # dirList
 #------------------------------------------------------
@@ -33,42 +36,32 @@ sub dirList {
     return \@files;
 }
 #------------------------------------------------------
-# archivate
+# addFile
 #------------------------------------------------------
-sub archivate {
+    sub addFile {
+        my ($file)=@_;
 
+        my ($point_code,$dateHour,$run_number, $car_number)=($file =~ m{^(.{8})_(.{10})_(.{8})_(.{8})}s);
+        my $baseName=substr($file,0,19);
+        $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
 
-    my $list=dirList("database");
-
-    my $lastFile1=shift @$list;
-    my $lastFile2=shift @$list;
-
-    if ($lastFile2)
-    {
-        file_arch::fileArch(substr($lastFile2,19));
+        return;
     }
+#------------------------------------------------------
+# init
+#------------------------------------------------------
+    sub init {
 
-    for my $file (@$list)
-    {
-        my $arxFile=file_arch::fileArch(substr($file,19));
-        unlink("database/$file");
+        %files=();
 
-        file_db::addFile($arxFile);
+        my $list=dirList("archives");
+
+        for my $file (@$list)
+        {
+             addFile($file);
+        }
+
+        return;
     }
-
-
-}
 #------------------------------------------------------
-# main
-#------------------------------------------------------
-sub main {
-
-    file_db::init();
-
-    archivate();
-
-
-}
-#------------------------------------------------------
-$|++;
-main(@ARGV);
+1;
