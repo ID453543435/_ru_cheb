@@ -60,7 +60,7 @@ sub dirList {
 
         if ($files{$dateHour})
         {
-            $arxName=$$files{$dateHour}[0];
+            $arxName=${$files{$dateHour}}[0];
         }
         else
         {
