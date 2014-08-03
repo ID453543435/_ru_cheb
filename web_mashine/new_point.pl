@@ -26,7 +26,7 @@ sub main {
 
     m_cgi::connectDB();
 
-    $m_cgi::db->do("INSERT INTO points () VALUES () ;");
+    $m_cgi::db->do("INSERT INTO points (status) VALUES (0) ;");
     
     my $sth = $m_cgi::db->prepare(
         "SELECT id

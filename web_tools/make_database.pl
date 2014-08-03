@@ -40,8 +40,9 @@ sub main {
 
      $dbh->do("
      CREATE TABLE points (
-     id   int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-     info varchar(255) NOT NULL
+     id       int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+     status   int(8) ,
+     info     varchar(255) NOT NULL
      );
      ");
 

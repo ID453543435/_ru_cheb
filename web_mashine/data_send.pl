@@ -28,7 +28,7 @@ sub saveFile {
     my $totalbytes= 0;
     my $res=0;
 
-    print "Uploading $filename to $file:\n";
+#    print "Uploading $filename to $file:\n";
 
     if (!$filename) {
 #        print "You must enter a filename before you can upload it\n";
@@ -36,7 +36,7 @@ sub saveFile {
     }
 
 
-    open (OUTFILE, ">", "$file") or die "Couldn't open $file for writing: $!";
+    open (OUTFILE, ">", "$file") or return 331;
     binmode(OUTFILE);
 
     while ($bytesread = read($filename, $buffer, $num_bytes)) {
@@ -44,7 +44,7 @@ sub saveFile {
         print OUTFILE $buffer;
     }
 
-    close OUTFILE or die "Couldn't close $file: $!";
+    close OUTFILE or return 332;
     if (defined($bytesread))
     {
 #        print "<p>Done. File $filename uploaded to $file ($totalbytes bytes)\n";
@@ -69,12 +69,23 @@ sub main {
 
     my $point_id=$m_cgi::cgi->param('point_id');
 
+    $m_cgi::db->do("UPDATE INTO points SET status=201 ;");
+    
     my $dataRes=saveFile($point_id."data.raw",  $m_cgi::cgi->upload('data'));
     my $dataArxRes=saveFile($point_id."data.7z",   $m_cgi::cgi->upload('data_arx'));
 
 
     print "dataRes=$dataRes\n";
     print "dataArxRes=$dataArxRes\n";
+
+    if ($dataRes==200 or $dataArxRes==200)
+    {
+        $m_cgi::db->do("UPDATE INTO points SET status=1 ;");
+    }
+    else
+    {
+        $m_cgi::db->do("UPDATE INTO points SET status=0 ;");
+    }
 
 
     $m_cgi::db->disconnect();
