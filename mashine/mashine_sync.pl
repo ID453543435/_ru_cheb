@@ -25,8 +25,10 @@ sub archivate {
 
     my $list=file_db::dirList("database");
 
-    my $lastFile1=shift @$list;
-    my $lastFile2=shift @$list;
+    @$list=sort(@$list);
+
+    my $lastFile1=pop @$list;
+    my $lastFile2=pop @$list;
 
     if ($lastFile2)
     {
@@ -37,7 +39,7 @@ sub archivate {
     for my $file (@$list)
     {
         my $arxFile=file_arch::fileArch(substr($file,0,19));
-#        unlink("database/$file");
+        unlink("database/$file") or die;
 
         file_db::addFile($arxFile);
     }

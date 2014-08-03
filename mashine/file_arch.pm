@@ -72,9 +72,9 @@
 
         a7z::compress($dbFile,$arxName,"temp");
 
-        move("temp/$arxName","archives/$arxName");
+        move("temp/$arxName","archives/$arxName") or die;
 
-#        unlink($tempFile);
+        unlink($tempFile) or die;
 
         return ($arxName);
     }
