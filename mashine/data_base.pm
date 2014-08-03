@@ -91,6 +91,7 @@
         $dbCarNumber=0;
 
         my $dateHour=substr(fileLib::toSql(time()),0,13);
+        $dateHour =~ tr/\- //d;
         openDataBase($dateHour);
 
         return;
