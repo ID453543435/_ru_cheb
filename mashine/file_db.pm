@@ -52,7 +52,7 @@ sub dirList {
 # fileArch
 #------------------------------------------------------
     sub fileArch {
-        my ($dbFile)=@_;
+        my ($file)=@_;
 
         my ($point_code,$dateHour)=($file =~ m{^(.{8})_(.{10})}s);
 
@@ -64,7 +64,7 @@ sub dirList {
         }
         else
         {
-            $arxName=file_arch::fileArch($dbFile);
+            $arxName=file_arch::fileArch($file);
             addFile($arxName);
         }
 
