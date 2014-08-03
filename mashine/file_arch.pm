@@ -31,7 +31,7 @@
         my ($dbFile)=@_;
 
 
-        $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
+        my $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
         or die "cant connect\n";
 
         return $db;
@@ -42,7 +42,7 @@
     sub fileArch {
         my ($dbFile)=@_;
 
-        $db = openDataBase("database/$dbFile.SQLite");
+        my $db = openDataBase("database/$dbFile.SQLite");
         
         my $sth = $db->prepare(
             "SELECT run_number, car_number, date_time, data
@@ -65,6 +65,7 @@
            print OUTFILE $data;
         }
         $sth->finish();    
+        $db->disconnect();
         
         close OUTFILE or return die "cant close";
 
