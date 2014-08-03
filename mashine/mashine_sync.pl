@@ -45,12 +45,12 @@ sub archivate {
 
     if ($lastFile2)
     {
-        file_arch::fileArch(substr($lastFile2,19));
+        file_arch::fileArch(substr($lastFile2,0,19));
     }
 
     for my $file (@$list)
     {
-        my $arxFile=file_arch::fileArch(substr($file,19));
+        my $arxFile=file_arch::fileArch(substr($file,0,19));
         unlink("database/$file");
 
         file_db::addFile($arxFile);
