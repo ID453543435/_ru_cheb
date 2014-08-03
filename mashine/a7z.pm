@@ -41,7 +41,7 @@ sub compress {
 
     chdir($dir);
 
-    console::sys($conf_rar, "a", "-tgzip", "-mx=9", "-ms=on", $file."gzip", $file, "-scsDOS");
+    system($conf_rar, "a", "-tgzip", "-mx=9", "-ms=on", $file."gzip", $file, "-scsDOS");
 
     chdir($cwd);
 
