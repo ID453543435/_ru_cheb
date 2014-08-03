@@ -8,6 +8,7 @@
     use strict;
 
     package file_db;
+    use file_arch;
 #------------------------------------------------------
 
     use vars qw(%files);
@@ -46,6 +47,28 @@ sub dirList {
         $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
 
         return;
+    }
+#------------------------------------------------------
+# fileArch
+#------------------------------------------------------
+    sub fileArch {
+        my ($dbFile)=@_;
+
+        my ($point_code,$dateHour)=($file =~ m{^(.{8})_(.{10})}s);
+
+        my $arxName;
+
+        if ($files{$dateHour})
+        {
+            $arxName=$$files{$dateHour}[0];
+        }
+        else
+        {
+            $arxName=file_arch::fileArch($dbFile);
+            addFile($arxName);
+        }
+
+        return ($arxName);
     }
 #------------------------------------------------------
 # init

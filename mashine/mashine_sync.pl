@@ -32,16 +32,13 @@ sub archivate {
 
     if ($lastFile2)
     {
-        my $arxFile=file_arch::fileArch(substr($lastFile2,0,19));
-        file_db::addFile($arxFile);
+        file_db::fileArch(substr($lastFile2,0,19));
     }
 
     for my $file (@$list)
     {
-        my $arxFile=file_arch::fileArch(substr($file,0,19));
+        file_db::fileArch(substr($file,0,19));
         unlink("database/$file") or die;
-
-        file_db::addFile($arxFile);
     }
 
 
