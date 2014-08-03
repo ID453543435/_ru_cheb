@@ -18,27 +18,12 @@ sub null {
     return $par;
 }
 #------------------------------------------------------
-# dirList
-#------------------------------------------------------
-sub dirList {
-    my ($dirname)=@_;
-
-    opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
-    my @files = readdir $dh;
-    closedir $dh;
-
-    pop @files; 
-    pop @files; 
-
-    return \@files;
-}
-#------------------------------------------------------
 # archivate
 #------------------------------------------------------
 sub archivate {
 
 
-    my $list=dirList("database");
+    my $list=file_db::dirList("database");
 
     my $lastFile1=shift @$list;
     my $lastFile2=shift @$list;

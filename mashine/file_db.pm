@@ -30,8 +30,8 @@ sub dirList {
     my @files = readdir $dh;
     closedir $dh;
 
-    pop @files; 
-    pop @files; 
+    shift @files; 
+    shift @files; 
 
     return \@files;
 }
