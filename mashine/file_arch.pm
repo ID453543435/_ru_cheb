@@ -72,7 +72,7 @@
 
         a7z::compress($dbFile,$arxName,"temp");
 
-        move($tempFile,"archives/$arxName");
+        move("temp/$arxName","archives/$arxName");
 
         unlink($tempFile);
 

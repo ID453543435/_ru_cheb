@@ -37,7 +37,7 @@ sub archivate {
     for my $file (@$list)
     {
         my $arxFile=file_arch::fileArch(substr($file,0,19));
-        unlink("database/$file");
+#        unlink("database/$file");
 
         file_db::addFile($arxFile);
     }
