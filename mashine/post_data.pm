@@ -11,7 +11,8 @@
     use LWP;
 
     package post_data;
-    use file_db;
+    use post_file;
+#    use file_db;
 #------------------------------------------------------
 
 #    use vars qw(%files);
@@ -57,15 +58,6 @@
         return \%res;
     }
 #------------------------------------------------------
-# findFile
-#------------------------------------------------------
-    sub findFile {
-        my ($run_number, $car_number, $dateTime)=@_;
-
-
-        return $par;
-    }
-#------------------------------------------------------
 # post
 #------------------------------------------------------
     sub post {
@@ -91,7 +83,7 @@
         my $params=parseHTML($body);
 
 
-        my $postFile=findFile($$params{run_number},$$params{$car_number},$$params{$date_time});
+        my $postFile=post_file::findFile($$params{run_number},$$params{$car_number},$$params{$date_time});
 
         
         my @forms = HTML::Form->parse( $body, "${parameters::server_url}post_form.pl" );
@@ -100,13 +92,14 @@
 
         $form->param("point_id",$parameters::point_code) ;
 
-        my $input_file = $form->find_input( "data_arx" ) ;
+        my $input_file = $form->find_input( $post_file::post_input_name ) ;
 
-        $input_file->filename( $postFile );
-        $input_file->content( fileLib::fileToStr($postFile) ); 
+        $input_file->filename( $post_file::post_file_short );
+        $input_file->content( fileLib::fileToStr($post_file::post_file_name) ); 
 
         $req=$form->click();
 
+        post_file::deleteFile();
         
         my $res = $ua->request($req);
 
