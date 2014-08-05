@@ -11,7 +11,7 @@
     package parameters;
 #------------------------------------------------------
 
-    use vars qw($point_code $run_number);
+    use vars qw($point_code $run_number $server_url);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -59,6 +59,21 @@
              $point_code=getNewPointCode();
              fileLib::strToFile($fileName,$point_code);
         }
+
+        return;
+    }
+#------------------------------------------------------
+# initPost
+#------------------------------------------------------
+    sub initPost {
+
+        do "settings/settings.pl";
+
+        my $fileName="settings/run_number";
+        $run_number=fileLib::fileToStr($fileName);
+
+        $fileName="settings/point_code";
+        $point_code=fileLib::fileToStr($fileName);
 
         return;
     }

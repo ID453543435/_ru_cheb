@@ -5,6 +5,7 @@
 
 =cut
 #------------------------------------------------------
+    use parameters;
     use file_arch;
     use file_db;
     use strict;
@@ -48,6 +49,7 @@ sub archivate {
 #------------------------------------------------------
 sub main {
 
+    parameters::initPost();
     file_db::init();
 
     archivate();
