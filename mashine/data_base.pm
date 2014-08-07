@@ -133,6 +133,8 @@
         ($parameters::run_number,$dbCarNumber,$timeL,$data)
         );
 
+        print "DB>";tranfer::printData($data);
+
         print "$dateHour-($parameters::run_number,$dbCarNumber)($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
         $dbCarNumber++;
