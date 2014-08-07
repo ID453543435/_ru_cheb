@@ -31,8 +31,8 @@
         $db->do("CREATE TABLE log (
         run_number INTEGER, 
         car_number INTEGER ,
-        date_time  ,
-        data
+        date_time  TEXT,
+        data BLOB
         );");
 
         $db->do("CREATE INDEX i001
@@ -133,7 +133,7 @@
         ($parameters::run_number,$dbCarNumber,$timeL,$data)
         );
 
-        print "DB>";tranfer::printData($data);
+#        print "DB>";tranfer::printData($data);
 
         print "$dateHour-($parameters::run_number,$dbCarNumber)($num,$chenel,$dirct,$timeL,$lenght,$speed)\n";
 
