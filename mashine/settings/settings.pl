@@ -1,1 +1,1 @@
-$server_url="http://localhost/web_mashine/";
+$server_url="http://localhost/cgi-bin/web_mashine/";

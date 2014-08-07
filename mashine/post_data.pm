@@ -113,6 +113,8 @@
            return(302);
         }
 
+        print $body;
+
 
         return;
     }
