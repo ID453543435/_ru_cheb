@@ -51,7 +51,7 @@
         
         $str=substr($str,$fromPoz,$toPoz-$fromPoz);
 
-        while ( $str =~ m{^(\w+)=(.*)$}gi ) 
+        while ( $str =~ m{^(\w+)=(.*)$}mgi ) 
         {
           $res{$1}=$2;
         }
