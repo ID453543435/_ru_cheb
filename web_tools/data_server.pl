@@ -103,7 +103,7 @@ sub serveAll {
 
     while (my @row = $sth->fetchrow_array()) {
        my ($point_id) = @row;
-       saveToDB();
+       saveToDB($point_id);
 
     }
     $sth->finish();
