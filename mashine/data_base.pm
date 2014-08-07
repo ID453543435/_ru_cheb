@@ -104,7 +104,7 @@
 
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
 
-        my ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$data);
+        my ($num,$chenel,$time,$lenght,$speed)=unpack("CCLSC",$data); # len=9
 
         my $dirct=$chenel & 0xf0;
 
@@ -112,7 +112,7 @@
 
         my $timeSec=$time/1000+$pribor::pr_baseTime;
 
-        $data .= pack("LLL",$timeSec,$parameters::run_number,$dbCarNumber);
+        $data .= pack("LLL",$timeSec,$parameters::run_number,$dbCarNumber);  # len=12
 
         my $timeL=fileLib::toSql($timeSec);
 

@@ -49,10 +49,22 @@
         return;
     }
 #------------------------------------------------------
+# printData
+#------------------------------------------------------
+    sub printData {
+        my ($data)=@_;
+
+        $data =~ s/(.)/sprintf("|%02x",ord($1))/esg; print "$data\n";
+        
+        return;
+    }
+#------------------------------------------------------
 # saveData
 #------------------------------------------------------
     sub saveData {
         my ($point_id,$data)=@_;
+
+        printData($data);
 
         my ($num,$chenel,$time,$lenght,$speed,$timeSec,$run_number,$carNumber)=unpack("CCLSCLLL",$data);
 
