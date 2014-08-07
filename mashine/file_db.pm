@@ -86,7 +86,7 @@ sub dirList {
     sub init {
 
         %files=();
-        $lastDateHour="";
+        $lastDateHour="0001010100";
         $fistDateHour="9999999999";
 
         my $list=dirList("archives");
