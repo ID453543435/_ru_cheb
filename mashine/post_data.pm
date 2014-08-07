@@ -9,7 +9,8 @@
  
     use LWP::UserAgent;
     use LWP;
-
+    use HTML::Form;
+    
     package post_data;
     use post_file;
 #    use file_db;
