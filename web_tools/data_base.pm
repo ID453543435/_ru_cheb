@@ -35,7 +35,7 @@
         # connect to MySQL database
         my %attr = (PrintError=>0, RaiseError=>1);
 
-        my $db = DBI->connect($dsn,$username,$password, \%attr);
+        $db = DBI->connect($dsn,$username,$password, \%attr);
 
         return;
     }
