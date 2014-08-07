@@ -53,7 +53,7 @@ sub saveToDBfile {
        
     }
 
-    close INFILE or return die;
+    close INFILE or die;
 
     return;
 }
