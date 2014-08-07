@@ -65,7 +65,7 @@
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
         
-        $req = new HTTP::Request GET => "${parameters::server_url}post_form.pl?point_id=${parameters::point_code}";
+        my $req = new HTTP::Request GET => "${parameters::server_url}post_form.pl?point_id=${parameters::point_code}";
 
         my $res = $ua->request($req);
 
