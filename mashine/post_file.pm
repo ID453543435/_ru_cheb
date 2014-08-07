@@ -41,14 +41,14 @@
 
         my ($year,$mon,$mday,$hour)=($dateHour =~ /(....)(..)(..)(..)/);
 
-        my $time_gm=0+timegm(0,0,$hour,$mday,$mon-1,$year-1900);
+        my $time_gm=0+timegm(0,0,$hour,$mday,$mon,$year);
         
         $time_gm += 60*60;
 
         my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
                                             gmtime($time_gm);
 
-        $dateHour=sprintf("%04i%02i%02i%02i",$year-1900,$mon+1,$mday,$hour);
+        $dateHour=sprintf("%04i%02i%02i%02i",$year,$mon+1,$mday,$hour);
 
         return $dateHour;
     }
