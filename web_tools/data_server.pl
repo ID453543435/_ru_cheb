@@ -66,7 +66,7 @@ sub saveToDB {
     my $pointDir=$parameters::tempFileDir.sprintf("%08i/",$point_id);
 
 
-    my $list=file_db::dirList($pointDir);
+    my $list=dirList($pointDir);
 
     for my $file (@$list)
     {
