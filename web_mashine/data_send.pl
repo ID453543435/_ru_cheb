@@ -70,7 +70,7 @@ sub main {
 
     my $point_id=$m_cgi::cgi->param('point_id');
 
-    $m_cgi::db->do("UPDATE INTO points SET status=201 ;");
+    $m_cgi::db->do("UPDATE INTO points SET status=201 WHERE id=? ;",{},($point_id));
     
 
     my $pointDir=$parameters::tempFileDir.sprintf("%08i/",$point_id);
@@ -92,7 +92,7 @@ sub main {
         $status=1;
     }
 
-    $m_cgi::db->do("UPDATE INTO points SET status=? WHERE point_id=? ;",{},($status,$point_id));
+    $m_cgi::db->do("UPDATE INTO points SET status=? WHERE id=? ;",{},($status,$point_id));
 
     $m_cgi::db->disconnect();
     m_cgi::fin();

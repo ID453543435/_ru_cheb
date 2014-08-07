@@ -94,10 +94,10 @@ sub saveToDB {
 sub serveAll {
 
     my $sth = $data_base::db->prepare(
-        "SELECT point_id
+        "SELECT id
          FROM points
          WHERE status=1
-         ORDER BY point_id;");
+         ORDER BY id;");
     
     $sth->execute() or die $DBI::errstr;
 
