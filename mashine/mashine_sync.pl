@@ -8,6 +8,7 @@
     use parameters;
     use file_arch;
     use file_db;
+    use post_data;
     use strict;
 #------------------------------------------------------
 # null
@@ -54,6 +55,7 @@ sub main {
 
     archivate();
 
+    post_data::post();
 
 }
 #------------------------------------------------------
