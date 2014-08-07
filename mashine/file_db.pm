@@ -11,7 +11,7 @@
     use file_arch;
 #------------------------------------------------------
 
-    use vars qw(%files);
+    use vars qw(%files $lastDateHour);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -45,6 +45,11 @@ sub dirList {
         my ($point_code,$dateHour,$run_number, $car_number)=($file =~ m{^(.{8})_(.{10})_(.{8})_(.{8})}s);
         my $baseName=substr($file,0,19);
         $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
+
+        if ($dateHour gt $lastDateHour)
+        {
+            $lastDateHour=$dateHour;
+        }
 
         return;
     }

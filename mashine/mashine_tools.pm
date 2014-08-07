@@ -33,6 +33,17 @@
         return $dateHour;
     }
 #------------------------------------------------------
+# openDataBase
+#------------------------------------------------------
+    sub openDataBase {
+        my ($dbFile)=@_;
+
+        my $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
+        or die "cant connect\n";
+
+        return $db;
+    }
+#------------------------------------------------------
 # saveSelectBin
 #------------------------------------------------------
     sub saveSelectBin {
