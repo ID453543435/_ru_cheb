@@ -1,1 +1,1 @@
-exec('D:\xampp\perl\bin\perl.exe make_database.pl');
+system('D:\xampp\perl\bin\perl.exe make_database.pl');

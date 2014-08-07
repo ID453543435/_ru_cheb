@@ -28,7 +28,7 @@
     sub init {
 
         # MySQL database configurations
-        my $dsn = "DBI:mysql:test";
+        my $dsn = "DBI:mysql:mashine";
         my $username = "root";
         my $password = '';
 

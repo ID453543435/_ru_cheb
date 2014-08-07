@@ -1,1 +1,1 @@
-exec('D:\xampp\perl\bin\perl.exe data_server.pl');
+system('D:\xampp\perl\bin\perl.exe data_server.pl');
