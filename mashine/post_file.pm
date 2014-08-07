@@ -98,7 +98,7 @@
         my $dateHour_in=$dateHour;
 
 
-        my ($file,$baseName,$run_number, $car_number,$point_code)=@{$file_db::files{$dateHour}};
+        my ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
 
         if ($run_number_in<$run_number)
         {
@@ -109,7 +109,7 @@
             while(1)
             {
                 $dateHour=nextHour($dateHour);
-                ($file,$baseName,$run_number, $car_number,$point_code)=@{$file_db::files{$dateHour}};
+                ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
                 last if $file;
                 last if ($dateHour gt $file_db::lastDateHour);
             }
