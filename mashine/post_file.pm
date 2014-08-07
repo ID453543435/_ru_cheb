@@ -6,10 +6,11 @@
 =cut
 #------------------------------------------------------
     use strict;
- 
-    package post_file;
     use file_db;
     use mashine_tools;
+ 
+    package post_file;
+    use Time::Local;
 #------------------------------------------------------
 
     use vars qw($post_file_name $post_input_name $post_file_short);
