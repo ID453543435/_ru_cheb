@@ -33,7 +33,7 @@
         my $password = '';
 
         # connect to MySQL database
-        my %attr = (PrintError=>0, RaiseError=>1);
+        my %attr = (PrintError=>1, RaiseError=>1);
 
         $db = DBI->connect($dsn,$username,$password, \%attr);
 

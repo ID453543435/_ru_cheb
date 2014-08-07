@@ -28,7 +28,7 @@ sub main {
      my $password = '';
 
      # connect to MySQL database
-     my %attr = (PrintError=>0, RaiseError=>1);
+     my %attr = (PrintError=>1, RaiseError=>1);
 
      my $dbh = DBI->connect($dsn,$username,$password, \%attr);
 
