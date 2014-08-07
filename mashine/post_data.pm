@@ -83,7 +83,7 @@
         my $params=parseHTML($body);
 
 
-        my $postFile=post_file::findFile($$params{run_number},$$params{$car_number},$$params{$date_time});
+        my $postFile=post_file::findFile($$params{run_number},$$params{car_number},$$params{date_time});
 
         
         my @forms = HTML::Form->parse( $body, "${parameters::server_url}post_form.pl" );
