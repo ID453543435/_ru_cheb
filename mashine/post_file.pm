@@ -90,9 +90,9 @@
 
         my $dateHour=mashine_tools::dateHour($dateTime_in);
 
-        if ($dateHour lt $file_arch::fistDateHour)
+        if ($dateHour lt $file_db::fistDateHour)
         {
-           $dateHour=$file_arch::fistDateHour;
+           $dateHour=$file_db::fistDateHour;
         }
         my $dateHour_in=$dateHour;
 
@@ -111,7 +111,7 @@
                 $dateHour=nextHour($dateHour);
                 ($file,$baseName,$run_number, $car_number,$point_code)=@$file_db::files{$dateHour};
                 last if $file;
-                last if ($dateHour gt $file_arch::lastDateHour);
+                last if ($dateHour gt $file_db::lastDateHour);
             }
         }
 
