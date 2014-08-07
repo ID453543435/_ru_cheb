@@ -11,7 +11,7 @@
     use file_arch;
 #------------------------------------------------------
 
-    use vars qw(%files $lastDateHour);
+    use vars qw(%files $lastDateHour $fistDateHour);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -51,6 +51,11 @@ sub dirList {
             $lastDateHour=$dateHour;
         }
 
+        if ($dateHour lt $fistDateHour)
+        {
+            $fistDateHour=$dateHour;
+        }
+
         return;
     }
 #------------------------------------------------------
@@ -81,6 +86,8 @@ sub dirList {
     sub init {
 
         %files=();
+        $lastDateHour="";
+        $fistDateHour="9999999999";
 
         my $list=dirList("archives");
 
