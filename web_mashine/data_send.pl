@@ -85,15 +85,14 @@ sub main {
     print "dataRes=$dataRes\n";
     print "dataArxRes=$dataArxRes\n";
 
+
+    my $status=0;
     if ($dataRes==200 or $dataArxRes==200)
     {
-        $m_cgi::db->do("UPDATE INTO points SET status=1 ;");
-    }
-    else
-    {
-        $m_cgi::db->do("UPDATE INTO points SET status=0 ;");
+        $status=1;
     }
 
+    $m_cgi::db->do("UPDATE INTO points SET status=? WHERE point_id=? ;",{},($status,$point_id));
 
     $m_cgi::db->disconnect();
     m_cgi::fin();

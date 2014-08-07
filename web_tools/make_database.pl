@@ -57,7 +57,7 @@ sub main {
      data       varchar(65) ,
      KEY k001 (date_time),
      KEY k002 (point_id,date_time),
-     KEY k003 (point_id,run_number,car_number)
+     UNIQUE KEY k003 (point_id,run_number,car_number)
      );
      ");
 
