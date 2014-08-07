@@ -31,7 +31,7 @@ sub main {
         "SELECT run_number,car_number,date_time
          FROM data
          WHERE point_id=?
-         ORDER BY point_id,run_number,car_number DESC LIMIT 1;");
+         ORDER BY point_id DESC, run_number DESC, car_number DESC LIMIT 1;");
     
     $sth->execute($point_id) or die $DBI::errstr;
 
