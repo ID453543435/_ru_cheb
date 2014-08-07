@@ -40,7 +40,7 @@ sub saveToDBfile {
     my ($point_id,$fileName)=@_;
 
 
-    open (INFILE, ">", $fileName) or die;
+    open (INFILE, "<", $fileName) or die;
     binmode(INFILE);
 
     my $data;
@@ -70,6 +70,8 @@ sub saveToDB {
     for my $file (@$list)
     {
         
+        print substr($file,-4,4),"=$file=\n";
+
         if (substr($file,-4,4) eq ".gzip")
         {
             a7z::decompress($file,$pointDir);
