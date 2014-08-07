@@ -70,9 +70,7 @@ sub saveToDB {
     for my $file (@$list)
     {
         
-        print substr($file,-4,4),"=$file=\n";
-
-        if (substr($file,-4,4) eq ".gzip")
+        if (substr($file,-5,5) eq ".gzip")
         {
             a7z::decompress($file,$pointDir);
 
