@@ -7,6 +7,7 @@ base
 =cut
 #------------------------------------------------------
      use strict;
+     use parameters;
      use m_cgi;
 #------------------------------------------------------
 # null
@@ -71,8 +72,14 @@ sub main {
 
     $m_cgi::db->do("UPDATE INTO points SET status=201 ;");
     
-    my $dataRes=saveFile($point_id."data.raw",  $m_cgi::cgi->upload('data'));
-    my $dataArxRes=saveFile($point_id."data.7z",   $m_cgi::cgi->upload('data_arx'));
+
+    my $pointDir=$parameters::tempFileDir.sprintf("%08i/",$point_id);
+
+    mkdir($pointDir);
+
+
+    my $dataRes   =saveFile($pointDir.$m_cgi::cgi->param('data'),       $m_cgi::cgi->upload('data'));
+    my $dataArxRes=saveFile($pointDir.$m_cgi::cgi->param('data_arx'),   $m_cgi::cgi->upload('data_arx'));
 
 
     print "dataRes=$dataRes\n";
