@@ -58,7 +58,6 @@
     sub makePreLast {
         my ($run_number_in, $car_number_in, $sqllite_file)=@_;
         
-
         my $db = mashine_tools::openDataBase($sqllite_file);
         
         my $request= "SELECT run_number, car_number, date_time, data
