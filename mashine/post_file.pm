@@ -62,10 +62,10 @@
         my $db = mashine_tools::openDataBase($sqllite_file);
         
         my $request= "SELECT run_number, car_number, date_time, data
-             FROM log WHERE run_number>? AND car_number>?
+             FROM log WHERE run_number>? OR (run_number = ? AND car_number>?)
              ORDER BY run_number, car_number ;";
 
-        ($post_file_name)=mashine_tools::saveSelectBin($db,$request,[$run_number_in, $car_number_in],$post_file_short);
+        ($post_file_name)=mashine_tools::saveSelectBin($db,$request,[$run_number_in, $run_number_in, $car_number_in],$post_file_short);
         
         $db->disconnect();
 
