@@ -49,13 +49,13 @@
         $sth->execute(@{$params}) or die $DBI::errstr;
 #        print "Number of rows found :" . $sth->rows . "\n";
 
-        my @row;
-        while (@row = $sth->fetchrow_array()) {
-
+        my @res;
+        while (my @row = $sth->fetchrow_array()) {
+           @res=@row;
         }
         $sth->finish();    
 
-        return @row;
+        return @res;
     }
 #------------------------------------------------------
 # header
