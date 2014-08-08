@@ -74,14 +74,14 @@ sub saveToDB {
         {
             a7z::decompress($file,$pointDir);
 
-#            unlink($pointDir.$file) or die;
+            unlink($pointDir.$file) or die;
 
             $file=substr($file,0,19);
         }
 
         saveToDBfile($point_id,$pointDir.$file);
         
-#        unlink($pointDir.$file) or die;
+        unlink($pointDir.$file) or die;
     }
 
 
@@ -124,7 +124,7 @@ sub main {
     {
         serveAll();
         sleep(1);
-        die;
+        <STDIN>;die;
     }
     
     data_base::disconnect();
