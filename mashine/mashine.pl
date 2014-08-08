@@ -35,6 +35,7 @@ sub main {
    pribor::readyUp();
 
    pribor::syncTime();
+   pribor::readCars();
 
    while(1)
    {
