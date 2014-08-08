@@ -52,7 +52,8 @@
         my $sth = $db->prepare($request);
         
         $sth->execute(@$params) or die $DBI::errstr;
-
+#        print "Number of rows found :" . $sth->rows . "\n";
+        
         my $tempFile="temp/$dbFile";
 
         open (OUTFILE, ">", $tempFile) or die "cant open";
