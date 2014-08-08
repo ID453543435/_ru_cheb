@@ -47,11 +47,11 @@
 # saveSelectBin
 #------------------------------------------------------
     sub saveSelectBin {
-        my ($db,$request,$dbFile)=@_;
+        my ($db,$request,$params,$dbFile)=@_;
 
         my $sth = $db->prepare($request);
         
-        $sth->execute() or die $DBI::errstr;
+        $sth->execute(@$params) or die $DBI::errstr;
 
         my $tempFile="temp/$dbFile";
 

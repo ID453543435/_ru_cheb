@@ -46,7 +46,7 @@
 
         my $sth = $db->prepare($request);
         
-        $sth->execute(@{$params}) or die $DBI::errstr;
+        $sth->execute(@$params) or die $DBI::errstr;
 #        print "Number of rows found :" . $sth->rows . "\n";
 
         my @res;
