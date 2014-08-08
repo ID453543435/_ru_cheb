@@ -124,7 +124,7 @@ sub main {
     {
         serveAll();
         sleep(1);
-        die;
+#        die;
     }
     
     data_base::disconnect();

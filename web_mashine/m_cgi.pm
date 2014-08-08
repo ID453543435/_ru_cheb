@@ -39,6 +39,26 @@
         return;
     }
 #------------------------------------------------------
+# SQLrow
+#------------------------------------------------------
+    sub SQLrow {
+        my ($request,$params)=@_;
+
+        my $sth = $db->prepare($request);
+        
+        $sth->execute(@$params) or die $DBI::errstr;
+
+#        print "Number of rows found :" . $sth->rows . "\n";
+
+        my @row;
+        while (@row = $sth->fetchrow_array()) {
+
+        }
+        $sth->finish();    
+
+        return @row;
+    }
+#------------------------------------------------------
 # header
 #------------------------------------------------------
 sub header {

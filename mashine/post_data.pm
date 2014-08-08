@@ -84,6 +84,13 @@
         my $params=parseHTML($body);
 
 
+        if ($$params{status} != 0)
+        {
+            print $body;
+            return(401);
+        }
+
+
         my $postFile=post_file::findFile($$params{run_number},$$params{car_number},$$params{date_time});
 
         

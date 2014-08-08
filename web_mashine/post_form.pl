@@ -27,23 +27,21 @@ sub main {
 
     my $point_id=$m_cgi::cgi->param('point_id');
 
-    my $sth = $m_cgi::db->prepare(
+
+    my ($status) = m_cgi::SQLrow(
+        "SELECT status
+         FROM points
+         WHERE id=?;",[$point_id]);
+
+
+    my ($run_number,$car_number,$date_time) = m_cgi::SQLrow(
         "SELECT run_number,car_number,date_time
          FROM data
          WHERE point_id=?
-         ORDER BY point_id DESC, run_number DESC, car_number DESC LIMIT 1;");
+         ORDER BY point_id DESC, run_number DESC, car_number DESC LIMIT 1;",[$point_id]);
     
-    $sth->execute($point_id) or die $DBI::errstr;
 
-    print "Number of rows found :" . $sth->rows . "\n";
-
-    my ($run_number,$car_number,$date_time);
-    while (my @row = $sth->fetchrow_array()) {
-       ($run_number,$car_number,$date_time) = @row;
-    }
-    $sth->finish();    
-
-
+    print "status=$status\n";
     print "point_id=".sprintf("%08i",$point_id)."\n";
     print "run_number=".sprintf("%08i",$run_number)."\n";
     print "car_number=".sprintf("%08i",$car_number)."\n";
