@@ -108,7 +108,7 @@ sub serveAll {
     $sth->finish();
 
     
-    $data_base::db->do("UPDATE INTO points SET status=0 WHERE status=1;");
+    $data_base::db->do("UPDATE points SET status=0 WHERE status=1;");
    
     return;
 }
@@ -124,7 +124,7 @@ sub main {
     {
         serveAll();
         sleep(1);
-        <STDIN>;die;
+        die;
     }
     
     data_base::disconnect();
