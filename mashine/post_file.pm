@@ -102,7 +102,7 @@
 
         if ($run_number_in<$run_number)
         {
-        } elsif ($run_number_in<$run_number)
+        } elsif ($car_number_in<$car_number)
         {
         } else
         {
