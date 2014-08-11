@@ -54,6 +54,8 @@ sub saveToDBfile {
 
     close INFILE or die;
 
+    print "$fileName\n";
+
     return;
 }
 #------------------------------------------------------
