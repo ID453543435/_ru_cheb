@@ -53,9 +53,14 @@ sub main {
     parameters::initPost();
     file_db::init();
 
-    archivate();
+    while (1)
+    {
+        archivate();
 
-    post_data::post();
+        post_data::post();
+
+        sleep(60*5);
+    }
 
     <STDIN>;
 }
