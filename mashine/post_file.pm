@@ -82,7 +82,7 @@ run_number=$run_number_in
 car_number=$car_number_in
 dateHour=$dateHour
 DATA
-        $fileName="temp/request";
+        my $fileName="temp/request";
 
         fileLib::strToFile($fileName,$request);
 
