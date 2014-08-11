@@ -48,7 +48,7 @@
 #        my $dateHour=mashine_tools::dateHour($$req{date_time});
         my $dateHour=$$req{dateHour};
 
-        if ($dateHour eq $data_base::$dbDateHour)
+        if ($dateHour eq $data_base::dbDateHour)
         {
             my $request= "SELECT run_number, car_number, date_time, data
                  FROM log WHERE run_number>? OR (run_number = ? AND car_number>?)
