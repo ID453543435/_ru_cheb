@@ -127,7 +127,7 @@ DATA
         {
         } else
         {
-            while($dateHour gt $file_db::lastDateHour)
+            while($dateHour le $file_db::lastDateHour)
             {
                 $dateHour=nextHour($dateHour);
                 ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
