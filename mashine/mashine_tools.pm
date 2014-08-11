@@ -72,4 +72,36 @@
         return($tempFile, $run_number, $car_number, $date_time);
     }
 #------------------------------------------------------
+# strToHASH
+#------------------------------------------------------
+    sub strToHASH {
+        my ($str)=@_;
+
+        my %res=();
+
+        while ( $str =~ m{^(\w+)=(.*)$}mgi ) 
+        {
+          $res{$1}=$2;
+        }
+        
+        return \%res;
+    }
+#------------------------------------------------------
+# parseHTML
+#------------------------------------------------------
+    sub parseHTML {
+        my ($str)=@_;
+
+        my %res=();
+
+        die "ERR=<www.worldsex.com> bad load 0\n" 
+        if not ($str =~ m{<!---beg--->}gi);
+        my $fromPoz=pos($str);
+        die "ERR=<www.worldsex.com> bad load 1\n" 
+        if not ($str =~ m{<!---end--->}gi);
+        my $toPoz=pos($str);
+        
+        return strToHASH(substr($str,$fromPoz,$toPoz-$fromPoz));
+    }
+#------------------------------------------------------
 1;

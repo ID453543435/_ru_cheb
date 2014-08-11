@@ -13,7 +13,7 @@
     
     package post_data;
     use post_file;
-#    use file_db;
+    use mashine_tools;
 #------------------------------------------------------
 
 #    use vars qw(%files);
@@ -33,30 +33,6 @@
 
 
         return;
-    }
-#------------------------------------------------------
-# parseHTML
-#------------------------------------------------------
-    sub parseHTML {
-        my ($str)=@_;
-
-        my %res=();
-
-        die "ERR=<www.worldsex.com> bad load 0\n" 
-        if not ($str =~ m{<!---beg--->}gi);
-        my $fromPoz=pos($str);
-        die "ERR=<www.worldsex.com> bad load 1\n" 
-        if not ($str =~ m{<!---end--->}gi);
-        my $toPoz=pos($str);
-        
-        $str=substr($str,$fromPoz,$toPoz-$fromPoz);
-
-        while ( $str =~ m{^(\w+)=(.*)$}mgi ) 
-        {
-          $res{$1}=$2;
-        }
-        
-        return \%res;
     }
 #------------------------------------------------------
 # post
@@ -81,7 +57,7 @@
            return(301);
         }
 
-        my $params=parseHTML($body);
+        my $params=mashine_tools::parseHTML($body);
 
 
         if ($$params{status} != 0)

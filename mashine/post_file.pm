@@ -76,6 +76,27 @@
     sub makeLast {
         my ($run_number_in, $car_number_in, $dateHour)=@_;
 
+
+        my $request=<<"DATA";
+run_number=$run_number_in
+car_number=$car_number_in
+dateHour=$dateHour
+DATA
+        $fileName="temp/request";
+
+        fileLib::strToFile($fileName,$request);
+
+        while(-f $fileName)
+        {
+           sleep(1);
+        }
+
+
+        unless (-f ("temp/$dateHour"))
+        {
+            $post_file_status=301;
+        }
+        
         
         return;
     }
@@ -88,13 +109,14 @@
 
         $post_file_status="";
 
-        my $dateHour=mashine_tools::dateHour($dateTime_in);
+        my $dateHour_in=mashine_tools::dateHour($dateTime_in);
 
-        if ($dateHour lt $file_db::fistDateHour)
+        if ($dateHour_in lt $file_db::fistDateHour)
         {
-           $dateHour=$file_db::fistDateHour;
+           $dateHour_in=$file_db::fistDateHour;
         }
-        my $dateHour_in=$dateHour;
+
+        my $dateHour=$dateHour_in;
 
 
         my ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
@@ -142,8 +164,8 @@
         }
         else
         {
-            $post_file_name="temp/$baseName";
-            $post_file_short=$baseName;
+            $post_file_name="temp/$dateHour";
+            $post_file_short=$dateHour;
             $post_input_name="data";
             $post_file_status=200;
 

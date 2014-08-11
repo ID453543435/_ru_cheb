@@ -11,6 +11,7 @@
     use tranfer;
     use pribor;
     use read_pass;
+    use data_request;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -27,6 +28,7 @@ sub main {
 
    parameters::init();
    data_base::init();
+   data_request::init();
 
    tranfer::openPort();
 
@@ -40,6 +42,7 @@ sub main {
    while(1)
    {
       read_pass::readCars();
+      data_request::checkRequest();
    }
 
    tranfer::closePort();
