@@ -54,8 +54,6 @@ sub saveToDBfile {
 
     close INFILE or die;
 
-    print "$fileName\n";
-
     return;
 }
 #------------------------------------------------------
@@ -83,6 +81,8 @@ sub saveToDB {
 
         saveToDBfile($point_id,$pointDir.$file);
         
+        print "$file\n";
+
         unlink($pointDir.$file) or die;
     }
 
