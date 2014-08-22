@@ -69,6 +69,12 @@
 
         my $postFile=post_file::findFile($$params{run_number},$$params{car_number},$$params{date_time});
 
+        if ($post_file::post_file_status == 301)
+        {
+
+            return(501);
+        }
+
         
         my @forms = HTML::Form->parse( $body, "${parameters::server_url}post_form.pl" );
 
@@ -97,9 +103,9 @@
            return(302);
         }
 
-        print $body;
+#        print $body;
 
-        return;
+        return($post_file::post_file_status);
     }
 #------------------------------------------------------
 1;

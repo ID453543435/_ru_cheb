@@ -57,9 +57,31 @@ sub main {
     {
         archivate();
 
-        post_data::post();
+        my $status=post_data::post();
 
-        sleep(60*5);
+        my $sleepTime=0;
+
+        if ($status == 501)  #my error
+        {
+           $sleepTime=1;
+        } elsif ($status >= 300 and $status < 400) #internet error
+        {
+           $sleepTime=30;
+        } elsif ($status >= 400 and $status < 500) #wait for server finish processing
+        {
+           $sleepTime=15;
+        } elsif ($status >= 200 and $status < 300) #ok
+        {
+           $sleepTime=15;
+           if ($status == 200)  # sended last data
+           {
+               $sleepTime=5*60;
+           }
+        }
+
+        print "status=$status;sleepTime=$sleepTime\n";
+
+        sleep($sleepTime);
     }
 
     <STDIN>;
