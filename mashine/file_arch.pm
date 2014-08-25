@@ -40,30 +40,15 @@
 #------------------------------------------------------
     sub fileArch {
         my ($dbFile)=@_;
-
-        my $db = openDataBase("database/$dbFile.SQLite");
         
-        my $sth = $db->prepare(
-            "SELECT run_number, car_number, date_time, data
-             FROM log ORDER BY run_number, car_number ;");
+        my $db = mashine_tools::openDataBase("database/$dbFile.SQLite");
         
-        $sth->execute() or die $DBI::errstr;
+        my $request= "SELECT run_number, car_number, date_time, data
+             FROM log ORDER BY run_number, car_number ;";
 
-        my $tempFile="temp/$dbFile";
-
-        open (OUTFILE, ">", $tempFile) or die "cant open";
-        binmode(OUTFILE);
-
-        my ($run_number, $car_number, $date_time, $data);
-        while (my @row = $sth->fetchrow_array()) {
-           ($run_number, $car_number, $date_time, $data) = @row;
-
-           print OUTFILE $data;
-        }
-        $sth->finish();    
+        my ($tempFile, $run_number, $car_number, $date_time)=mashine_tools::saveSelectBin($db,$request,[],$dbFile);
+        
         $db->disconnect();
-        
-        close OUTFILE or return die "cant close";
 
         my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number).".gzip";
 
