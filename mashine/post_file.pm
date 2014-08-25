@@ -127,24 +127,21 @@ DATA
         {
         } else
         {
-            while($dateHour le $file_db::lastDateHour)
+            while(1)
             {
+                die unless ($dateHour le $file_db::lastDateHour);
+
                 $dateHour=nextHour($dateHour);
                 ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
                 last if $file;
             }
         }
 
-        my $sqllite_file="";
-        if ($dateHour_in eq $dateHour)
-        {
-             $sqllite_file="database/$baseName.SQLite";
-        }
+        my $sqllite_file="database/$baseName.SQLite";
 
-
-        if ($file)
+        if ($run_number ne "")
         {
-            if (-f($sqllite_file))
+            if (-f($sqllite_file) and ($dateHour_in eq $dateHour))
             {
 
                 $post_file_short=$baseName;

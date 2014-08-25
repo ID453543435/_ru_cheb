@@ -30,6 +30,14 @@ sub archivate {
     @$list=sort(@$list);
 
     my $lastFile1=pop @$list;
+
+    
+    my ($point_code,$dateHour)=($lastFile1 =~ m{^(.{8})_(.{10})}s);
+    my $baseName=substr($lastFile1,0,19);
+
+    file_db::addFileData($lastFile1,$baseName,$point_code,$dateHour, "", "");
+
+    
     my $lastFile2=pop @$list;
 
     if ($lastFile2)
