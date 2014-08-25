@@ -34,7 +34,8 @@ sub archivate {
 
     if ($lastFile2)
     {
-        file_db::fileArch(substr($lastFile2,0,19));
+        my $arxFile=file_db::fileArch(substr($lastFile2,0,19));
+        unlink("database/$lastFile2") unless $arxFile;
     }
 
     for my $file (@$list)
