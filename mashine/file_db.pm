@@ -37,13 +37,11 @@ sub dirList {
     return \@files;
 }
 #------------------------------------------------------
-# addFile
+# addFileData
 #------------------------------------------------------
-    sub addFile {
-        my ($file)=@_;
+    sub addFileData {
+        my ($file,$baseName,$point_code,$dateHour,$run_number, $car_number)=@_;
 
-        my ($point_code,$dateHour,$run_number, $car_number)=($file =~ m{^(.{8})_(.{10})_(.{8})_(.{8})}s);
-        my $baseName=substr($file,0,19);
         $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
 
         if ($dateHour gt $lastDateHour)
@@ -55,6 +53,19 @@ sub dirList {
         {
             $fistDateHour=$dateHour;
         }
+
+        return;
+    }
+#------------------------------------------------------
+# addFile
+#------------------------------------------------------
+    sub addFile {
+        my ($file)=@_;
+
+        my ($point_code,$dateHour,$run_number, $car_number)=($file =~ m{^(.{8})_(.{10})_(.{8})_(.{8})}s);
+        my $baseName=substr($file,0,19);
+
+        addFileData($file,$baseName,$point_code,$dateHour,$run_number, $car_number);
 
         return;
     }
