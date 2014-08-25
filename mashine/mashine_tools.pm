@@ -67,7 +67,14 @@
         }
         $sth->finish();    
         
-        close OUTFILE or return die "cant close";
+        close OUTFILE or die "cant close";
+
+        unless($run_number)
+        {
+            unlink($tempFile) die "cant unlink";
+            $tempFile="";
+        }
+
 
         return($tempFile, $run_number, $car_number, $date_time);
     }

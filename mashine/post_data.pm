@@ -11,9 +11,10 @@
     use LWP;
     use HTML::Form;
     
-    package post_data;
     use post_file;
     use mashine_tools;
+
+    package post_data;
 #------------------------------------------------------
 
 #    use vars qw(%files);

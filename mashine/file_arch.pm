@@ -9,6 +9,7 @@
     use strict;
     use fileLib;
     use a7z;
+    use mashine_tools;
 
     package file_arch;
     use File::Copy;
@@ -49,6 +50,8 @@
         my ($tempFile, $run_number, $car_number, $date_time)=mashine_tools::saveSelectBin($db,$request,[],$dbFile);
         
         $db->disconnect();
+
+        return ("") unless $tempFile;
 
         my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number).".gzip";
 

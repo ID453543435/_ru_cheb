@@ -7,8 +7,8 @@
 #------------------------------------------------------
     use strict;
 
-    package file_db;
     use file_arch;
+    package file_db;
 #------------------------------------------------------
 
     use vars qw(%files $lastDateHour $fistDateHour);
@@ -75,7 +75,7 @@ sub dirList {
         else
         {
             $arxName=file_arch::fileArch($file);
-            addFile($arxName);
+            addFile($arxName) if $arxName;
         }
 
         return ($arxName);
