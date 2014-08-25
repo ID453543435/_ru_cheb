@@ -12,6 +12,7 @@
     use pribor;
     use read_pass;
     use data_request;
+    use os_spec;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -29,6 +30,7 @@ sub main {
    parameters::init();
    data_base::init();
    data_request::init();
+   os_spec::init();
 
    tranfer::openPort();
 
@@ -38,6 +40,8 @@ sub main {
 
    pribor::syncTime();
    pribor::readCars();
+
+#   os_spec::start("mashine_sync.pl");
 
    while(1)
    {
