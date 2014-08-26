@@ -71,7 +71,7 @@
 
         unless($run_number)
         {
-            unlink($tempFile) die "cant unlink";
+            unlink($tempFile) or die "cant unlink";
             $tempFile="";
         }
 
