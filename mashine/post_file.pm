@@ -130,7 +130,7 @@ DATA
             while(1)
             {
                 print "($dateHour le ${file_db::lastDateHour})\n";
-                die unless ($dateHour le $file_db::lastDateHour);
+                last unless ($dateHour le $file_db::lastDateHour);
 
                 $dateHour=nextHour($dateHour);
                 ($file,$baseName,$run_number, $car_number,$point_code)=file_db::fileData($dateHour);
