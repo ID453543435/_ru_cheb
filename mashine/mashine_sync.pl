@@ -24,13 +24,11 @@ sub null {
 #------------------------------------------------------
 sub archivate {
 
-
     my $list=file_db::dirList("database");
-
+    @$list = grep(m{\.SQLite$}is, @$list);
     @$list=sort(@$list);
 
     my $lastFile1=pop @$list;
-
     
     my ($point_code,$dateHour)=($lastFile1 =~ m{^(.{8})_(.{10})}s);
     my $baseName=substr($lastFile1,0,19);
@@ -54,8 +52,6 @@ sub archivate {
         file_db::fileArch(substr($file,0,19));
         unlink("database/$file") or die;
     }
-
-
 }
 #------------------------------------------------------
 # main
