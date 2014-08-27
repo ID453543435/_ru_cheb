@@ -44,9 +44,9 @@
         return $db;
     }
 #------------------------------------------------------
-# saveSelectBin
+# saveSelectBinZ
 #------------------------------------------------------
-    sub saveSelectBin {
+    sub saveSelectBinZ {
         my ($db,$request,$params,$dbFile)=@_;
 
         my $sth = $db->prepare($request);
@@ -68,6 +68,17 @@
         $sth->finish();    
         
         close OUTFILE or die "cant close";
+
+        return($tempFile, $run_number, $car_number, $date_time);
+    }
+#------------------------------------------------------
+# saveSelectBin
+#------------------------------------------------------
+    sub saveSelectBin {
+        my ($db,$request,$params,$dbFile)=@_;
+
+
+        my ($tempFile, $run_number, $car_number, $date_time)=saveSelectBinZ($db,$request,$params,$dbFile);
 
         unless($run_number)
         {

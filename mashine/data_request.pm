@@ -54,7 +54,7 @@
                  FROM log WHERE run_number>? OR (run_number = ? AND car_number>?)
                  ORDER BY run_number, car_number ;";
 
-            mashine_tools::saveSelectBin($data_base::db, $request
+            mashine_tools::saveSelectBinZ($data_base::db, $request
             ,[$$req{run_number}, $$req{run_number}, $$req{car_number}]
             ,$dateHour);
         }
