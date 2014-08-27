@@ -79,7 +79,7 @@ sub dirList {
 
         my $arxName;
 
-        if ($files{$dateHour})
+        if (${$files{$dateHour}}[2])
         {
             $arxName=${$files{$dateHour}}[0];
         }
