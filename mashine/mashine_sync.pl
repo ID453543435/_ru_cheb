@@ -40,6 +40,9 @@ sub archivate {
     
     my $lastFile2=pop @$list;
 
+
+    print "lastFile2=$lastFile2;lastFile1=$lastFile1;\n";
+
     if ($lastFile2)
     {
         my $arxFile=file_db::fileArch(substr($lastFile2,0,19));
