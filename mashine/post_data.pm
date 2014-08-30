@@ -95,9 +95,8 @@
 
         $req=$form->click();
 
-        post_file::deleteFile();
-        
         my $res = $ua->request($req);
+        post_file::deleteFile();
 
         if ($res->is_success) {
            $head=$res->headers_as_string;
@@ -106,7 +105,7 @@
         } else {
            $head="fall=".$res->code."=".$res->message;
            $body="";
-           print "$head\n";
+#           print "$head\n";
            return(302);
         }
 
