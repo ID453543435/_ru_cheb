@@ -10,7 +10,8 @@
     use LWP::UserAgent;
     use LWP;
     use HTML::Form;
-    
+    use HTTP::Request::Common;
+
     use post_file;
     use mashine_tools;
 
@@ -32,6 +33,7 @@
 #------------------------------------------------------
     sub init {
 
+        $HTTP::Request::Common::DYNAMIC_FILE_UPLOAD = 1;
 
         return;
     }
@@ -85,8 +87,11 @@
 
         my $input_file = $form->find_input( $post_file::post_input_name ) ;
 
+#        $input_file->filename( $post_file::post_file_short );
+#        $input_file->content( fileLib::fileToStr($post_file::post_file_name) ); 
+
+        $input_file->file( $post_file::post_file_name );
         $input_file->filename( $post_file::post_file_short );
-        $input_file->content( fileLib::fileToStr($post_file::post_file_name) ); 
 
         $req=$form->click();
 

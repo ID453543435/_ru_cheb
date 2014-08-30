@@ -37,6 +37,55 @@ sub dirList {
     return \@files;
 }
 #------------------------------------------------------
+# deleteFile
+#------------------------------------------------------
+    sub deleteFile {
+        my ($dateHour)=@_;
+
+
+        my $fileName=${$files{$dateHour}}[0];
+
+        delete($files{$dateHour});
+
+        unlink("archives/".$fileName) or die;
+
+
+        return;
+    }
+#------------------------------------------------------
+# diskOk
+#------------------------------------------------------
+    sub diskOk {
+
+
+        if(keys(%files) > 25)
+        {
+           return 0;
+        }
+
+        return 1;
+    }
+#------------------------------------------------------
+# freeDisk
+#------------------------------------------------------
+    sub freeDisk {
+
+        my @dates=sort(keys(%files));
+
+
+        while(not diskOk())
+        {
+
+            my $dateTime=shift(@dates);
+
+            deleteFile($dateTime);
+        }
+
+        $fistDateHour=shift(@dates);
+
+        return;
+    }
+#------------------------------------------------------
 # addFileData
 #------------------------------------------------------
     sub addFileData {
