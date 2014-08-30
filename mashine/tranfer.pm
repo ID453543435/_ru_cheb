@@ -27,7 +27,7 @@
     sub printData {
         my ($data)=@_;
 
-#        $data =~ s/(.)/sprintf("|%02x",ord($1))/esg; print "$data\n";
+        $data =~ s/(.)/sprintf("|%02x",ord($1))/esg; print "$data\n";
        
         return;
     }
@@ -70,7 +70,7 @@
     sub sendData {
         my ($data)=@_;
 
-        print ">";printData($data);
+#        print ">";printData($data);
 
         my $crc16=rtu::crc($data);
         $data=$data.pack("n",$crc16);
@@ -110,7 +110,7 @@
            
         }
 
-        print "<";printData($data);
+#        print "<";printData($data);
 
         return $data;
     }
