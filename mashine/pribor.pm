@@ -80,6 +80,8 @@
         tranfer::sendData($data);
 
 
+        printf("%02x\r",$pr_packet);
+
         return;
     }
 #------------------------------------------------------

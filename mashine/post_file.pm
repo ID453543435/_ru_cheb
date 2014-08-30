@@ -129,7 +129,7 @@ DATA
         {
             while(1)
             {
-                print "($dateHour le ${file_db::lastDateHour})\n";
+#                print "($dateHour le ${file_db::lastDateHour})\n";
                 last if ($dateHour ge $file_db::lastDateHour);
 
                 $dateHour=nextHour($dateHour);
@@ -156,7 +156,7 @@ DATA
                 $post_file_name="archives/$file";
                 $post_file_short=$file;
                 $post_input_name="data_arx";
-                $post_file_status=201;
+                $post_file_status=203;
             }
         }
         else

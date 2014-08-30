@@ -39,7 +39,7 @@ sub archivate {
     my $lastFile2=pop @$list;
 
 
-    print "lastFile2=$lastFile2;lastFile1=$lastFile1;\n";
+#    print "lastFile2=$lastFile2;lastFile1=$lastFile1;\n";
 
     if ($lastFile2)
     {

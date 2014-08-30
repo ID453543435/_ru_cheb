@@ -64,7 +64,7 @@
     sub saveData {
         my ($point_id,$data)=@_;
 
-        printData($data);
+#        printData($data);
 
         my ($num,$chenel,$time,$lenght,$speed,$timeSec,$run_number,$carNumber)=unpack("CCLSCLLL",$data);
 
@@ -80,7 +80,7 @@
         ($point_id,$run_number,$carNumber,$timeL,$data)
         );
 
-        print "($point_id,$run_number,$carNumber,$timeL,data)\n";
+#        print "($point_id,$run_number,$carNumber,$timeL,data)\n";
 
         return;
     }

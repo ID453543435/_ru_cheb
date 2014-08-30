@@ -27,8 +27,8 @@
     sub printData {
         my ($data)=@_;
 
-        $data =~ s/(.)/sprintf("|%02x",ord($1))/esg; print "$data\n";
-        
+#        $data =~ s/(.)/sprintf("|%02x",ord($1))/esg; print "$data\n";
+       
         return;
     }
 #------------------------------------------------------

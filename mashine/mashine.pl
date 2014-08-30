@@ -41,7 +41,7 @@ sub main {
    pribor::syncTime();
    pribor::readCars();
 
-#   os_spec::start("mashine_sync.pl");
+   os_spec::start("mashine_sync.pl");
 
    while(1)
    {
