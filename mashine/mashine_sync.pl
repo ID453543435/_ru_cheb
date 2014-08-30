@@ -60,6 +60,7 @@ sub main {
 
     parameters::initPost();
     file_db::init();
+    post_data::init();
 
     while (1)
     {
