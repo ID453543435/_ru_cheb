@@ -63,6 +63,7 @@ sub main {
 
     while (1)
     {
+        file_db::freeDisk();
         archivate();
 
         my $status=post_data::post();
