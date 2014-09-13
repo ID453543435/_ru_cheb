@@ -5,8 +5,13 @@
 
 =cut
 #------------------------------------------------------
+    use LWP::UserAgent;
+    use LWP;
+    use HTTP::Request::Common;
+
     use strict;
     use fileLib;
+    use mashine_tools;
 
     package parameters;
 #------------------------------------------------------
@@ -22,13 +27,42 @@
         return $par;
     }
 #------------------------------------------------------
+# getNewPointCodeSub
+#------------------------------------------------------
+    sub getNewPointCodeSub {
+    
+        my $ua = new LWP::UserAgent;
+#        $ua->timeout(6);
+        
+        my $req = new HTTP::Request GET => "${parameters::server_url}new_point.pl";
+
+        my $res = $ua->request($req);
+
+        my ($head,$body);
+        if ($res->is_success) {
+           $head=$res->headers_as_string;
+           $body=$res->content;
+
+        } else {
+           $head="fall=".$res->code."=".$res->message;
+           $body="";
+           return("");
+        }
+
+        my $params=mashine_tools::parseHTML($body);
+
+        return $$params{num};
+    }
+#------------------------------------------------------
 # getNewPointCode
 #------------------------------------------------------
     sub getNewPointCode {
 
-        my $res="00000006";
-
-        return $res;
+        while(1)
+        {
+            my $num=getNewPointCodeSub();
+            return($num) if $num;
+        }
     }
 #------------------------------------------------------
 # init
