@@ -102,7 +102,8 @@ sub dirList {
         {
             $fistDateHour=$dateHour;
         }
-
+        print "file_db.pm:$dateHour_in=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+        
         return;
     }
 #------------------------------------------------------
