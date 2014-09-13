@@ -1,4 +1,4 @@
-#!"D:\xampp\perl\bin\perl.exe"
+#!perl.exe
 #------------------------------------------------------
 =head1 NAME
 base
