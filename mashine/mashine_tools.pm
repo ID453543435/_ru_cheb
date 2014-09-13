@@ -110,12 +110,11 @@
     sub parseHTML {
         my ($str)=@_;
 
-        my %res=();
-
-        die "ERR=<www.worldsex.com> bad load 0\n" 
+        return ({}) 
         if not ($str =~ m{<!---beg--->}gi);
         my $fromPoz=pos($str);
-        die "ERR=<www.worldsex.com> bad load 1\n" 
+
+        return ({}) 
         if not ($str =~ m{<!---end--->}gi);
         my $toPoz=pos($str);
         
