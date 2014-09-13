@@ -77,7 +77,7 @@ sub dirList {
         {
             my $dateTime=shift(@dates);
 
-            last unless ${$files{$dateHour}}[3];
+            last unless ${$files{$dateTime}}[3];
 
             deleteFile($dateTime);
         }
