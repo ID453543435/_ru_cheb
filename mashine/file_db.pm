@@ -83,7 +83,7 @@ sub dirList {
             deleteFile($dateTime);
         }
 
-        $fistDateHour=shift(@dates);
+        $fistDateHour=shift(@dates) if @dates;
 
         print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
