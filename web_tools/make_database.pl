@@ -62,9 +62,9 @@ sub main {
      lengh int(6) ,
      speed  int(3) ,
 
-     KEY k001 (date_time),
-     KEY k002 (point_id,date_time),
-     UNIQUE KEY k003 (point_id,run_number,car_number)
+     KEY k001 (datetime),
+     KEY k002 (pointid,datetime),
+     UNIQUE KEY k003 (pointid,runnumber,carnumber)
      );
      ");
 
