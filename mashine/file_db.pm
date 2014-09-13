@@ -72,6 +72,7 @@ sub dirList {
 
         my @dates=sort(keys(%files));
 
+        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         while(not diskOk())
         {
@@ -83,6 +84,8 @@ sub dirList {
         }
 
         $fistDateHour=shift(@dates);
+
+        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         return;
     }
