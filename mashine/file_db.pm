@@ -75,9 +75,9 @@ sub dirList {
 
         while(not diskOk())
         {
-            my $dateTime=shift(@dates);
+            last unless ${$files{$dates[0]}}[3];
 
-            last unless ${$files{$dateTime}}[3];
+            my $dateTime=shift(@dates);
 
             deleteFile($dateTime);
         }
