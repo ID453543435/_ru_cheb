@@ -91,6 +91,8 @@ sub dirList {
     sub addFileData {
         my ($file,$baseName,$point_code,$dateHour,$run_number, $car_number)=@_;
 
+        print "file_db.pm[$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+
         $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
 
         if ($dateHour gt $lastDateHour)
@@ -102,7 +104,7 @@ sub dirList {
         {
             $fistDateHour=$dateHour;
         }
-        print "file_db.pm:$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+        print "file_db.pm]$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
         
         return;
     }
