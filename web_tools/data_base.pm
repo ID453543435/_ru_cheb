@@ -75,7 +75,7 @@
         my $timeL=fileLib::toSql($timeSec);
 
         $db->do("INSERT IGNORE INTO data 
-        (point_id, run_number, car_number, date_time
+        (pointid, runnumber, carnumber, datetime
         ,direct ,chenel ,lengh ,speed) 
         VALUES(?,?,?,?, ?,?,?,?) ",{},
         ($point_id,$run_number,$carNumber,$timeL

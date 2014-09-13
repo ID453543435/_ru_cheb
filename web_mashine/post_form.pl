@@ -35,10 +35,10 @@ sub main {
 
 
     my ($run_number,$car_number,$date_time) = m_cgi::SQLrow(
-        "SELECT run_number,car_number,date_time
+        "SELECT runnumber,carnumber,datetime
          FROM data
-         WHERE point_id=?
-         ORDER BY point_id DESC, run_number DESC, car_number DESC LIMIT 1;",[$point_id]);
+         WHERE pointid=?
+         ORDER BY pointid DESC, runnumber DESC, carnumber DESC LIMIT 1;",[$point_id]);
     
 
     print "status=$status\n";

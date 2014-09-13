@@ -52,10 +52,10 @@ sub main {
 
      $dbh->do("
      CREATE TABLE data (
-     point_id   int(8) ,
-     run_number int(8) ,
-     car_number int(8) ,
-     date_time  DATETIME ,
+     pointid   int(8) ,
+     runnumber int(8) ,
+     carnumber int(8) ,
+     datetime  DATETIME ,
 
      direct int(2) ,
      chenel int(2) ,
