@@ -47,13 +47,21 @@ sub main {
 
 #        (run_number, car_number, date_time, data) 
 
+
+#     data       varchar(65) ,
+
      $dbh->do("
      CREATE TABLE data (
      point_id   int(8) ,
      run_number int(8) ,
      car_number int(8) ,
      date_time  DATETIME ,
-     data       varchar(65) ,
+
+     direct int(2) ,
+     chenel int(2) ,
+     lengh int(6) ,
+     speed  int(3) ,
+
      KEY k001 (date_time),
      KEY k002 (point_id,date_time),
      UNIQUE KEY k003 (point_id,run_number,car_number)
