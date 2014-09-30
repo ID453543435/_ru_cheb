@@ -76,7 +76,7 @@ sub dirList {
 
         while(not diskOk())
         {
-            last unless ${$files{$dates[0]}}[3];
+            last unless ${$files{$dates[0]}}[2];
 
             my $dateTime=shift(@dates);
 
