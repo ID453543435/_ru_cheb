@@ -13,6 +13,7 @@
     use read_pass;
     use data_request;
     use os_spec;
+    use com_port;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -31,6 +32,7 @@ sub main {
    data_base::init();
    data_request::init();
    os_spec::init();
+   com_port::init();
 
    tranfer::openPort();
 
