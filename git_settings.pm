@@ -40,7 +40,7 @@ sub getVersion {
 #------------------------------------------------------
 sub setEnv {
 
-    $ENV{PATH} .= q{;C:\Users\1\AppData\Local\GitHub\PortableGit_6d98349f44ba975cf6c762a720f8259a267ea445\bin\;};
+    $ENV{PATH} .= q{;C:\Users\1\AppData\Local\GitHub\PortableGit_7eaa994416ae7b397b2628033ac45f8ff6ac2010\bin\;};
 
     return;
 }
