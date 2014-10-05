@@ -5,7 +5,8 @@
 
 =cut
 #------------------------------------------------------
-    use Win32::SerialPort;
+#    use Win32::SerialPort;
+    use com_port;
     use strict;
     use rtu;
 #------------------------------------------------------
@@ -36,22 +37,7 @@
 #------------------------------------------------------
     sub openPort {
         
-        my $PortName="COM3";
-        my $quiet=0;
-
-        $comPort = new Win32::SerialPort ($PortName, $quiet)
-             || die "Can't open $PortName: $^E\n";    # $quiet is optional
-
-        $comPort->user_msg("ON");
-        $comPort->databits(8);
-        $comPort->baudrate(115200);
-        $comPort->parity("none");
-        $comPort->stopbits(1);
-        $comPort->handshake("rts");
-        $comPort->buffers(4096, 4096);
-
-        $comPort->write_settings
-             || die "Can't write_settings $PortName: $^E\n";
+        com_port::openPort();
 
         return;
     }
@@ -60,7 +46,7 @@
 #------------------------------------------------------
     sub closePort {
 
-        $comPort->close || die "failed to close";
+        com_port::closePort();
 
         return;
     }
@@ -82,7 +68,7 @@
 
 #        $data =~ s/(.)/sprintf("|%02x",ord($1))/eg; print "$data\n";die;
 
-        my $count_out = $comPort->write($data);
+        my $count_out = com_port::sendData($data);
         warn "write failed\n"         unless ($count_out);
         warn "write incomplete\n"     if ( $count_out != length($data) );  
 
@@ -125,7 +111,7 @@
         my $mode=0;
         while (1)
         {
-           my ($count_in, $string_in) = $comPort->read(1);
+           my ($count_in, $string_in) = com_port::readData(1);
            if ($count_in != 1)
            {
 #               print "\nread fall:count_in=$count_in,string_in=$string_in\n";
