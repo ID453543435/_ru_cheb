@@ -26,12 +26,12 @@
     sub openPort {
         
         $socket = new IO::Socket::INET (
-             LocalHost => "127.0.0.1",
-             LocalPort => $parameters::tor_incomePort,
+             PeerAddr => $parameters::com_port_adres,
+             PeerPort => $parameters::com_port_port,
              Proto => 'tcp',
-             Listen => 5,
-             ReuseAddr => 1
         ) or die "ERROR in Socket Creation : $!\n";
+
+        binmode($socket);
 
         return;
     }
@@ -40,7 +40,7 @@
 #------------------------------------------------------
     sub closePort {
 
-        $comPort->close || die "failed to close";
+        $socket->close || die "failed to close";
 
         return;
     }
@@ -50,7 +50,7 @@
     sub sendData {
         my ($data)=@_;
 
-        my $count_out = $comPort->write($data);
+        my $count_out = $socket->syswrite($data);
 #        warn "write failed\n"         unless ($count_out);
 #        warn "write incomplete\n"     if ( $count_out != length($data) );  
 
@@ -64,7 +64,9 @@
     sub readData {
         my ($bytes)=@_;
 
-        my ($count_in, $string_in) = $comPort->read($bytes);
+        $string_in="";
+
+        my $count_in = $socket->read($string_in,$bytes);
 
         return ($count_in, $string_in);
     }

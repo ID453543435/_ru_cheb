@@ -17,7 +17,7 @@
 #------------------------------------------------------
 
     use vars qw($point_code $run_number $server_url);
-    use vars qw($com_port);
+    use vars qw($com_port $com_port_adres $com_port_port);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
