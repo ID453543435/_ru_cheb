@@ -45,6 +45,8 @@ sub main {
   warn "write failed\n"         unless ($count_out);
   warn "write incomplete\n"     if ( $count_out != length($data) );  
 
+  sleep(1);print "sleep(1)\n";
+
   my $InBytes=1;
   my ($count_in, $string_in);
   while (1)
