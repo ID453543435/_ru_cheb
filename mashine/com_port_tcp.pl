@@ -64,7 +64,7 @@
     sub readData {
         my ($bytes)=@_;
 
-        $string_in="";
+        my $string_in="";
 
         my $count_in = $socket->read($string_in,$bytes);
 
