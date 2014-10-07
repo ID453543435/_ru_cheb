@@ -37,7 +37,7 @@ sub main {
    tranfer::openPort();
 
 
-   my $pribor=new pribor(0x0f);
+   my $pribor=new pribor(0x10);
 #   pribor::init(0x10);
 
    pribor::readyUp($pribor);
