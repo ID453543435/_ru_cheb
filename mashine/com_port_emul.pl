@@ -33,14 +33,13 @@
 
         $comPort->user_msg("ON");
         $comPort->databits(8);
-#        $comPort->baudrate(115200);
+        $comPort->baudrate(115200);
         $comPort->parity("none");
         $comPort->stopbits(1);
         $comPort->handshake("rts");
         $comPort->buffers(4096, 4096);
 
-        $comPort->write_settings
-             || die "Can't write_settings $PortName: $^E\n";
+#        $comPort->write_settings || die "Can't write_settings $PortName: $^E\n";
 
         return;
     }
