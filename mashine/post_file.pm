@@ -116,7 +116,7 @@ DATA
            $dateHour_in=$file_db::fistDateHour;
         }
 
-        print "post_file.pm:$dateHour_in=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+#        print "post_file.pm:$dateHour_in=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         my $dateHour=$dateHour_in;
 
