@@ -100,7 +100,7 @@
 # saveData
 #------------------------------------------------------
     sub saveData {
-        my ($data)=@_;
+        my ($pribor,$data)=@_;
 
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
 
@@ -110,7 +110,7 @@
 
         $chenel=$chenel & 0x0f;
 
-        my $timeSec=$time/1000+$pribor::pr_baseTime;
+        my $timeSec=$time/1000+$pribor->{pr_baseTime};
 
         $data .= pack("LLL",$timeSec,$parameters::run_number,$dbCarNumber);  # len=12
 

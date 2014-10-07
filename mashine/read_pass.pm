@@ -33,7 +33,7 @@
     
         for my $str (@$data)
         {
-            data_base::saveData($str);
+            data_base::saveData($pribor,$str);
         }
 
 
