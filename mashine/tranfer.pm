@@ -96,7 +96,7 @@
            
         }
 
-#        print "<";printData($data);
+        print "<";printData($data);
 
         return $data;
     }
