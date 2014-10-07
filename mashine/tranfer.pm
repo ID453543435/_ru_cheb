@@ -72,7 +72,7 @@
         warn "write failed\n"         unless ($count_out);
         warn "write incomplete\n"     if ( $count_out != length($data) );  
 
-        sleep(0.1);
+#        sleep(0.1);
 
         return;
     }
