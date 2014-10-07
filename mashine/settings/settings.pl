@@ -1,5 +1,5 @@
 $server_url="http://37.232.170.76/cgi-bin/web_mashine/";
 
-$com_port="win";  #"tcp", "win"
+$com_port="emul";  #"tcp", "win"
 $com_port_adres="192.168.1.60";
 $com_port_port=503;
