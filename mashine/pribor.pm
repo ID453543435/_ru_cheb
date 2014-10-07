@@ -86,7 +86,7 @@
         tranfer::sendData($data);
 
 
-        printf("%02x\r",$self->{pr_packet});
+        printf("%02x:%02x\r",$self->{pr_adress},$self->{pr_packet});
 
         return;
     }
