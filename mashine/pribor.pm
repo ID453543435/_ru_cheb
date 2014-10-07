@@ -40,7 +40,7 @@
 # readyUp
 #------------------------------------------------------
     sub readyUp {
-        my ($self)=@_;
+        my $self = shift;
 
         sleep(1);
 
@@ -62,7 +62,7 @@
 # syncTime
 #------------------------------------------------------
     sub syncTime {
-        my ($self)=@_;
+        my $self = shift;
 
         pribor::sendData($self,"\x02"); #Синхронизация
         $self->{pr_baseTime}=time();
@@ -73,7 +73,7 @@
 # sendData
 #------------------------------------------------------
     sub sendData {
-        my ($self)=@_;
+        my $self = shift;
         my ($data)=@_;
 
         $self->{pr_packet}++;
@@ -94,7 +94,7 @@
 # readData
 #------------------------------------------------------
     sub readData {
-        my ($self)=@_;
+        my $self = shift;
 
         my ($data,$packet,$adress);
         while(1)
@@ -116,7 +116,7 @@
 # readCars
 #------------------------------------------------------
     sub readCars {
-        my ($self)=@_;
+        my $self = shift;
 
 
         sendData("\x05"); #Чтение буфера событий
