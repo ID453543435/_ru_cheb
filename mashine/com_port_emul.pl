@@ -72,7 +72,9 @@
     sub readData {
         my ($bytes)=@_;
 
+        print "<";
         my ($count_in, $string_in) = $comPort->read($bytes);
+        print "$count_in>";
 
         return ($count_in, $string_in);
     }
