@@ -71,7 +71,7 @@
             alarm 5;
             $count_in = $socket->read($string_in,$bytes);
             alarm 0;
-        }
+        };
 
         return ($count_in, $string_in);
     }
