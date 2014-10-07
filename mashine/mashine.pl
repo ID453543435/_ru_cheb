@@ -36,18 +36,20 @@ sub main {
 
    tranfer::openPort();
 
-   pribor::init(0x10);
 
-   pribor::readyUp();
+   my $pribor=new pribor(0x10);
+#   pribor::init(0x10);
 
-   pribor::syncTime();
-   pribor::readCars();
+   pribor::readyUp($pribor);
+
+   pribor::syncTime($pribor);
+   pribor::readCars($pribor);
 
    os_spec::start("mashine_sync.pl");
 
    while(1)
    {
-      read_pass::readCars();
+      read_pass::readCars($pribor);
       data_request::checkRequest();
    }
 

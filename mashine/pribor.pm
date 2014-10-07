@@ -11,7 +11,7 @@
 #------------------------------------------------------
     package pribor;
 
-    use vars qw($pr_adress $pr_packet $pr_baseTime);
+#    use vars qw($pr_adress $pr_packet $pr_baseTime);
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -22,29 +22,33 @@
         return $par;
     }
 #------------------------------------------------------
-# init
+# new
 #------------------------------------------------------
-    sub init {
+    sub new {
         my ($adress)=@_;
 
-        $pr_packet=-1;
-        $pr_adress=$adress;
+        my $self  = {};
+        bless($self, $class);
+        
+        $self->{pr_packet} = -1;
+        $self->{pr_adress} = $adress;
+        $self->{pr_baseTime} = "";
 
-
-        return;
+        return $self;
     }
 #------------------------------------------------------
 # readyUp
 #------------------------------------------------------
     sub readyUp {
+        my ($self)=@_;
 
         sleep(1);
 
         while (1)
         {
-           pribor::sendData("\x01"); #Эхо-запрос
+           pribor::sendData($self,"\x01"); #Эхо-запрос
 
-           my $data=pribor::readData();
+           my $data=pribor::readData($self);
 
            last if $data eq "\x00";
            last if $data eq "\x01";
@@ -58,9 +62,10 @@
 # syncTime
 #------------------------------------------------------
     sub syncTime {
+        my ($self)=@_;
 
-        pribor::sendData("\x02"); #Синхронизация
-        $pr_baseTime=time();
+        pribor::sendData($self,"\x02"); #Синхронизация
+        $self->{pr_baseTime}=time();
 
         return;
     }
@@ -68,19 +73,20 @@
 # sendData
 #------------------------------------------------------
     sub sendData {
+        my ($self)=@_;
         my ($data)=@_;
 
-        $pr_packet++;
+        $self->{pr_packet}++;
 
-        $pr_packet = $pr_packet & 0xFF;
+        $self->{pr_packet} = $self->{pr_packet} & 0xFF;
 
 
-        $data=pack("CC",$pr_packet,$pr_adress).$data;
+        $data=pack("CC",$self->{pr_packet},$self->{pr_adress}).$data;
 
         tranfer::sendData($data);
 
 
-        printf("%02x\r",$pr_packet);
+        printf("%02x\r",$self->{pr_packet});
 
         return;
     }
@@ -88,17 +94,18 @@
 # readData
 #------------------------------------------------------
     sub readData {
+        my ($self)=@_;
 
         my ($data,$packet,$adress);
         while(1)
         {
-           $data=tranfer::readData();
+           $data=tranfer::readData($self);
 
            last unless $data;
 
            ($packet,$adress)=unpack("CC",$data);
 
-           last if $packet == $pr_packet;
+           last if $packet == $self->{pr_packet};
         }
         $data=substr($data,2);
 
@@ -109,10 +116,11 @@
 # readCars
 #------------------------------------------------------
     sub readCars {
+        my ($self)=@_;
 
 
         sendData("\x05"); #Чтение буфера событий
-        my $data=readData();
+        my $data=readData($self);
 
         my $num=-1;
         my @res=();
@@ -131,8 +139,8 @@
         }
         if ( $num != -1)
         {
-           pribor::sendData("\x06".pack("C",$num));
-           my $data=pribor::readData();
+           pribor::sendData($self,"\x06".pack("C",$num));
+           my $data=pribor::readData($self);
         }
 
 

@@ -25,9 +25,10 @@
 # readCars
 #------------------------------------------------------
     sub readCars {
+        my ($pribor)=@_;
 
 
-        my $data=pribor::readCars();
+        my $data=pribor::readCars($pribor);
 #       push(@res,[$num,$chenel,$dirct,$timeL,$lenght,$speed]);
     
         for my $str (@$data)
