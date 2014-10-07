@@ -67,13 +67,14 @@
         my $string_in="";
         my $count_in = 0;
 
+        print "<";
         eval{
             alarm 5;
             $count_in = $socket->read($string_in,$bytes);
             alarm 0;
         };
 
-        print "<$count_in>";
+        print "$count_in>";
 
         return ($count_in, $string_in);
     }
