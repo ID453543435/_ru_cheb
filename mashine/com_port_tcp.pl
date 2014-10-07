@@ -71,7 +71,7 @@
         eval{
             local $SIG{ALRM} = sub { die "alarm\n" }; # NB: \n required
             alarm 5;
-            $count_in = $socket->read($string_in,$bytes);
+            $count_in = $socket->sysread($string_in,$bytes);
             alarm 0;
         };
 
