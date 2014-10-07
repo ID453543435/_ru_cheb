@@ -56,7 +56,7 @@
     sub sendData {
         my ($data)=@_;
 
-        print ">";printData($data);
+#        print ">";printData($data);
 
         my $crc16=rtu::crc($data);
         $data=$data.pack("n",$crc16);
@@ -96,7 +96,7 @@
            
         }
 
-        print "<";printData($data);
+#        print "<";printData($data);
 
         return $data;
     }

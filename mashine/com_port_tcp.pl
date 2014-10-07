@@ -67,7 +67,7 @@
         my $string_in="";
         my $count_in = 0;
 
-        print "<";
+#        print "<";
         eval{
             local $SIG{ALRM} = sub { die "alarm\n" }; # NB: \n required
             alarm 5;
@@ -75,7 +75,7 @@
             alarm 0;
         };
 
-        print "$count_in>";
+#        print "$count_in>";
 
         return ($count_in, $string_in);
     }
