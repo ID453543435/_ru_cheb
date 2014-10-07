@@ -119,7 +119,7 @@
         my $self = shift;
 
 
-        sendData("\x05"); #Чтение буфера событий
+        sendData($self,"\x05"); #Чтение буфера событий
         my $data=readData($self);
 
         my $num=-1;
