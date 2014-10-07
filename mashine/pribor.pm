@@ -25,7 +25,7 @@
 # new
 #------------------------------------------------------
     sub new {
-        my ($adress)=@_;
+        my ($class,$adress)=@_;
 
         my $self  = {};
         bless($self, $class);
