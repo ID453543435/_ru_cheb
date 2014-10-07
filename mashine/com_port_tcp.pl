@@ -65,8 +65,13 @@
         my ($bytes)=@_;
 
         my $string_in="";
+        my $count_in = 0;
 
-        my $count_in = $socket->read($string_in,$bytes);
+        eval{
+            alarm 5;
+            $count_in = $socket->read($string_in,$bytes);
+            alarm 0;
+        }
 
         return ($count_in, $string_in);
     }
