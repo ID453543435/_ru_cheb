@@ -22,7 +22,7 @@ sub null {
 sub main {
                                        
   my $PortObj = new IO::Socket::INET (
-       PeerAddr => "37.232.170.76",
+       PeerAddr => "192.168.1.60",
        PeerPort => 503,
        Proto => 'tcp',
   ) or die "ERROR in Socket Creation : $!\n";
