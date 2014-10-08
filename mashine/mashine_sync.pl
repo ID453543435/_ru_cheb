@@ -9,6 +9,7 @@
     use file_arch;
     use file_db;
     use post_data;
+    use os_spec;
     use strict;
 #------------------------------------------------------
 # null
@@ -59,6 +60,7 @@ sub archivate {
 sub main {
 
     parameters::initPost();
+    os_spec::init();
     file_db::init();
     post_data::init();
 
