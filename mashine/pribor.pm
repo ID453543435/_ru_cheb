@@ -66,6 +66,7 @@
 
         pribor::sendData($self,"\x02"); #Синхронизация
         $self->{pr_baseTime}=time();
+        sleep(0.1);
 
         return;
     }
