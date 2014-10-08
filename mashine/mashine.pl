@@ -44,10 +44,10 @@ sub main {
 #   my $pribor=new pribor(0x10);
 #   pribor::init(0x10);
 
-   pribor_list::readyUp($pribor);
+   pribor_list::readyUp();
 
-   pribor_list::syncTime($pribor);
-   pribor_list::readCars($pribor);
+   pribor_list::syncTime();
+   pribor_list::readCars();
 
    os_spec::start("mashine_sync.pl");
 
