@@ -55,7 +55,7 @@
 
         my $arxName= $dbFile.sprintf("_%08i_%08i", $run_number, $car_number).".gzip";
 
-        a7z::compress($dbFile,$arxName,"temp");
+        os_spec::compress($dbFile,$arxName,"temp");
 
         move("temp/$arxName","archives/$arxName") or die;
 
