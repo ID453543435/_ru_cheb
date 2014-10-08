@@ -34,12 +34,14 @@ sub main {
    data_request::init();
    os_spec::init();
    com_port::init();
-   pribor_list::init();
 
    tranfer::openPort();
 
 
-   my $pribor=new pribor(0x10);
+   pribor_list::init();
+   print join(";",@pribor_list::pribor_list),"\n";
+
+#   my $pribor=new pribor(0x10);
 #   pribor::init(0x10);
 
    pribor_list::readyUp($pribor);
