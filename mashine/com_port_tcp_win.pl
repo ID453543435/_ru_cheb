@@ -73,7 +73,7 @@
 
         print "<";
 
-        @ready = $selector->can_read( 6 );
+        my @ready = $select->can_read( 6 );
         if (@ready > 0) {
             $count_in = $socket->sysread($string_in,$bytes);
         } else {
