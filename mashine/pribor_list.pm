@@ -26,7 +26,7 @@
     sub init {
 
         @pribor_list=();
-        for(my $i=0;$i++;$i<@parameters::dev_adress)
+        for(my $i=0;$i<@parameters::dev_adress;$i++)
         {
             my $adress= $parameters::dev_adress[$i];
             my $pribor=new pribor($adress);

@@ -39,7 +39,7 @@ sub main {
 
 
    pribor_list::init();
-   print join(";",@pribor_list::pribor_list),"\n";
+   print join(";",@pribor_list::pribor_list),";\n";
 
 #   my $pribor=new pribor(0x10);
 #   pribor::init(0x10);
