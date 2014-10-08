@@ -34,7 +34,7 @@
             print "start /B /LOW $str\n";
         } else {
             # I'm the child
-            exec($str);
+            exec("perl", $str);
         } 
 
         return;
