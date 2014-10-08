@@ -23,7 +23,13 @@
 #------------------------------------------------------
     sub init {
 
-        do("os_spec_${^O}.pl");
+#        do("os_spec_${^O}.pl");
+
+        unless (my $return = do("os_spec_${^O}.pl")) {
+             warn "couldn't parse $file: $@" if $@;
+             warn "couldn't do $file: $!" unless defined $return;
+             warn "couldn't run $file" unless $return;
+        }        
 
         return;
     }
