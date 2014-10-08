@@ -45,7 +45,7 @@
     sub compress {
         my ($file,$arhFile,$dir)=@_;
 
-        my $cwd=Cwd::getdcwd();
+        my $cwd=Cwd::getcwd();
 
         chdir($dir);
 
