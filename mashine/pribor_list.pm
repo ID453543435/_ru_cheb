@@ -31,7 +31,7 @@
             my $adress= $parameters::dev_adress[$i];
             my $pribor=new pribor($adress);
 
-            $pribor->{chanel}=$i+2;
+            $pribor->{chanel}=$i*2;
 
             push(@pribor_list,$pribor);
 
