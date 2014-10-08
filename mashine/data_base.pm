@@ -110,6 +110,8 @@
 
         $chenel=$chenel & 0x0f;
 
+        $chenel += $pribor->{chanel};
+
         my $timeSec=$time/1000+$pribor->{pr_baseTime};
 
         $data .= pack("LLL",$timeSec,$parameters::run_number,$dbCarNumber);  # len=12
@@ -126,6 +128,9 @@
         {
             openDataBase($dateHour);
         };
+
+        substr($data,1,1,pack("C",( $chenel | $dirct )));
+
 
         $db->do("INSERT INTO log 
         (run_number, car_number, date_time, data) 

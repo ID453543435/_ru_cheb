@@ -14,6 +14,7 @@
     use data_request;
     use os_spec;
     use com_port;
+    use pribor_list;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -33,6 +34,7 @@ sub main {
    data_request::init();
    os_spec::init();
    com_port::init();
+   pribor_list::init();
 
    tranfer::openPort();
 
@@ -40,16 +42,19 @@ sub main {
    my $pribor=new pribor(0x10);
 #   pribor::init(0x10);
 
-   pribor::readyUp($pribor);
+   pribor_list::readyUp($pribor);
 
-   pribor::syncTime($pribor);
-   pribor::readCars($pribor);
+   pribor_list::syncTime($pribor);
+   pribor_list::readCars($pribor);
 
    os_spec::start("mashine_sync.pl");
 
    while(1)
    {
-      read_pass::readCars($pribor);
+      for my $pribor (@pribor_list::pribor_list)
+      {
+          read_pass::readCars($pribor);
+      }
       data_request::checkRequest();
    }
 
