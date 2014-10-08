@@ -8,7 +8,8 @@
     use DBI;
     use strict;
     use fileLib;
-    use a7z;
+#    use a7z;
+    use os_spec;
     use mashine_tools;
 
     package file_arch;
