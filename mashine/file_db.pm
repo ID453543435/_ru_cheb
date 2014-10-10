@@ -5,8 +5,10 @@
 
 =cut
 #------------------------------------------------------
-    use strict;
+    use Data::Dump qw(dump);
 
+    use strict;
+    
     use file_arch;
     package file_db;
 #------------------------------------------------------
@@ -30,6 +32,8 @@ sub dirList {
     opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
     my @files = readdir $dh;
     closedir $dh;
+
+    print ::dump($@files),":dirList\n";
 
     shift @files; 
     shift @files; 
