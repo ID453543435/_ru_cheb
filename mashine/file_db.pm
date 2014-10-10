@@ -37,7 +37,7 @@ sub dirList {
 
 #    shift @files; 
 #    shift @files; 
-    @files = grep(! m{\.\.?}s, @files);
+    @files = grep(not( m{^\.\.?$}s), @files);
     
     return \@files;
 }
