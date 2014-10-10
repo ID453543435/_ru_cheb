@@ -33,7 +33,7 @@ sub dirList {
     my @files = readdir $dh;
     closedir $dh;
 
-    print ::dump($@files),":dirList\n";
+    print ::dump(\@files),":dirList\n";
 
     shift @files; 
     shift @files; 
