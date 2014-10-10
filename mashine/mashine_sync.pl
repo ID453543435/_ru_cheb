@@ -34,6 +34,9 @@ sub archivate {
     my ($point_code,$dateHour)=($lastFile1 =~ m{^(.{8})_(.{10})}s);
     my $baseName=substr($lastFile1,0,19);
 
+
+    print "mashine_sync.pl:($lastFile1,$baseName,$point_code,$dateHour)\n";
+    
     file_db::addFileData($lastFile1,$baseName,$point_code,$dateHour, "", "");
 
     
