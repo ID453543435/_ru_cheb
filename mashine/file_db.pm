@@ -35,9 +35,10 @@ sub dirList {
 
     print ::dump(\@files),":dirList\n";
 
-    shift @files; 
-    shift @files; 
-
+#    shift @files; 
+#    shift @files; 
+    @$list = grep(! m{\.\.?}s, @$list);
+    
     return \@files;
 }
 #------------------------------------------------------
