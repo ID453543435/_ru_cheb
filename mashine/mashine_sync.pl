@@ -5,12 +5,14 @@
 
 =cut
 #------------------------------------------------------
+    use Data::Dump qw(dump);
+
+    use strict;
     use parameters;
     use file_arch;
     use file_db;
     use post_data;
     use os_spec;
-    use strict;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -26,8 +28,16 @@ sub null {
 sub archivate {
 
     my $list=file_db::dirList("database");
+
+    print ::dump($list),"\n";
+
     @$list = grep(m{\.SQLite$}is, @$list);
+
+    print ::dump($list),"\n";
+
     @$list=sort(@$list);
+
+    print ::dump($list),"\n";
 
     my $lastFile1=pop @$list;
     
