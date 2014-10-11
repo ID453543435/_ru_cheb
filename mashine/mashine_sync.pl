@@ -29,15 +29,15 @@ sub archivate {
 
     my $list=file_db::dirList("database");
 
-    print ::dump($list),"\n";
+#    print ::dump($list),"\n";
 
     @$list = grep(m{\.SQLite$}is, @$list);
 
-    print ::dump($list),"\n";
+#    print ::dump($list),"\n";
 
     @$list=sort(@$list);
 
-    print ::dump($list),"\n";
+#    print ::dump($list),"\n";
 
     my $lastFile1=pop @$list;
     
@@ -45,7 +45,7 @@ sub archivate {
     my $baseName=substr($lastFile1,0,19);
 
 
-    print "mashine_sync.pl:($lastFile1,$baseName,$point_code,$dateHour)\n";
+#    print "mashine_sync.pl:($lastFile1,$baseName,$point_code,$dateHour)\n";
     
     file_db::addFileData($lastFile1,$baseName,$point_code,$dateHour, "", "");
 

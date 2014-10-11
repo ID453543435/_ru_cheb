@@ -33,7 +33,7 @@ sub dirList {
     my @files = readdir $dh;
     closedir $dh;
 
-    print ::dump(\@files),":dirList\n";
+#    print ::dump(\@files),":dirList\n";
 
 #    shift @files; 
 #    shift @files; 
@@ -63,7 +63,7 @@ sub dirList {
     sub diskOk {
 
 
-        if(keys(%files) > 25)
+        if(keys(%files) > 25*31)
         {
            return 0;
         }
@@ -77,7 +77,7 @@ sub dirList {
 
         my @dates=sort(keys(%files));
 
-        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+#        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         while(not diskOk())
         {
@@ -90,7 +90,7 @@ sub dirList {
 
         $fistDateHour=shift(@dates) if @dates;
 
-        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+#        print "freeDisk[---=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         return;
     }
@@ -100,7 +100,7 @@ sub dirList {
     sub addFileData {
         my ($file,$baseName,$point_code,$dateHour,$run_number, $car_number)=@_;
 
-        print "file_db.pm[$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+#        print "file_db.pm[$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
 
         $files{$dateHour}=[$file,$baseName,$run_number, $car_number,$point_code];
 
@@ -113,7 +113,7 @@ sub dirList {
         {
             $fistDateHour=$dateHour;
         }
-        print "file_db.pm]$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
+#        print "file_db.pm]$dateHour=$file_db::fistDateHour=$file_db::lastDateHour=\n";
         
         return;
     }
