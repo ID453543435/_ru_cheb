@@ -12,7 +12,7 @@
     use vars qw($tempFileDir);
 
 
-$tempFileDir="E:/web_mashine/";
+$tempFileDir="C:/web_mashine/";
 
 
 #------------------------------------------------------
