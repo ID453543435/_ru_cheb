@@ -11,7 +11,12 @@
 #------------------------------------------------------
     package pribor;
 
-#    use vars qw($pr_adress $pr_packet $pr_baseTime);
+    use vars qw(@classes);
+
+
+    @classes = (3,7.5,10,12,17.5,23);
+
+
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -83,6 +88,7 @@
     sub syncTime {
         my $self = shift;
 
+        $self->{pr_baseTime}=time();
 
         return;
     }
@@ -206,10 +212,20 @@
 # encodeCar
 #------------------------------------------------------
     sub encodeCar {
+        my $self = shift;
         my ($res,$chenel,$class,$speed,$num)=@_;
 
 
-        print "($chenel,$class,$speed,$num)\n";
+        my $leng=$classes[$class];
+
+        print "($chenel,$leng($class),$speed,$num)\n" if $num;
+
+        my $data=pack("CCLSC",0,$chenel,(time() - $self->{pr_baseTime})*1000,$leng*16,$speed);
+        for (my $i=0;$i<$num;$i++)
+        {
+            push(@$res,$data);
+        }
+        
 
         return;
     }
@@ -234,13 +250,13 @@
              {
                  $$itog[$j] -= $$class[$j];
 
-                 encodeCar($res,$j,$i-3,$$speed[$j],$$class[$j]);
+                 encodeCar($self,$res,$j,$i-3,$$speed[$j],$$class[$j]);
              }
         }
 
         for (my $j=0;$j<@$itog;$j++)
         {
-            encodeCar($res,$j,0,$$speed[$j],$$itog[$j]);
+            encodeCar($self,$res,$j,0,$$speed[$j],$$itog[$j]);
         }
 
         return;
