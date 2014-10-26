@@ -34,6 +34,7 @@
         $self->{pr_adress} = $adress;
         $self->{pr_baseTime} = "";
         $self->{buffer} = "";
+        $self->{packet} = [];
 
         return $self;
     }
@@ -65,11 +66,13 @@
 
         my $tTime=time();
 
-        if ($tTime - $self->{pr_baseTime} > 36)
+        if ($tTime - $self->{pr_baseTime} > 3)
         {
             sendData($self,"FFAA53030001000001");
 
             $self->{pr_baseTime}=$tTime;
+
+#            print "ping\n";
         }
 
         return;
@@ -159,17 +162,24 @@
            my $data=takeFromBufer($self);
            last unless $data;
 
-           pingPribor($self);
+#           pingPribor($self);
 
-           $data=filter($data);
-           next unless $data;
+           my $type=filter($data);
+           next unless $type;
 
            $num++;
 
            print ">";tranfer::printData($data);
-           
 
-#           push(@res,$car);
+
+           $self->{packet}->[$type - 0x10 ]=$data;
+
+
+           if ($type == 0x18)
+           {
+                emulateCars($self,\@res);
+           }
+
         }
         if ( $num != -1)
         {
@@ -179,20 +189,78 @@
         return \@res;
     }
 #------------------------------------------------------
+# getNumbers
+#------------------------------------------------------
+    sub getNumbers {
+        my ($str)=@_;
+
+
+        my $data=substr($str,6,-2);
+
+        my @res=unpack("n*",$data);
+
+
+        return \@res;
+    }
+#------------------------------------------------------
+# encodeCar
+#------------------------------------------------------
+    sub encodeCar {
+        my ($res,$chenel,$class,$speed,$num)=@_;
+
+
+        print "($chenel,$class,$speed,$num)\n";
+
+        return;
+    }
+#------------------------------------------------------
+# emulateCars
+#------------------------------------------------------
+    sub emulateCars {
+        my $self = shift;
+        my ($res)=@_;
+
+
+        my $itog=getNumbers($self->{packet}->[0]);
+        my $speed=getNumbers($self->{packet}->[2]);
+
+
+        for (my $i=4;$i<=8;$i++)
+        {
+
+             my $class=getNumbers($self->{packet}->[$i]);
+
+             for (my $j=0;$j<@$class;$j++)
+             {
+                 $$itog[$j] -= $$class[$j];
+
+                 encodeCar($res,$j,$i-3,$$speed[$j],$$class[$j]);
+             }
+        }
+
+        for (my $j=0;$j<@$itog;$j++)
+        {
+            encodeCar($res,$j,0,$$speed[$j],$$itog[$j]);
+        }
+
+        return;
+    }
+#------------------------------------------------------
 # filter
 #------------------------------------------------------
     sub filter {
         my ($data)=@_;
 
-
         my $type=unpack("C",substr($data,2,1));
+
+        print "[$type]\r";
 
         if ($type >= 0x10 and $type <= 0x18)
         {
-            return $data;
+            return $type;
         }
 
-        return;
+        return "";
     }
 #------------------------------------------------------
 1;
