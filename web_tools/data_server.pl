@@ -77,18 +77,22 @@ sub saveToDB {
 
             a7z::decompress($arxFile,$pointDir);
 
-            saveToDBfile($point_id,$pointDir.$file);
+            if (-f($pointDir.$file))
+            {
+                saveToDBfile($point_id,$pointDir.$file);
 
-            unlink($pointDir.$arxFile) or die;
+                unlink($pointDir.$arxFile) or die;
+                unlink($pointDir.$file) or die;
+            }
         }
         else
         {
             saveToDBfile($point_id,$pointDir.$file);
+            unlink($pointDir.$file) or die;
         }
         
         print "$file\n";
 
-        unlink($pointDir.$file) or die;
     }
 
 
