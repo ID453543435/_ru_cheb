@@ -72,14 +72,19 @@ sub saveToDB {
         
         if (substr($file,-5,5) eq ".gzip")
         {
-            a7z::decompress($file,$pointDir);
+            my $arxFile=$file;
+            $file=substr($arxFile,0,19);
 
-            unlink($pointDir.$file) or die;
+            a7z::decompress($arxFile,$pointDir);
 
-            $file=substr($file,0,19);
+            saveToDBfile($point_id,$pointDir.$file);
+
+            unlink($pointDir.$arxFile) or die;
         }
-
-        saveToDBfile($point_id,$pointDir.$file);
+        else
+        {
+            saveToDBfile($point_id,$pointDir.$file);
+        }
         
         print "$file\n";
 
