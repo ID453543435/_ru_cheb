@@ -69,7 +69,8 @@ sub saveToDB {
 
     for my $file (@$list)
     {
-        
+        print "$pointDir.$file\n";
+
         if (substr($file,-5,5) eq ".gzip")
         {
             my $arxFile=$file;
@@ -90,9 +91,6 @@ sub saveToDB {
             saveToDBfile($point_id,$pointDir.$file);
             unlink($pointDir.$file) or die;
         }
-        
-        print "$file\n";
-
     }
 
 
