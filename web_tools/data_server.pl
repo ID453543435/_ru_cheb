@@ -69,7 +69,7 @@ sub saveToDB {
 
     for my $file (@$list)
     {
-        print "$pointDir.$file\n";
+        print $pointDir.$file,"\n";
 
         if (substr($file,-5,5) eq ".gzip")
         {
