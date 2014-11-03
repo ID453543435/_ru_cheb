@@ -52,6 +52,8 @@
 
            last if $data eq "\x00";
            last if $data eq "\x01";
+           last if $data eq "\x02";
+           last if $data eq "\x03";
 
            sleep(1);
         }
