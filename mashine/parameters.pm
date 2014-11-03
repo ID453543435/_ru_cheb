@@ -71,6 +71,7 @@
 #------------------------------------------------------
     sub init {
 
+        do "settings_base.pl";
         do "settings/settings.pl";
 
         my $fileName="settings/run_number";
