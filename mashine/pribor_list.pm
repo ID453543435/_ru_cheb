@@ -29,6 +29,9 @@
         for(my $i=0;$i<@parameters::dev_adress;$i++)
         {
             my $adress= $parameters::dev_adress[$i];
+
+            next if $adress eq "*";
+
             my $pribor=new pribor($adress);
 
             $pribor->{chanel}=$i*2;
