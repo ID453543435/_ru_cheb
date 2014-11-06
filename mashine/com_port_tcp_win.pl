@@ -54,9 +54,28 @@
     sub sendData {
         my ($data)=@_;
 
-        my $count_out = $socket->syswrite($data);
+        my $count_out;
+        while(1)
+        {
+           $count_out = $socket->syswrite($data);
+           last if $count_out;
+
 #        warn "write failed\n"         unless ($count_out);
-#        warn "write incomplete\n"     if ( $count_out != length($data) );  
+#        warn "write incomplete\n"     if ( $count_out != length($data) );
+#        warn "write in closed\n"      unless $socket->connected();
+
+           while(1)
+           {
+               sleep(30);
+               print "reconnecting...\n";
+               eval{
+                   openPort();
+               };
+               last unless $@;
+               print "err:$@\n";
+           }
+           last;
+        }
 
 #        sleep(0.1);
 
