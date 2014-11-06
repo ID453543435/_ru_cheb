@@ -104,7 +104,7 @@ sub main {
            }
         }
 
-        print "status=$status;sleepTime=$sleepTime\n";
+        print "${parameters::point_code}:status=$status;sleepTime=$sleepTime\n";
 
         sleep($sleepTime);
     }
