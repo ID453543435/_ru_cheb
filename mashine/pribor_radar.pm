@@ -147,7 +147,9 @@
     sub readData {
         my $self = shift;
 
-        $self->{buffer} .= com_port::readData(2048);
+        my ($count_in, $string_in) = com_port::readData(2048);
+
+        $self->{buffer} .= $string_in;
 
         return;
     }
