@@ -44,6 +44,24 @@
         return $db;
     }
 #------------------------------------------------------
+# dirList
+#------------------------------------------------------
+sub dirList {
+    my ($dirname)=@_;
+
+    opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
+    my @files = readdir $dh;
+    closedir $dh;
+
+#    print ::dump(\@files),":dirList\n";
+
+#    shift @files; 
+#    shift @files; 
+    @files = grep(not( m{^\.\.?$}s), @files);
+    
+    return \@files;
+}
+#------------------------------------------------------
 # saveSelectBinZ
 #------------------------------------------------------
     sub saveSelectBinZ {

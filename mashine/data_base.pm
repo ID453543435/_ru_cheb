@@ -8,6 +8,7 @@
     use strict;
     use fileLib;
     use DBI;
+    use mashine_tools;
 
     package data_base;
 #------------------------------------------------------
@@ -57,6 +58,29 @@
 
 
         $dbFile="database/${parameters::point_code}_$dateHour.SQLite";
+
+        my $res=openDataBaseFile($dbFile);
+
+        unless ($res)
+        {
+            print "REINDEX fall;recreate database;\n";
+            $db->disconnect();
+            unlink($dbFile); 
+            openDataBaseFile($dbFile);
+        }
+
+        $dbDateHour=$dateHour;
+
+        return;
+    }
+#------------------------------------------------------
+# openDataBaseFile
+#------------------------------------------------------
+    sub openDataBaseFile {
+        my ($dbFile)=@_;
+
+        my $res=1;
+
         $db = DBI->connect("DBI:SQLite:$dbFile",undef,undef) 
         or die "cant connect\n";
         if (-z $dbFile)
@@ -66,21 +90,35 @@
         {
 
             print "REINDEX...\n";
-            my $res=$db->do("REINDEX;");
+            $res=$db->do("REINDEX;");
 
-            unless ($res)
-            {
-                print "REINDEX fall;recreate database;\n";
-                $db->disconnect();
-                $dbDateHour="";
-                unlink($dbFile); 
-                openDataBase($dateHour);
-            }
         }
 
-        $dbDateHour=$dateHour;
+        return $res;
+    }
+#------------------------------------------------------
+# lastDataFile
+#------------------------------------------------------
+    sub lastDataFile {
 
-        return;
+        my $list=mashine_tools::dirList("database");
+
+    #    print ::dump($list),"\n";
+
+        @$list = grep(m{\.SQLite$}is, @$list);
+
+    #    print ::dump($list),"\n";
+
+        @$list=sort(@$list);
+
+    #    print ::dump($list),"\n";
+
+        my $lastFile1=pop @$list;
+
+        my ($point_code,$dateHour)=($lastFile1 =~ m{^(.{8})_(.{10})}s);
+#        my $baseName=substr($lastFile1,0,19);
+
+        return $dateHour;
     }
 #------------------------------------------------------
 # init
@@ -90,9 +128,8 @@
         $dbDateHour="";
         $dbCarNumber=0;
 
-        my $dateHour=substr(fileLib::toSql(time()),0,13);
-        $dateHour =~ tr/\- //d;
-        openDataBase($dateHour);
+        my $dateHour=lastDataFile();
+        openDataBase($dateHour) if $dateHour;
 
         return;
     }

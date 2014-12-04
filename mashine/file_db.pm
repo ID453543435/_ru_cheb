@@ -10,6 +10,7 @@
     use strict;
     
     use file_arch;
+    use mashine_tools;
     package file_db;
 #------------------------------------------------------
 
@@ -23,24 +24,6 @@
 
         return $par;
     }
-#------------------------------------------------------
-# dirList
-#------------------------------------------------------
-sub dirList {
-    my ($dirname)=@_;
-
-    opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
-    my @files = readdir $dh;
-    closedir $dh;
-
-#    print ::dump(\@files),":dirList\n";
-
-#    shift @files; 
-#    shift @files; 
-    @files = grep(not( m{^\.\.?$}s), @files);
-    
-    return \@files;
-}
 #------------------------------------------------------
 # deleteFile
 #------------------------------------------------------
@@ -179,7 +162,7 @@ sub dirList {
         $lastDateHour="0001010100";
         $fistDateHour="9999999999";
 
-        my $list=dirList("archives");
+        my $list=mashine_tools::dirList("archives");
 
         for my $file (@$list)
         {
