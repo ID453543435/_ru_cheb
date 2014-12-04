@@ -9,6 +9,7 @@
      use parameters;
      use data_base;
      use a7z;
+     use mashine_tools;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -19,19 +20,18 @@ sub null {
     return $par;
 }
 #------------------------------------------------------
-# dirList
+# dirList_num
 #------------------------------------------------------
-sub dirList {
+sub dirList_num {
     my ($dirname)=@_;
 
-    opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
-    my @files = readdir $dh;
-    closedir $dh;
+    my $list=mashine_tools::dirList($dirname);
 
-    shift @files; 
-    shift @files; 
+#    print ::dump($list),"\n";
 
-    return \@files;
+    @$list = grep(m{^\d+$}is, @$list);
+    
+    return $list;
 }
 #------------------------------------------------------
 # saveToDBfile
@@ -65,7 +65,7 @@ sub saveToDB {
     my $pointDir=$parameters::tempFileDir.sprintf("%08i/",$point_id);
 
 
-    my $list=dirList($pointDir);
+    my $list=mashine_tools::dirList($pointDir);
 
     for my $file (@$list)
     {
