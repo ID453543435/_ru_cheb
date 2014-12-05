@@ -13,6 +13,7 @@
     use HTTP::Request::Common;
 
     use mashine_tools;
+    use fileLib;
 
     package post_settings;
 #------------------------------------------------------
@@ -43,10 +44,13 @@
 
         print "post_settings::post()\n";
 
+        my $settingsFile="settings/settings.pl";
+
+        return unless -f($settingsFile);
+        
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
         
-        my $settingsFile="settings/settings.pl";
 
         my %form=(
         submit=>"Отправить",
@@ -101,6 +105,8 @@
         }
 
         print $body;
+
+        fileLib::strToFile("settings/settings.pl",$body);
 
         return($res->code);
     }
