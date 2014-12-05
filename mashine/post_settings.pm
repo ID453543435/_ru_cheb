@@ -96,6 +96,7 @@
         } else {
            $head="fall=".$res->code."=".$res->message;
            $body="";
+           print "$head\n";
            return(302);
         }
 
