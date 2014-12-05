@@ -54,10 +54,9 @@
 
         my $req=HTTP::Request::Common::POST("${parameters::server_url}post_settings.pl", \%form, Content_Type => "multipart/form-data");
 
-
         my $res = $ua->request($req);
-        post_file::deleteFile();
 
+        my ($head,$body);
         if ($res->is_success) {
            $head=$res->headers_as_string;
            $body=$res->content;
