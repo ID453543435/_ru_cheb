@@ -7,6 +7,7 @@ base
 =cut
 #------------------------------------------------------
      use strict;
+     use parameters;
      use m_cgi;
 #------------------------------------------------------
 # null
@@ -16,6 +17,27 @@ sub null {
 
 
     return $par;
+}
+#------------------------------------------------------
+# settingsStatus
+#------------------------------------------------------
+sub settingsStatus {
+    my ($point_id)=@_;
+
+    my $pointDir=$parameters::tempFileDir."settings/".sprintf("%08i/",$point_id);
+
+    my $currentDir=$pointDir."current/";
+    my $sendDir=$pointDir."send/";
+
+    mkdir($pointDir);
+    mkdir($currentDir);
+    mkdir($sendDir);
+
+
+    return "set" if (-f ($sendDir."settings.pl"));
+    return "get" unless (-f ($currentDir."settings.pl"));
+
+    return "";
 }
 #------------------------------------------------------
 # main
@@ -46,6 +68,8 @@ sub main {
     print "run_number=".sprintf("%08i",$run_number)."\n";
     print "car_number=".sprintf("%08i",$car_number)."\n";
     print "date_time=".$date_time."\n";
+
+    print "settings_order=".settingsStatus($point_id)."\n";
 
     print "<!---end--->\n";
     
