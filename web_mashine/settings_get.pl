@@ -30,9 +30,13 @@ sub main {
 
     my $pointDir=$parameters::tempFileDir."settings/".sprintf("%08i/",$point_id);
 
-    my $data   = fileLib::fileTostr($pointDir."send/settings.pl");
+    my $settingsFile=$pointDir."send/settings.pl";
+
+    my $data   = fileLib::fileTostr($settingsFile);
 
     print $data;
+
+    unlink($settingsFile);
 
 
 }
