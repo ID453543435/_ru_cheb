@@ -12,11 +12,9 @@
     use HTML::Form;
     use HTTP::Request::Common;
 
-    use post_file;
     use mashine_tools;
-    use post_settings;
 
-    package post_data;
+    package post_settings;
 #------------------------------------------------------
 
 #    use vars qw(%files);
@@ -46,6 +44,40 @@
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
         
+        $settingsFile="settings/settings.pl";
+
+        my %form=(
+        submit=>"Отправить",
+        point_id=>$parameters::point_code,
+        data=>[$settingsFile],
+        );
+
+        my $req=HTTP::Request::Common::POST("${parameters::server_url}post_settings.pl", \%form, Content_Type => "multipart/form-data");
+
+
+        my $res = $ua->request($req);
+        post_file::deleteFile();
+
+        if ($res->is_success) {
+           $head=$res->headers_as_string;
+           $body=$res->content;
+
+        } else {
+           $head="fall=".$res->code."=".$res->message;
+           $body="";
+           print "$head\n";
+           return(301);
+        }
+
+        print $body;
+
+        return($res->code);
+    }
+#------------------------------------------------------
+# get
+#------------------------------------------------------
+    sub get {
+
         my $req = new HTTP::Request GET => "${parameters::server_url}post_form.pl?point_id=${parameters::point_code}";
 
         my $res = $ua->request($req);
@@ -58,64 +90,33 @@
         } else {
            $head="fall=".$res->code."=".$res->message;
            $body="";
-           return(301);
-        }
-
-        my $params=mashine_tools::parseHTML($body);
-
-
-        post_settings::handle($params);
-
-
-        if ($$params{status} != 0)
-        {
-#            print $body;
-            return(401);
-        }
-
-
-        my $postFile=post_file::findFile($$params{run_number},$$params{car_number},$$params{date_time});
-
-        if ($post_file::post_file_status == 301)
-        {
-
-            return(501);
-        }
-
-        
-        my @forms = HTML::Form->parse( $body, "${parameters::server_url}post_form.pl" );
-
-        my $form=$forms[0];
-
-        $form->param("point_id",$parameters::point_code) ;
-
-        my $input_file = $form->find_input( $post_file::post_input_name ) ;
-
-#        $input_file->filename( $post_file::post_file_short );
-#        $input_file->content( fileLib::fileToStr($post_file::post_file_name) ); 
-
-        $input_file->file( $post_file::post_file_name );
-        $input_file->filename( $post_file::post_file_short );
-
-        $req=$form->click();
-
-        my $res = $ua->request($req);
-        post_file::deleteFile();
-
-        if ($res->is_success) {
-           $head=$res->headers_as_string;
-           $body=$res->content;
-
-        } else {
-           $head="fall=".$res->code."=".$res->message;
-           $body="";
-#           print "$head\n";
            return(302);
         }
 
-#        print $body;
+        print $body;
 
-        return($post_file::post_file_status);
+
+        return($res->code);
+    }
+#------------------------------------------------------
+# handle
+#------------------------------------------------------
+    sub handle {
+        my ($params)=@_;
+
+
+        if ($$params{settings_order} eq "get")
+        {
+            return post();
+        }
+        if ($$params{settings_order} eq "set")
+        {
+            return get();
+        }
+        
+
+
+        return;
     }
 #------------------------------------------------------
 1;
