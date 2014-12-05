@@ -78,6 +78,7 @@ sub main {
     file_db::init();
     post_data::init();
 
+    my $errorCount=0;
     while (1)
     {
         file_db::freeDisk();
@@ -93,11 +94,22 @@ sub main {
         } elsif ($status >= 300 and $status < 400) #internet error
         {
            $sleepTime=30;
+           if ($errorCount>3)
+           {
+              $sleepTime=5*60;
+           }
+           $errorCount++;
         } elsif ($status >= 400 and $status < 500) #wait for server finish processing
         {
            $sleepTime=15;
+           if ($errorCount>3)
+           {
+              $sleepTime=5*60;
+           }
+           $errorCount++;
         } elsif ($status >= 200 and $status < 300) #ok
         {
+           $errorCount=0;
            $sleepTime=15;
            if ($status == 200)  # sended last data
            {
