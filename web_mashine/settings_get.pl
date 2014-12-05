@@ -33,7 +33,7 @@ sub main {
 
     my $settingsFile=$pointDir."send/settings.pl";
 
-    my $data   = fileLib::fileTostr($settingsFile);
+    my $data   = fileLib::fileToStr($settingsFile);
 
     print $data;
 
