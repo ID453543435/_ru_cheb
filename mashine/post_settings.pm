@@ -41,6 +41,8 @@
 #------------------------------------------------------
     sub post {
 
+        print "post_settings::post()";
+
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
         
@@ -77,10 +79,12 @@
 #------------------------------------------------------
     sub get {
 
+        print "post_settings::get()";
+
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
 
-        my $req = new HTTP::Request GET => "${parameters::server_url}post_form.pl?point_id=${parameters::point_code}";
+        my $req = new HTTP::Request GET => "${parameters::server_url}get_settings.pl?point_id=${parameters::point_code}";
 
         my $res = $ua->request($req);
 
