@@ -9,6 +9,7 @@ base
      use strict;
      use parameters;
      use m_cgi;
+     use fileLib;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -72,6 +73,9 @@ sub main {
     my $pointDir=$parameters::tempFileDir."settings/".sprintf("%08i/",$point_id);
 
     my $dataRes   =saveFile($pointDir."current/settings.pl",       $m_cgi::cgi->upload('data'));
+
+
+    fileLib::strToFile($pointDir."last_ip",$m_cgi::cgi->remote_host());
 
     print "dataRes=$dataRes\n";
 
