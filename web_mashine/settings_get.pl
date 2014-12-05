@@ -23,8 +23,8 @@ sub null {
 #------------------------------------------------------
 sub main {
 
-    my $cgi = CGI->new; # create new CGI object
-    print $cgi->header; # create the HTTP header
+    $m_cgi::cgi = CGI->new; # create new CGI object
+    print $m_cgi::cgi->header; # create the HTTP header
 
     my $point_id=$m_cgi::cgi->param('point_id');
 
