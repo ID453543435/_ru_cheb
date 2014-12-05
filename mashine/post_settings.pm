@@ -44,7 +44,7 @@
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
         
-        $settingsFile="settings/settings.pl";
+        my $settingsFile="settings/settings.pl";
 
         my %form=(
         submit=>"Отправить",
