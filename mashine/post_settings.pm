@@ -41,7 +41,7 @@
 #------------------------------------------------------
     sub post {
 
-        print "post_settings::post()";
+        print "post_settings::post()\n";
 
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
@@ -54,7 +54,7 @@
         data=>[$settingsFile],
         );
 
-        my $req=HTTP::Request::Common::POST("${parameters::server_url}post_settings.pl", \%form, Content_Type => "multipart/form-data");
+        my $req=HTTP::Request::Common::POST("${parameters::server_url}settings_send.pl", \%form, Content_Type => "multipart/form-data");
 
         my $res = $ua->request($req);
 
@@ -79,12 +79,12 @@
 #------------------------------------------------------
     sub get {
 
-        print "post_settings::get()";
+        print "post_settings::get()\n";
 
         my $ua = new LWP::UserAgent;
 #        $ua->timeout(6);
 
-        my $req = new HTTP::Request GET => "${parameters::server_url}get_settings.pl?point_id=${parameters::point_code}";
+        my $req = new HTTP::Request GET => "${parameters::server_url}settings_get.pl?point_id=${parameters::point_code}";
 
         my $res = $ua->request($req);
 
