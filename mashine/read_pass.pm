@@ -34,6 +34,7 @@
         for my $str (@$data)
         {
             data_base::saveData($pribor,$str);
+            data_xml_sftp::saveData($pribor,$str) if $parameters::data_xml_sftp_enable;
         }
 
 

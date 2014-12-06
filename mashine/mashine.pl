@@ -15,6 +15,7 @@
     use os_spec;
     use com_port;
     use pribor_list;
+    use data_xml_sftp;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -30,6 +31,8 @@ sub null {
 sub main {
 
    parameters::init();
+   data_xml_sftp::init() if $parameters::data_xml_sftp_enable;
+
    data_base::init();
    data_request::init();
    os_spec::init();
@@ -58,6 +61,7 @@ sub main {
           read_pass::readCars($pribor);
       }
       data_request::checkRequest();
+      data_xml_sftp::saveFile(time()) if $parameters::data_xml_sftp_enable;
    }
 
    tranfer::closePort();
