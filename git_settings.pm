@@ -21,6 +21,7 @@ sub controlArea {
     system("git", "add", "*.cc");
     system("git", "add", "*.pl");
     system("git", "add", "*.pm");
+    system("git", "add", "*.py");
     system("git", "add", "*.txt");
     system("git", "add", "README");
 
