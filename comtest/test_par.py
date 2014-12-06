@@ -17,7 +17,7 @@ def main():
    sftp = paramiko.SFTPClient.from_transport(transport)
 #   sftp.get("file_name", '.', None)
    files = sftp.listdir()
-   print files   
+   print(files)   
 
 #------------------------------------------------------
 main()
