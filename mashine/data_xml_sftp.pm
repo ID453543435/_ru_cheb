@@ -114,11 +114,11 @@
 
         print "($chenel,$directtion,$class,$speed,$timeSec)\n";
 
-        my $chanDir=$data{$chenel}->{$directtion};
+#        my $chanDir=$data{$chenel}->{$directtion};
 
-        $chanDir->{speed} += $speed;
-        $chanDir->{total_amount}++;
-        $chanDir->{$class}++;
+        $data{$chenel}->{$directtion}->{speed} += $speed;
+        $data{$chenel}->{$directtion}->{total_amount}++;
+        $data{$chenel}->{$directtion}->{$class}++;
 
 #        (run_number, car_number, date_time, data) 
 #        ($parameters::run_number,$dbCarNumber,$timeL,$data)
