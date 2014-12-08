@@ -37,6 +37,21 @@
         return;
     }
 #------------------------------------------------------
+# время в toISO формат из UNIX
+#------------------------------------------------------
+    sub toISO {
+        my ($par)=@_;
+
+        my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+                                            gmtime($par);
+
+        $year+=1900;
+        $mon++;
+
+        return sprintf("%4i%2i%2iT%2i%2i%2i+00",$year,$mon,$mday,$hour,$min,$sec);
+
+    }
+#------------------------------------------------------
 # saveFile
 #------------------------------------------------------
     sub saveFile {
@@ -71,6 +86,8 @@
                $sensors{traffic_occupancy}=($sensors{traffic_total_amount}/$periodHours)/$parameters::data_xml_sftp_carpass_max[$chanel];
                $sensors{measure_period}=$parameters::data_xml_sftp_send_period/60;
 
+               delete($sensors{speed});
+
 
                while (my ($sensor, $value) = each(%sensors)){
 
@@ -90,10 +107,12 @@
         }
         %data=();
 
-        print XMLout({id=>"301", datetime => '20130731T093043+03' , 
+        print XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report');
 
+
+#EXTERNALID_YYYYMMDDHHiiss_RAND.xml,
 
         return;
     }
