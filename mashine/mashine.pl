@@ -31,8 +31,11 @@ sub main {
 
    parameters::init();
 
-   use data_xml_sftp if $parameters::data_xml_sftp_enable;
-   data_xml_sftp::init() if $parameters::data_xml_sftp_enable;
+   if ($parameters::data_xml_sftp_enable)
+   {
+      use data_xml_sftp;
+      data_xml_sftp::init();
+   }
 
    data_base::init();
    data_request::init();
