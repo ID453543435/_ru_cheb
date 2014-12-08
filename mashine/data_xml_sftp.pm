@@ -48,7 +48,22 @@
         $year+=1900;
         $mon++;
 
-        return sprintf("%4i%2i%2iT%2i%2i%2i+00",$year,$mon,$mday,$hour,$min,$sec);
+        return sprintf("%04i%02i%02iT%02i%02i%02i+00",$year,$mon,$mday,$hour,$min,$sec);
+
+    }
+#------------------------------------------------------
+# время в toFile формат из UNIX
+#------------------------------------------------------
+    sub toFile {
+        my ($par)=@_;
+
+        my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+                                            gmtime($par);
+
+        $year+=1900;
+        $mon++;
+
+        return sprintf("%04i%02i%02i%02i%02i%02i",$year,$mon,$mday,$hour,$min,$sec);
 
     }
 #------------------------------------------------------
@@ -107,12 +122,17 @@
         }
         %data=();
 
-        print XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
-        data =>\@data 
-        },  keyattr    => {  }, RootName => 'report');
-
 
 #EXTERNALID_YYYYMMDDHHiiss_RAND.xml,
+        my $outfile="21${parameters::point_code}_".toFile($timeFrom)."_".rand(100000).".xml";
+
+        print "$outfile:\n",XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
+        data =>\@data 
+        },  keyattr    => {  }, RootName => 'report'
+#        , OutputFile => "data_xml/".$outfile
+        );
+
+
 
         return;
     }
