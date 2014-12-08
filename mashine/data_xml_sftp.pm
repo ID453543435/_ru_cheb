@@ -53,13 +53,13 @@
 
         my @data=();
 
-        while (($chanel, $i) = each(%data)){
-           while (($directtion, $j) = each(%$i)){
+        while (my ($chanel, $i) = each(%data)){
+           while (my ($directtion, $j) = each(%$i)){
 
                my %sensors=%$j;
 
 
-               while (($sensor, $value) = each(%sensors)){
+               while (my ($sensor, $value) = each(%sensors)){
 
                    my %values=
                    (
