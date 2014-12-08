@@ -15,7 +15,6 @@
     use os_spec;
     use com_port;
     use pribor_list;
-    use data_xml_sftp;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -31,6 +30,8 @@ sub null {
 sub main {
 
    parameters::init();
+
+   use data_xml_sftp if $parameters::data_xml_sftp_enable;
    data_xml_sftp::init() if $parameters::data_xml_sftp_enable;
 
    data_base::init();
