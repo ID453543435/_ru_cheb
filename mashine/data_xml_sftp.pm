@@ -13,7 +13,7 @@
 
     package data_xml_sftp;
 
-    use XML::Simple qw(:strict);
+#    use XML::Simple qw(:strict);
 #------------------------------------------------------
 
     use vars qw(%data $timeFrom);
