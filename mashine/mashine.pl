@@ -33,7 +33,7 @@ sub main {
 
    if ($parameters::data_xml_sftp_enable)
    {
-      use data_xml_sftp;
+      do "data_xml_sftp.pm";
       data_xml_sftp::init();
    }
 
