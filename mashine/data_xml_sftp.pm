@@ -126,12 +126,12 @@
 #EXTERNALID_YYYYMMDDHHiiss_RAND.xml,
         my $outfile="21${parameters::point_code}_".toFile($timeFrom)."_".rand(100000).".xml";
 
-        print "$outfile:\n",XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
+#        print "$outfile:\n",
+        XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report'
-#        , OutputFile => "data_xml/".$outfile
+        , OutputFile => "data_xml/".$outfile
         );
-
 
 
         return;
