@@ -67,7 +67,7 @@
                        direction=>$directtion,
                        sensor=>$sensor,
                        value=>[$value]
-                   )
+                   );
 
                    push(@data,\%values);
                }
