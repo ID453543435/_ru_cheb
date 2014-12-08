@@ -95,6 +95,7 @@ DATA
         unless (-f ("temp/$dateHour"))
         {
             $post_file_status=301;
+            print "request:\n$request";
         }
         
         
