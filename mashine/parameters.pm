@@ -22,7 +22,7 @@
 
     use vars qw($data_xml_sftp_enable);
     use vars qw($data_xml_sftp_adress $data_xml_sftp_port $data_xml_sftp_user $data_xml_sftp_password);
-    use vars qw($data_xml_sftp_send_period @data_xml_sftp_carpass_max);
+    use vars qw($data_xml_sftp_send_point_id $data_xml_sftp_send_period @data_xml_sftp_carpass_max);
     
 #------------------------------------------------------
 # null

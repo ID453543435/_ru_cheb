@@ -12,6 +12,8 @@
     use car_class;
 
     package data_xml_sftp;
+
+    use XML::Simple qw(:strict);
 #------------------------------------------------------
 
     use vars qw(%data $timeFrom);
@@ -49,7 +51,34 @@
         print ::dump(\%data),"\n";
 
 
+        my @data=();
+
+        while (($chanel, $i) = each(%data)){
+           while (($directtion, $j) = each(%$i)){
+
+               my %sensors=%$j;
+
+
+               while (($sensor, $value) = each(%sensors)){
+
+                   my %values=
+                   (
+                       line=>$chanel,
+                       direction=>$directtion,
+                       sensor=>$sensor,
+                       value=>[$value]
+                   )
+
+                   push(@data,\%values);
+               }
+           }
+        }
         %data=();
+
+        print XMLout({id=>"301", datetime => '20130731T093043+03' , 
+        data =>\@data 
+        },  keyattr    => {  }, RootName => 'report');
+
 
         return;
     }

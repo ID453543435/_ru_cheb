@@ -17,5 +17,6 @@ $data_xml_sftp_port="";
 $data_xml_sftp_user="";
 $data_xml_sftp_password="";
 
+$data_xml_sftp_send_point_id=777;
 $data_xml_sftp_send_period=60*1;
 @data_xml_sftp_carpass_max=(9999,9999,9999,9999,9999,9999,9999,9999,9999);
