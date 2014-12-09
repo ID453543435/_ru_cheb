@@ -6,7 +6,8 @@
 =cut
 #------------------------------------------------------
     use Data::Dump qw(dump);
-
+    use File::Copy;
+    
     use strict;
 #    use fileLib;
     use car_class;
@@ -33,6 +34,8 @@
 
         %data=();
         $timeFrom=time();
+        
+        os_spec::start("mashine_sync_sftp.pl");
 
         return;
     }
@@ -130,8 +133,11 @@
         XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report'
-        , OutputFile => "data_xml/".$outfile
+        , OutputFile => "temp/temp_xml.xml"
         );
+
+
+        move("temp/temp_xml.xml","data_xml/$outfile") or die;
 
 
         return;
