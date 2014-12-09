@@ -47,7 +47,7 @@ sub main {
 
 
 #    my $remote = $sftp->open("traffic/test.txt", O_CREAT, 0666) or die "cannot open file";
-    my $remote = $sftp->open("traffic/test.txt", O_CREAT) or die "cannot open file";
+    my $remote = $sftp->open("traffic/test.txt", O_CREAT | O_APPEND) or die "cannot open file";
     my $bytes=$remote->write("Test Home Page");
     print "write=$bytes;\n";
 
