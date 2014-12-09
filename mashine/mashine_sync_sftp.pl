@@ -69,7 +69,7 @@ sub main {
 
         eval{
            sendSFTP();
-        }
+        };
         print "sendSFTP:$@;\n" if $@;
         sleep(60*1);
     
