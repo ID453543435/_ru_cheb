@@ -44,7 +44,7 @@ sub sendSFTP {
 
     for my $file (@$list)
     {
-        print "mashine_sync_sftp:<$file>\n"
+        print "mashine_sync_sftp:<$file>\n";
 
         $sftp->put("data_xml/$file", "traffic/$file") or die "put failed: " . $sftp->error;
 
