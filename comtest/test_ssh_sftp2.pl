@@ -29,7 +29,7 @@ sub null {
 sub main {
 
 
-    my $sftp = Net::SFTP::Foreign->new("95.53.129.30:3058", user => "novgufa", password => "NNovUf536");
+    my $sftp = Net::SFTP::Foreign->new("95.53.129.30", port => "3058", user => "novgufa", password => "NNovUf536");
     $sftp->die_on_error("Unable to establish SFTP connection");
 
     $sftp->put("test_ssh_sftp2.pl", "traffic/test.txt") or die "put failed: " . $sftp->error;
