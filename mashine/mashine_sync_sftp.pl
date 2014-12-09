@@ -35,18 +35,15 @@ sub sendSFTP {
 
     @$list=sort(@$list);
 
-
     return unless @$list;
 
-
-    my $sftp = Net::SFTP::Foreign->new("95.53.129.30", port => "3058", user => "novgufa", password => "NNovUf536");
+    my $sftp = Net::SFTP::Foreign->new($parameters::data_xml_sftp_adress, port => $parameters::data_xml_sftp_port
+    , user => $parameters::data_xml_sftp_user, password => $parameters::data_xml_sftp_password);
     $sftp->die_on_error("Unable to establish SFTP connection");
-
 
 
     for my $file (@$list)
     {
-
         print "mashine_sync_sftp:<$file>\n"
 
         $sftp->put("data_xml/$file", "traffic/$file") or die "put failed: " . $sftp->error;

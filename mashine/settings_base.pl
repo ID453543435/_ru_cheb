@@ -12,10 +12,10 @@ $radar_port=2001;
 
 $data_xml_sftp_enable=0;
 
-$data_xml_sftp_adress="";
-$data_xml_sftp_port="";
-$data_xml_sftp_user="";
-$data_xml_sftp_password="";
+$data_xml_sftp_adress="95.53.129.30";
+$data_xml_sftp_port="3058";
+$data_xml_sftp_user="novgufa";
+$data_xml_sftp_password="NNovUf536";
 
 $data_xml_sftp_send_point_id=777;
 $data_xml_sftp_send_period=60*60;
