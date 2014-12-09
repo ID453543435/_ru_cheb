@@ -31,12 +31,6 @@ sub main {
 
    parameters::init();
 
-   if ($parameters::data_xml_sftp_enable)
-   {
-      do "data_xml_sftp.pm";
-      data_xml_sftp::init();
-   }
-
    data_base::init();
    data_request::init();
    os_spec::init();
@@ -57,6 +51,13 @@ sub main {
    pribor_list::readCars();
 
    os_spec::start("mashine_sync.pl");
+
+   if ($parameters::data_xml_sftp_enable)
+   {
+      do "data_xml_sftp.pm";
+      data_xml_sftp::init();
+   }
+
 
    while(1)
    {
