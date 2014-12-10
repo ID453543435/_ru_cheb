@@ -222,7 +222,7 @@
 
         print "($chenel,$leng($class),$speed,$num)\n" if $num;
 
-        my $data=pack("CCLSC",0,$chenel,(time() - $self->{pr_baseTime})*1000,$leng*16,$speed);
+        my $data=pack("CCLSC",0,$chenel,(time() - $self->{pr_baseTime})*1000,$leng*64,$speed);
         for (my $i=0;$i<$num;$i++)
         {
             push(@$res,$data);

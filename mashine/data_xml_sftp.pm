@@ -166,7 +166,7 @@
 
 #        substr($data,1,1,pack("C",( $chenel | $dirct )));
 
-        $lenght=$lenght/16;
+        $lenght=$lenght/64;
 
         my $class=car_class::giveClass($lenght);
 
