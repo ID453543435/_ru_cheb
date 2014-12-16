@@ -137,7 +137,7 @@
         );
 
 
-        move("temp/temp_xml.xml","data_xml/$outfile") or die;
+        ::move("temp/temp_xml.xml","data_xml/$outfile") or die;
 
 
         return;
