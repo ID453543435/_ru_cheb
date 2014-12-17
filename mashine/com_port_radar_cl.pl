@@ -29,7 +29,7 @@
         my $PortName="ttyAMA0";
         my $quiet=0;
 
-        $comPort = new Win32::SerialPort ($PortName, $quiet)
+        $comPort = new Device::SerialPort ($PortName, $quiet)
              || die "Can't open $PortName: $^E\n";    # $quiet is optional
 
         $comPort->user_msg("ON");
