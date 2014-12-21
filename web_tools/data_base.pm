@@ -74,6 +74,12 @@
 
         my $timeL=fileLib::toSql($timeSec);
 
+        if ($lenght>(64*50) or $speed>600)
+        {
+            return(1);
+        }
+
+
         $db->do("INSERT IGNORE INTO data 
         (pointid, runnumber, carnumber, datetime
         ,direct ,chenel ,lengh ,speed) 

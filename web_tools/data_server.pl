@@ -5,6 +5,8 @@
 =head1 SYNOPSIS
 =cut
 #------------------------------------------------------
+     use File::Copy;
+
      use strict;
      use parameters;
      use data_base;
@@ -44,15 +46,27 @@ sub saveToDBfile {
     binmode(INFILE);
 
     my $data;
+    my $err=0;
     while (my $bytesread = read(INFILE, $data, 21)) {
 
        die if $bytesread !=21;
 
-       data_base::saveData($point_id,$data);
+       $err += data_base::saveData($point_id,$data);
        
     }
 
     close INFILE or die;
+
+    if ($err)
+    {
+        my $pointErrDir=$parameters::tempFileDir."errors/";
+        
+        mkdir($pointErrDir);
+
+        my $errFileName=sprintf("%08i_%08i_",$point_id,time()).$fileName;
+
+        ::copy($fileName,$pointErrDir.$errFileName) or die;
+    }
 
     return;
 }
