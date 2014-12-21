@@ -63,7 +63,9 @@ sub saveToDBfile {
         
         mkdir($pointErrDir);
 
-        my $errFileName=sprintf("%08i_%08i_",$point_id,time()).$fileName;
+#        my ($fn)=($fileName ~= m{[\/\\]([^\/\\]+)$});
+
+        my $errFileName=sprintf("%08i_%08i_%03i.dat",$point_id,time(),$err);
 
         ::copy($fileName,$pointErrDir.$errFileName) or die;
     }
