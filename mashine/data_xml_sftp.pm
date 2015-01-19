@@ -113,7 +113,7 @@
 
                    my %values=
                    (
-                       line=>$chanel,
+                       lane=>$chanel,
                        direction=>$directtion,
                        sensor=>$sensor,
                        value=>[$value]
@@ -127,7 +127,7 @@
 
 
 #EXTERNALID_YYYYMMDDHHiiss_RAND.xml,
-        my $outfile="21${parameters::point_code}_".toFile($timeFrom)."_".int(rand(100000)).".xml";
+        my $outfile="${parameters::data_xml_sftp_send_point_id}_".toFile($timeFrom)."_".int(rand(100000)).".xml";
 
 #        print "$outfile:\n",
         XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
