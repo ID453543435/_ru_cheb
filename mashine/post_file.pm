@@ -5,6 +5,8 @@
 
 =cut
 #------------------------------------------------------
+    use File::Copy;
+
     use strict;
     use file_db;
     use mashine_tools;
@@ -84,7 +86,9 @@ dateHour=$dateHour
 DATA
         my $fileName="temp/request";
 
-        fileLib::strToFile($fileName,$request);
+        fileLib::strToFile("temp/temp_request",$request);
+
+        ::move("temp/temp_request",$fileName) or die;
 
         while(-f $fileName)
         {
