@@ -26,7 +26,7 @@
 #------------------------------------------------------
     sub openPort {
         
-        my $PortName="/dev/ttyAMA0";
+        my $PortName=$parameters::com_port_linux_file;
         my $quiet=0;
 
         $comPort = new Device::SerialPort ($PortName, $quiet)

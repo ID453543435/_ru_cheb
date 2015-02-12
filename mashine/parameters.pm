@@ -18,6 +18,7 @@
 
     use vars qw($point_code $run_number $server_url);
     use vars qw($com_port $com_port_adres $com_port_port);
+    use vars qw($com_port_linux_file);
     use vars qw(@dev_adress);
 
     use vars qw($data_xml_sftp_enable);
