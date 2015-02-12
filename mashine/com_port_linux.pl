@@ -36,7 +36,7 @@
         $comPort->baudrate(9600);
         $comPort->parity("none");
         $comPort->stopbits(1);
-#        $comPort->handshake("rts");
+        $comPort->handshake("rts");
         $comPort->buffers(4096, 4096);
 
         $comPort->write_settings
