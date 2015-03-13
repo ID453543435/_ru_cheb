@@ -225,7 +225,7 @@
         my ($str)=@_;
 
 
-        my $data=substr($str,6,-2);
+        my $data=substr($str,3,-2);
 
         my @res=unpack("C*",$data);
 
