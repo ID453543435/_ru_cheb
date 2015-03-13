@@ -51,7 +51,10 @@ sub main {
    pribor_list::syncTime();
    pribor_list::readCars();
 
-   os_spec::start("mashine_sync.pl");
+   if ($parameters::server_url)
+   {
+      os_spec::start("mashine_sync.pl");
+   }
 
    if ($parameters::data_xml_sftp_enable)
    {
