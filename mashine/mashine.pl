@@ -30,6 +30,7 @@ sub null {
 sub main {
 
    parameters::init();
+   pribor::init();
 
    data_base::init();
    data_request::init();
