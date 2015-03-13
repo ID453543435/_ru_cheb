@@ -195,7 +195,7 @@
 #           pingPribor($self);
 
            my $type=filter($data);
-           next if $type == -1;
+           next unless defined($type);
 
            $num++;
 
@@ -297,12 +297,7 @@
 
         print "[$type]=$resType;\r";
 
-        if ($resType)
-        {
-            return $resType;
-        }
-
-        return -1;
+        return $resType;
     }
 #------------------------------------------------------
 1;
