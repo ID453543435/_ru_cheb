@@ -11,10 +11,32 @@
 #------------------------------------------------------
     package pribor;
 
-    use vars qw(@classes);
+    use vars qw(@classes %packet_codes);
 
+
+=head1 SYNOPSIS
+      VOLUME:10
+  MID SIZE 1:20
+  MID SIZE 2:38
+  LONG VEH 1:1b
+  LONG VEH 2:37
+   XLONG VEH:36
+   OCCUPANCY:11(2 bytes/10)
+ SIDEFRD SPD:12
+=cut
 
     @classes = (3,7.5,10,12,17.5,23);
+
+    %packet_codes= (
+       0x10 => 0
+       0x20 => 4
+       0x38 => 5
+       0x1b => 6
+       0x37 => 7
+       0x36 => 8
+       0x11 => 3
+       0x12 => 2
+    );
 
 
 #------------------------------------------------------
@@ -50,14 +72,14 @@
         my $self = shift;
 
         
-        sendData($self,"FFAAC00200010001");
+#        sendData($self,"FFAAC00200010001");
 #        sendData($self,"FFAAC00200020002");
-        sendData($self,"FFAA53030001000001");
-        sendData($self,"FFAA540200010001");
+#        sendData($self,"FFAA53030001000001");
+#        sendData($self,"FFAA540200010001");
 #        sendData($self,"FFAA53030001000001");
 
 
-        pingPribor($self);
+#        pingPribor($self);
 
 
         return;
@@ -111,7 +133,7 @@
     sub takeFromBufer {
         my $self = shift;
 
-        my $ind=index($self->{buffer},"\xFF\xAA");
+        my $ind=index($self->{buffer},"\xFF");
 
         return "" if $ind<0;
 
@@ -123,11 +145,11 @@
 
         }
 
-        return "" if length($self->{buffer}) < 6;
+        return "" if length($self->{buffer}) < 4;
 
 #        $ind=index($self->{buffer},"\xFF\xAA",2);
 
-        my $length=unpack("S",substr($self->{buffer},3,2))+6;
+        my $length=unpack("C",substr($self->{buffer},2,1))+4;
 
         
 
@@ -180,10 +202,10 @@
            print ">";tranfer::printData($data);
 
 
-           $self->{packet}->[$type - 0x10 ]=$data;
+           $self->{packet}->[$type]=$data;
 
 
-           if ($type == 0x18)
+           if ($type == 2)
            {
                 emulateCars($self,\@res);
            }
@@ -205,7 +227,7 @@
 
         my $data=substr($str,6,-2);
 
-        my @res=unpack("n*",$data);
+        my @res=unpack("C*",$data);
 
 
         return \@res;
@@ -269,13 +291,15 @@
     sub filter {
         my ($data)=@_;
 
-        my $type=unpack("C",substr($data,2,1));
+        my $type=unpack("C",substr($data,1,1));
 
-        print "[$type]\r";
+        my $resType=$packet_codes{$type};
 
-        if ($type >= 0x10 and $type <= 0x18)
+        print "[$type]=$resType;\r";
+
+        if ($resType)
         {
-            return $type;
+            return $resType;
         }
 
         return "";
