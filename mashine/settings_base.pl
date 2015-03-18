@@ -10,13 +10,14 @@ $com_port_port=503;
 
 #  $com_port="linux" settings:
 $com_port_linux_file="/dev/ttyAMA0";
+$com_port_speed=115200;
 
 #  $com_port="radar" settings:
 $radar_adres="213.87.81.32";
 $radar_port=2001;
 
 #===============================
-$pribor="pribor"; # "pribor", "radar"
+$pribor="pribor"; # "pribor", "radar", "radar_old"
 
 #  $pribor="pribor" settings:
 @dev_adress=(0x01);

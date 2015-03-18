@@ -33,7 +33,7 @@
 
         $comPort->user_msg("ON");
         $comPort->databits(8);
-        $comPort->baudrate(115200);
+        $comPort->baudrate($parameters::com_port_speed);
         $comPort->parity("none");
         $comPort->stopbits(1);
         $comPort->handshake("rts");
