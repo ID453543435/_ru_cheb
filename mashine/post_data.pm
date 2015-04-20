@@ -87,6 +87,11 @@
 
         my $form=$forms[0];
 
+        unless ($form)
+        {
+            return(351);
+        }
+
         $form->param("point_id",$parameters::point_code) ;
 
         my $input_file = $form->find_input( $post_file::post_input_name ) ;
