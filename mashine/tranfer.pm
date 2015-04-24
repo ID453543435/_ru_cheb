@@ -93,7 +93,7 @@
         if ($crc !=$crc16)
         {
            print "\nCRC error!\n";
-           
+           $data="";
         }
 
 #        print "<";printData($data);
