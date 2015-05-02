@@ -74,9 +74,12 @@
 
         my $timeL=fileLib::toSql($timeSec);
 
+        my $err=0;
         if ($lenght>(64*50) or $speed>600)
         {
-            return(1);
+            $err++;
+            $lenght=0;
+            $speed=0;
         }
 
 
@@ -90,7 +93,7 @@
 
 #        print "($point_id,$run_number,$carNumber,$timeL,data)\n";
 
-        return;
+        return $err;
     }
 #------------------------------------------------------
 1;
