@@ -113,7 +113,7 @@
 
                    my %values=
                    (
-                       lane=>$chanel,
+                       lane=>$chanel+1,
                        direction=>$directtion,
                        sensor=>$sensor,
                        value=>[$value]
