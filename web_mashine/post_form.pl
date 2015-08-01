@@ -53,13 +53,13 @@ sub main {
     my ($status) = m_cgi::SQLrow(
         "SELECT status
          FROM points
-         WHERE id=?;",[$point_id]);
+         WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
 
 
     my ($run_number,$car_number,$date_time) = m_cgi::SQLrow(
         "SELECT runnumber,carnumber,datetime
          FROM data
-         WHERE pointid=?
+         WHERE pointid=CAST( ? AS UNSIGNED)
          ORDER BY pointid DESC, runnumber DESC, carnumber DESC LIMIT 1;",[$point_id]);
     
 
