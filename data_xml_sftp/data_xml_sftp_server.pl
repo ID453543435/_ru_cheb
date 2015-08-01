@@ -3,15 +3,19 @@
 =head1 NAME
 
 =head1 SYNOPSIS
+
 =cut
+#------------------------------------------------------
+BEGIN {
+  push(@INC, 'lib');
+}
 #------------------------------------------------------
      use File::Copy;
 
      use strict;
      use parameters;
      use data_base;
-     use a7z;
-     use mashine_tools;
+     use settings;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
