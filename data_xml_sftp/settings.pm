@@ -98,10 +98,7 @@
     sub saveCurrent {
         my ($pointId)=@_;
 
-        for my $i (@_vars)
-        {
-           $_data{$pointId}=eval($_script);
-        }
+        $_data{$pointId}=eval($_script);
 
         return;
     }

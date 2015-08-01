@@ -76,6 +76,7 @@ sub main {
 
     settings::init();
 
+    print $settings::_script,"\n";
     print ::dump(\%settings::_data);
 
     die;
