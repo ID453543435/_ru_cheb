@@ -42,6 +42,7 @@ sub getVersion {
 sub setEnv {
 
     $ENV{PATH} .= q{;C:\Users\1\AppData\Local\GitHub\PortableGit_ed44d00daa128db527396557813e7b68709ed0e2\bin\;};
+    $ENV{TERM} ="cygwin";
 
     return;
 }
