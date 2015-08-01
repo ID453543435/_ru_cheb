@@ -69,7 +69,13 @@ sub serveAll {
 #------------------------------------------------------
 sub main {
 
-    data_base::init();
+    $parameters::tempFileDir='F:\prg_perl\_ru_cheb\web_mashine';
+
+#    data_base::init();
+
+    settings::init();
+
+    die;
 
 
     while(1)

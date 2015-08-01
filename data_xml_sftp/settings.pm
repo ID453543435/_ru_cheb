@@ -7,7 +7,8 @@
 #------------------------------------------------------
     use strict;
     use fileLib;
-
+    use parameters;
+    
     package settings;
 #------------------------------------------------------
 
@@ -68,10 +69,51 @@
         $_data{$pointId}={};
         for my $i (@_vars)
         {
-           $$_data{$pointId}{$i}=
+
+
+
+#           $$_data{$pointId}{$i}=
 
         }
 
+
+        return;
+    }
+#------------------------------------------------------
+# dirList
+#------------------------------------------------------
+sub dirList {
+    my ($dirname)=@_;
+
+    opendir my($dh), $dirname or die "Couldn't open dir '$dirname': $!";
+    my @files = readdir $dh;
+    closedir $dh;
+
+#    print ::dump(\@files),":dirList\n";
+
+#    shift @files; 
+#    shift @files; 
+    @files = grep(not( m{^\.\.?$}s), @files);
+    
+    return \@files;
+}
+#------------------------------------------------------
+# init
+#------------------------------------------------------
+    sub init {
+
+        my $dir=$parameters::tempFileDir.'/settings/';
+        my $list=dirList($dir);
+
+        for my $file (@$list)
+        {
+            my $fileSet=$dir.$file.'/current/settings.pl';
+            if (-f($fileSet))
+            {
+               print "$fileSet\n";
+
+            }
+        }
 
         return;
     }
