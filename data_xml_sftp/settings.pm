@@ -38,7 +38,8 @@
 
     use vars @_vars;
 
-    use vars qw(%_data);
+    use vars qw(%_data $_script);
+    $_script=generate(\@_vars);
 
 #------------------------------------------------------
 # null
@@ -48,6 +49,37 @@
 
 
         return $par;
+    }
+#------------------------------------------------------
+# generate
+#------------------------------------------------------
+    sub generate {
+        my ($list)=@_;
+
+        my $res="";
+
+        for my $i (@$list)
+        {
+           my $type=substr($i,0,1);
+           my $name=substr($i,1);
+           if ($type eq '$')
+           {
+              $res .= "$name => $i ,\n";
+           } 
+           elsif ($type eq '@')
+           {
+              $res .= "$name => [$i] ,\n";
+           } 
+           elsif ($type eq '%')
+           {
+              $res .= "$name => {$i} ,\n";
+           } 
+
+
+        }
+
+
+        return "{ $res }";
     }
 #------------------------------------------------------
 # loadSet
@@ -66,16 +98,10 @@
     sub saveCurrent {
         my ($pointId)=@_;
 
-        $_data{$pointId}={};
         for my $i (@_vars)
         {
-
-
-
-#           $$_data{$pointId}{$i}=
-
+           $_data{$pointId}=eval($_script);
         }
-
 
         return;
     }
@@ -111,6 +137,8 @@ sub dirList {
             if (-f($fileSet))
             {
                print "$fileSet\n";
+               loadSet($fileSet);
+               saveCurrent(0+$file);
 
             }
         }

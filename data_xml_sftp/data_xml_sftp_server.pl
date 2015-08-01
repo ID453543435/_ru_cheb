@@ -10,6 +10,7 @@ BEGIN {
   push(@INC, 'lib');
 }
 #------------------------------------------------------
+     use Data::Dump qw(dump);
      use File::Copy;
 
      use strict;
@@ -74,6 +75,8 @@ sub main {
 #    data_base::init();
 
     settings::init();
+
+    print ::dump(\%settings::_data);
 
     die;
 
