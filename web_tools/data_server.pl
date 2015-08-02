@@ -61,7 +61,7 @@ sub updateDate {
     if (length($fileName) == 19)
     {
         my ($year,$mon,$mday,$hour)=
-        ($fileName =~ m/^........-(....)(..)(..)(..)/);
+        ($fileName =~ m/^........_(....)(..)(..)(..)/);
 
         my $gm_actual=timegm(0,0,$hour,$mday,$mon-1,$year-1900);
 
