@@ -75,7 +75,7 @@ sub updateDate {
 
         $gm_actual=fileLib::toUnix($date_actual);
 
-        $gm_actual += 3*60;
+        $gm_actual -= 3*60;
 
     }
 

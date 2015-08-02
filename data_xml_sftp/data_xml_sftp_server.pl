@@ -12,6 +12,7 @@ BEGIN {
 #------------------------------------------------------
      use Data::Dump qw(dump);
      use File::Copy;
+use Time::Local;
 
      use strict;
      use parameters;
@@ -74,7 +75,7 @@ sub getSendDatetime {
     {
 #        my ($cur_actual) = data_base::SQLrow("SELECT data_actual FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
 
-        my $datetime_gm=fileLib::toUnix(time());
+        my $datetime_gm=fileLib::toSql(time());
         my ($year,$mon,$mday,$hour,$min,$sec)=
         ($datetime_gm =~ /(....)-(..)-(..) (..):(..):(..)/);
 
@@ -132,13 +133,14 @@ sub serveAll {
         my $data_sended=getSendDatetime($point_id);
         my $cur_actual_gm=getDatetimeActual($point_id);
 
-        print "data_sended=",fileLib::toUnix($data_sended),"\n";
-        print "cur_actual_gm=",fileLib::toUnix($cur_actual_gm),"\n";
+        print "data_sended=",fileLib::toSql($data_sended),"\n";
+        print "cur_actual_gm=",fileLib::toSql($cur_actual_gm),"\n";
 
         my $data_send=$data_sended+$parameters::data_xml_sftp_send_period;
 
         next if $cur_actual_gm<$data_send;
 
+        print "data_send=",fileLib::toSql($data_send),"\n";
 
         data_xml_sftp::data_init($data_sended);
 
@@ -156,9 +158,9 @@ sub serveAll {
 sub main {
 
 #    $parameters::tempFileDir='F:\prg_perl\_ru_cheb\web_mashine';
-    $parameters::tempFileDir='D:\prg_perl\_ru_cheb\web_mashine';
+#    $parameters::tempFileDir='D:\prg_perl\_ru_cheb\web_mashine';
 
-#    data_base::init();
+    data_base::init();
 
     parameters::init();
 
