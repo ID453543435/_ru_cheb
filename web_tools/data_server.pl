@@ -45,7 +45,15 @@ sub updateDate {
 
 
     my ($cur_actual) = data_base::SQLrow("SELECT data_actual FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
-    my $cur_actual_gm=fileLib::toUnix($cur_actual);
+    my $cur_actual_gm;
+    if (substr($cur_actual,0,4) eq "0000")
+    {
+       $cur_actual_gm=0;
+    }
+    else
+    {
+       $cur_actual_gm=fileLib::toUnix($cur_actual);
+    }
 
     my $date_actual="";
 
