@@ -44,7 +44,7 @@ sub updateDate {
     my ($point_id,$fileName)=@_;
 
 
-    my ($cur_actual) = m_cgi::SQLrow("SELECT data_actual FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+    my ($cur_actual) = data_base::SQLrow("SELECT data_actual FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
     my $cur_actual_gm=fileLib::toUnix($cur_actual);
 
     my $date_actual="";
@@ -67,7 +67,7 @@ sub updateDate {
     }
     else
     {
-        ($date_actual) = m_cgi::SQLrow("SELECT data_send FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+        ($date_actual) = data_base::SQLrow("SELECT data_send FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
     }
 
     print "($point_id,$fileName,$cur_actual)=$date_actual;\n";
