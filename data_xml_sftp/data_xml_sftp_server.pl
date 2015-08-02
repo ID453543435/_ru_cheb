@@ -44,7 +44,7 @@ sub dataSave {
          AND datetime >= ? AND datetime < ?
          ORDER BY pointid, datetime;");
     
-    $sth->execute() or die $DBI::errstr;
+    $sth->execute($data_sended,$data_send) or die $DBI::errstr;
 
     while (my @row = $sth->fetchrow_array()) {
        my ($point_id,$run_number,$carNumber,$timeL
@@ -144,7 +144,7 @@ sub serveAll {
 
         data_xml_sftp::data_init($data_sended);
 
-        dataSave($point_id,$data_sended,$data_send);
+        dataSave($point_id,fileLib::toSql($data_sended),fileLib::toSql($data_send));
 
         data_xml_sftp::data_saveFile();
 
