@@ -12,7 +12,7 @@
     package settings;
 #------------------------------------------------------
 
-=head1 SYNOPSIS
+#=head1 SYNOPSIS
 
     use vars qw($point_code $run_number $server_url);
     use vars qw($com_port $com_port_adres $com_port_port);
@@ -22,7 +22,7 @@
     use vars qw($data_xml_sftp_enable);
     use vars qw($data_xml_sftp_adress $data_xml_sftp_port $data_xml_sftp_user $data_xml_sftp_password);
     use vars qw($data_xml_sftp_send_point_id $data_xml_sftp_send_period @data_xml_sftp_carpass_max);
-=cut
+#=cut
     
     use vars qw(@_vars);
 
@@ -36,7 +36,7 @@
     push @_vars, qw($data_xml_sftp_adress $data_xml_sftp_port $data_xml_sftp_user $data_xml_sftp_password);
     push @_vars, qw($data_xml_sftp_send_point_id $data_xml_sftp_send_period @data_xml_sftp_carpass_max);
 
-    use vars @_vars;
+#    use vars @_vars;
 
     use vars qw(%_data $_script);
     $_script=generate(\@_vars);
