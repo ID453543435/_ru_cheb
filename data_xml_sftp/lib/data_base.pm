@@ -96,4 +96,23 @@
         return $err;
     }
 #------------------------------------------------------
+# SQLrow
+#------------------------------------------------------
+    sub SQLrow {
+        my ($request,$params)=@_;
+
+        my $sth = $db->prepare($request);
+        
+        $sth->execute(@$params) or die $DBI::errstr;
+#        print "Number of rows found :" . $sth->rows . "\n";
+
+        my @res;
+        while (my @row = $sth->fetchrow_array()) {
+           @res=@row;
+        }
+        $sth->finish();    
+
+        return @res;
+    }
+#------------------------------------------------------
 1;

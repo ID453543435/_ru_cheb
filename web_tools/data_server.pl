@@ -56,28 +56,35 @@ sub updateDate {
        $cur_actual_gm=fileLib::toUnix($cur_actual);
     }
 
-    my $date_actual="";
+#    my $date_actual="";
+    my $gm_actual="";
 
     if (length($fileName) == 19)
     {
         my ($year,$mon,$mday,$hour)=
         ($fileName =~ m/^........_(....)(..)(..)(..)/);
 
-        my $gm_actual=timegm(0,0,$hour,$mday,$mon-1,$year-1900);
+        $gm_actual=timegm(0,0,$hour,$mday,$mon-1,$year-1900);
 
         $gm_actual += 60*60;
 
-        if ($cur_actual_gm>$gm_actual)
-        {
-           $gm_actual=$cur_actual_gm;
-        }
-
-        $date_actual=fileLib::toSql($gm_actual);
     }
     else
     {
-        ($date_actual) = data_base::SQLrow("SELECT data_send FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+        my ($date_actual) = data_base::SQLrow("SELECT data_send FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+
+        $gm_actual=fileLib::toUnix($date_actual);
+
+        $gm_actual += 3*60;
+
     }
+
+    if ($cur_actual_gm>$gm_actual)
+    {
+       $gm_actual=$cur_actual_gm;
+    }
+
+    my $date_actual=fileLib::toSql($gm_actual);
 
     print "($point_id,$fileName,$cur_actual)=$date_actual;\n";
 

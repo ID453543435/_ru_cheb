@@ -70,6 +70,13 @@ sub main {
      );
      ");
 
+     $dbh->do("
+     CREATE TABLE xml (
+     pointid       int(8) NOT NULL PRIMARY KEY,
+     status   int(8) ,
+     data_sended   DATETIME
+     );
+     ");
 
      # disconnect from the MySQL database
      $dbh->disconnect();

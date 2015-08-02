@@ -9,7 +9,7 @@
     use fileLib;
     use parameters;
     
-    package settings;
+    package parameters;
 #------------------------------------------------------
 
 #=head1 SYNOPSIS
@@ -38,8 +38,9 @@
 
 #    use vars @_vars;
 
-    use vars qw(%_data $_script);
+    use vars qw(%_data $_script $_script_from);
     $_script=generate(\@_vars);
+    $_script_from=generateFrom(\@_vars);
 
 #------------------------------------------------------
 # null
@@ -49,6 +50,25 @@
 
 
         return $par;
+    }
+#------------------------------------------------------
+# points
+#------------------------------------------------------
+    sub points {
+
+        return keys(%_data);
+    }
+#------------------------------------------------------
+# point
+#------------------------------------------------------
+    sub point {
+        my ($id)=@_;
+
+        my %a=%{$_data{0+$id}};
+
+        eval($_script_from);
+
+        return;
     }
 #------------------------------------------------------
 # generate
@@ -80,6 +100,34 @@
 
 
         return "{ $res }";
+    }
+#------------------------------------------------------
+# generateFrom
+#------------------------------------------------------
+    sub generateFrom {
+        my ($list)=@_;
+
+        my $res="";
+
+        for my $i (@$list)
+        {
+           my $type=substr($i,0,1);
+           my $name=substr($i,1);
+           if ($type eq '$')
+           {
+              $res .= "$i=\$a{$name};\n";
+           } 
+           elsif ($type eq '@')
+           {
+              $res .= "$i=\@{\$a{$name}};\n";
+           } 
+           elsif ($type eq '%')
+           {
+              $res .= "$i=\%{\$a{$name}};\n";
+           } 
+        }
+
+        return $res;
     }
 #------------------------------------------------------
 # loadSet
