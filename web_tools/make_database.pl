@@ -41,7 +41,9 @@ sub main {
      CREATE TABLE points (
      id       int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
      status   int(8) ,
-     info     varchar(255) NOT NULL
+     info     varchar(255) NOT NULL,
+     data_send   DATETIME ,
+     data_actual DATETIME
      );
      ");
 

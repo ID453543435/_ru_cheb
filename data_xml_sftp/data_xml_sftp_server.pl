@@ -70,15 +70,16 @@ sub serveAll {
 #------------------------------------------------------
 sub main {
 
-    $parameters::tempFileDir='F:\prg_perl\_ru_cheb\web_mashine';
+#    $parameters::tempFileDir='F:\prg_perl\_ru_cheb\web_mashine';
+    $parameters::tempFileDir='D:\prg_perl\_ru_cheb\web_mashine';
 
 #    data_base::init();
 
     settings::init();
 
-#    print $settings::_script,"\n";
-#    print ::dump(\%settings::_data);
-#    die;
+    print ::dump(\%settings::_data);
+    print $settings::_script,"\n";
+    die;
 
 
     while(1)

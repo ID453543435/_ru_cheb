@@ -8,6 +8,8 @@
      use File::Copy;
 
      use strict;
+     use fileLib;
+
      use parameters;
      use data_base;
      use a7z;
@@ -34,6 +36,47 @@ sub dirList_num {
     @$list = grep(m{^\d+$}is, @$list);
     
     return $list;
+}
+#------------------------------------------------------
+# updateDate
+#------------------------------------------------------
+sub updateDate {
+    my ($point_id,$fileName)=@_;
+
+
+    my ($cur_actual) = m_cgi::SQLrow("SELECT data_actual FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+    my $cur_actual_gm=fileLib::toUnix($cur_actual);
+
+    my $date_actual="";
+
+    if (length($fileName) == 19)
+    {
+        my ($year,$mon,$mday,$hour)=
+        ($fileName =~ m/^........-(....)(..)(..)/);
+
+        my $gm_actual=timegm(0,0,$hour,$mday,$mon-1,$year-1900);
+
+        $gm_actual += 60*60;
+
+        if ($cur_actual_gm>$gm_actual)
+        {
+           $gm_actual=$cur_actual_gm;
+        }
+
+        $date_actual=fileLib::toSql($gm_actual);
+    }
+    else
+    {
+        ($date_actual) = m_cgi::SQLrow("SELECT data_send FROM points WHERE id=CAST( ? AS UNSIGNED);",[$point_id]);
+    }
+
+    print "($point_id,$fileName,$cur_actual)=$date_actual;\n";
+
+    $data_base::db->do("UPDATE points SET status=0, data_actual=? WHERE id=CAST( ? AS UNSIGNED) ;",{},($date_actual,$point_id));
+
+#    $data_base::db->do("UPDATE points SET status=0 WHERE status=1;"); # data_send
+
+    return;
 }
 #------------------------------------------------------
 # saveToDBfile
@@ -97,6 +140,7 @@ sub saveToDB {
             if (-f($pointDir.$file))
             {
                 saveToDBfile($point_id,$pointDir.$file);
+                updateDate($point_id,$file);
 
                 unlink($pointDir.$arxFile) or die;
                 unlink($pointDir.$file) or die;
@@ -105,6 +149,8 @@ sub saveToDB {
         else
         {
             saveToDBfile($point_id,$pointDir.$file);
+            updateDate($point_id,$file);
+
             unlink($pointDir.$file) or die;
         }
     }
@@ -133,7 +179,7 @@ sub serveAll {
     $sth->finish();
 
     
-    $data_base::db->do("UPDATE points SET status=0 WHERE status=1;");
+#    $data_base::db->do("UPDATE points SET status=0 WHERE status=1;");
    
     return;
 }

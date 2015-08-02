@@ -19,6 +19,23 @@ sub null {
     return $par;
 }
 #------------------------------------------------------
+# время в sql формат из UNIX
+#------------------------------------------------------
+    sub toSql {
+        my ($par)=@_;
+
+        my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+                                            gmtime($par);
+
+        $year+=1900;
+        $mon++;
+
+        ($mon,$mday,$hour,$min,$sec)=map(substr("00".$_,-2,2),($mon,$mday,$hour,$min,$sec));
+
+        return "$year-$mon-$mday $hour:$min:$sec";
+
+    }
+#------------------------------------------------------
 # saveFile
 #------------------------------------------------------
 sub saveFile {
@@ -92,7 +109,7 @@ sub main {
         $status=1;
     }
 
-    $m_cgi::db->do("UPDATE points SET status=? WHERE id=? ;",{},($status,$point_id));
+    $m_cgi::db->do("UPDATE points SET status=?, data_send=? WHERE id=? ;",{},($status,toSql(time()),$point_id));
 
     $m_cgi::db->disconnect();
     m_cgi::fin();
