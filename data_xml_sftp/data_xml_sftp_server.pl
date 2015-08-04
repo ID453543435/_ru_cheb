@@ -20,6 +20,7 @@ use Time::Local;
      use settings;
      use data_xml_sftp;
      use data_xml_sftp_pat;
+     use send_to_ftp;
 #------------------------------------------------------
 # null
 #------------------------------------------------------
@@ -44,7 +45,7 @@ sub dataSave {
          AND datetime >= ? AND datetime < ?
          ORDER BY pointid, datetime;");
     
-    $sth->execute($data_sended,$data_send) or die $DBI::errstr;
+    $sth->execute($point_id,$data_sended,$data_send) or die $DBI::errstr;
 
     while (my @row = $sth->fetchrow_array()) {
        my ($point_id,$run_number,$carNumber,$timeL
@@ -125,22 +126,24 @@ sub serveAll {
 
         next unless $parameters::data_xml_sftp_enable;
 
-        print "data_xml_sftp_enable=$parameters::data_xml_sftp_enable\n";
-        print "data_xml_sftp_send_point_id=$parameters::data_xml_sftp_send_point_id\n";
-        print "data_xml_sftp_send_period=$parameters::data_xml_sftp_send_period\n";
-        print "data_xml_sftp_carpass_max=",::dump(\@parameters::data_xml_sftp_carpass_max),"\n";
+#        print "data_xml_sftp_enable=$parameters::data_xml_sftp_enable\n";
+#        print "data_xml_sftp_send_point_id=$parameters::data_xml_sftp_send_point_id\n";
+#        print "data_xml_sftp_send_period=$parameters::data_xml_sftp_send_period\n";
+#        print "data_xml_sftp_carpass_max=",::dump(\@parameters::data_xml_sftp_carpass_max),"\n";
 
         my $data_sended=getSendDatetime($point_id);
         my $cur_actual_gm=getDatetimeActual($point_id);
 
-        print "data_sended=",fileLib::toSql($data_sended),"\n";
-        print "cur_actual_gm=",fileLib::toSql($cur_actual_gm),"\n";
+#        print "data_sended=",fileLib::toSql($data_sended),"\n";
+#        print "cur_actual_gm=",fileLib::toSql($cur_actual_gm),"\n";
 
         my $data_send=$data_sended+$parameters::data_xml_sftp_send_period;
 
         next if $cur_actual_gm<$data_send;
 
-        print "data_send=",fileLib::toSql($data_send),"\n";
+#        print "data_send=",fileLib::toSql($data_send),"\n";
+
+        print "$point_id:(",fileLib::toSql($data_sended),"-",fileLib::toSql($data_send),")\n";
 
         data_xml_sftp::data_init($data_sended);
 
@@ -171,7 +174,8 @@ sub main {
     while(1)
     {
         serveAll();
-        sleep(1);
+        send_to_ftp::sendFTP();
+        sleep(6);
 #        die;
     }
     

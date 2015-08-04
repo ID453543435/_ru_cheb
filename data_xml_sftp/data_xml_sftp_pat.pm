@@ -110,7 +110,7 @@
 
         my $directtion= $dirct ? "forward" : "backward";
 
-        print "($chenel,$directtion,$class,$speed,$timeSec)\n";
+#        print "($chenel,$directtion,$class,$speed,$timeSec)\n";
 
 #        my $chanDir=$data{$chenel}->{$directtion};
 
