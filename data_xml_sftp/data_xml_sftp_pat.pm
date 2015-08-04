@@ -38,7 +38,7 @@
 #------------------------------------------------------
     sub data_saveFile {
 
-        print ::dump(\%data),"\n";
+#        print ::dump(\%data),"\n";
 
         my @data=();
 

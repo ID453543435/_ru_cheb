@@ -5,6 +5,9 @@
 94.232.56.19:2121
 Пользователь: ftppuid
 Пароль: 59RjvAhfGjdFcn
+
+Пользователь: ftpdata
+Пароль: 59GfcDthGhjLfv
 =cut
 #------------------------------------------------------
     use Data::Dump qw(dump);
@@ -20,8 +23,8 @@
 
     $data_xml_ftp_adress="94.232.56.19";
     $data_xml_sftp_port="2121";
-    $data_xml_ftp_user="ftppuid";
-    $data_xml_ftp_password="59RjvAhfGjdFcn";
+    $data_xml_ftp_user="ftpdata";
+    $data_xml_ftp_password="59GfcDthGhjLfv";
 
 #------------------------------------------------------
 # null
