@@ -71,8 +71,8 @@
                    (
                        lane=>$chanel+1,
                        direction=>$directtion,
-                       sensor=>$sensor,
-                       value=>[$value]
+                       sensor_type=>$sensor,
+                       sensor_value=>[$value]
                    );
 
                    push(@data,\%values);
@@ -86,7 +86,7 @@
         my $outfile="${parameters::data_xml_sftp_send_point_id}_".toFile($timeFrom)."_".int(rand(100000)).".xml";
 
 #        print "$outfile:\n",
-        XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , 
+        XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , period => ""
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report'
         , OutputFile => "temp/temp_xml.xml"
