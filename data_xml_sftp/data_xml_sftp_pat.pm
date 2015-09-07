@@ -89,6 +89,7 @@
         XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , period => ""
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report'
+        , XMLDecl  => '<?xml version="1.0" encoding="UTF8"?>'
         , OutputFile => "temp/temp_xml.xml"
         );
 
