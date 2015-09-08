@@ -86,7 +86,7 @@
         my $outfile="${parameters::data_xml_sftp_send_point_id}_".toFile($timeFrom)."_".int(rand(100000)).".xml";
 
 #        print "$outfile:\n",
-        XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , period => ""
+        XMLout({id=>$parameters::data_xml_sftp_send_point_id, datetime => toISO($timeFrom) , period => "",
         data =>\@data 
         },  keyattr    => {  }, RootName => 'report'
         , XMLDecl  => '<?xml version="1.0" encoding="UTF8"?>'
